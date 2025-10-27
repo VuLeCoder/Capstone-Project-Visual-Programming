@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Krypton.Toolkit;
+using Sunny.UI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Sunny.UI;
 
 namespace BtlApp
 {
@@ -19,7 +20,9 @@ namespace BtlApp
             createCalendar();
         }
 
-// ====================== ... ======================
+        // ====================== ... ======================
+        private readonly Color TASK_COLOR = Color.FromArgb(168, 199, 250);
+
         private DateTime GetStartOfWeek(DateTime date)
         {
             int diff = date.DayOfWeek - DayOfWeek.Sunday;
@@ -32,7 +35,8 @@ namespace BtlApp
 // ====================== ... ======================
         private readonly int WEEK = 7, HOUR = 24;
         private readonly string[] DAY_NAMES = { "CN", "TH 2", "TH 3", "TH 4", "TH 5", "TH 6", "TH 7" };
-        private readonly int TIMELIME_WIDTH = 40, TASK_CELL_HEIGHT = 60, BORDER = 2;
+        private readonly int TIMELIME_WIDTH = 40, TASK_CELL_HEIGHT = 60, BORDER = 1;
+        private readonly Color CALENDAR_BACKCOLOR = Color.FromArgb(19, 19, 20);
         private void createHeaderCalendar()
         {
             tlp_mainCalendarHeader.ColumnCount = DAY_NAMES.Length + 1;
@@ -54,7 +58,7 @@ namespace BtlApp
             {
                 Margin = new Padding(0),
                 Dock = DockStyle.Fill,
-                BackColor = Color.Gray
+                BackColor = CALENDAR_BACKCOLOR
             };
             tlp_mainCalendarHeader.Controls.Add(noneLabel);
 
@@ -70,7 +74,7 @@ namespace BtlApp
                     Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold),
                     TextAlign = ContentAlignment.MiddleCenter,
 
-                    BackColor = Color.Gray,
+                    BackColor = CALENDAR_BACKCOLOR,
                     //Color.FromArgb(144, 202, 249) : Color.Gray,
 
                     ForeColor = date.Date == DateTime.Now.Date ? Color.FromArgb(144, 202, 249) : Color.White
@@ -92,7 +96,7 @@ namespace BtlApp
                     Font = new Font("Microsoft Sans Serif", 8F,FontStyle.Bold),
                     TextAlign = ContentAlignment.MiddleCenter,
                     Margin = new Padding(0, 0, 0, BORDER),
-                    BackColor = Color.Gray,
+                    BackColor = CALENDAR_BACKCOLOR,
                     ForeColor = Color.White,
                 };
                 tlp_mainCalendar.Controls.Add(timeLabel, 0, h);
@@ -102,12 +106,18 @@ namespace BtlApp
                     UIPanel panel = new UIPanel
                     {
                         Dock = DockStyle.Fill,
-                        FillColor = Color.Gray,
-                        RectColor = Color.Gray,
+                        FillColor = CALENDAR_BACKCOLOR,
+                        RectColor = CALENDAR_BACKCOLOR,
                         Radius = 0,
                         Margin = new Padding(BORDER, 0, 0, BORDER),
                         Tag = new { Day = d, Hour = hour }
                     };
+
+                    // test
+
+                    // test
+
+
                     //panel.MouseClick += Panel_MouseClick;
                     tlp_mainCalendar.Controls.Add(panel, d + 1, h);
                 }
@@ -117,6 +127,7 @@ namespace BtlApp
         private void createCalendar()
         {
             createHeaderCalendar();
+            panelMain.BackColor = CALENDAR_BACKCOLOR;
 
             tlp_mainCalendar.ColumnCount = WEEK + 1;
             tlp_mainCalendar.RowCount = HOUR;
