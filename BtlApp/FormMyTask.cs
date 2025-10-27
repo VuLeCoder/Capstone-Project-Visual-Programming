@@ -32,6 +32,7 @@ namespace BtlApp
 // ====================== ... ======================
         private readonly int WEEK = 7, HOUR = 24;
         private readonly string[] DAY_NAMES = { "CN", "TH 2", "TH 3", "TH 4", "TH 5", "TH 6", "TH 7" };
+        private readonly int TIMELIME_WIDTH = 40, TASK_CELL_HEIGHT = 60, BORDER = 2;
         private void createHeaderCalendar()
         {
             tlp_mainCalendarHeader.ColumnCount = DAY_NAMES.Length + 1;
@@ -40,15 +41,23 @@ namespace BtlApp
 
             tlp_mainCalendarHeader.Padding = new Padding(0, 0, SystemInformation.VerticalScrollBarWidth, 0);
 
-            tlp_mainCalendarHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80));
+            tlp_mainCalendarHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, TIMELIME_WIDTH));
             for (int i = 0; i < WEEK; ++i)
             {
-                tlp_mainCalendarHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.28F));
+                tlp_mainCalendarHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100/WEEK));
             }
 
             DateTime currentWeekStart = GetStartOfWeek(DateTime.Now);
             DateTime date;
-            
+
+            Label noneLabel = new Label
+            {
+                Margin = new Padding(0),
+                Dock = DockStyle.Fill,
+                BackColor = Color.Gray
+            };
+            tlp_mainCalendarHeader.Controls.Add(noneLabel);
+
             for (int i=0; i<WEEK; ++i)
             {
                 date = currentWeekStart.AddDays(i);
@@ -56,12 +65,15 @@ namespace BtlApp
                 {
                     Text = $"{DAY_NAMES[(int)date.DayOfWeek]}\n{date:dd/MM/yyyy}",
                     Margin = new Padding(0),
+                    Padding = new Padding(BORDER, 0, 0, 0),
                     Dock = DockStyle.Fill,
                     Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold),
                     TextAlign = ContentAlignment.MiddleCenter,
-                    BackColor = date.Date == DateTime.Now.Date ?
-                    Color.FromArgb(144, 202, 249) : Color.FromArgb(240, 240, 240),
-                    ForeColor = date.Date == DateTime.Now.Date ? Color.White : Color.Black
+
+                    BackColor = Color.Gray,
+                    //Color.FromArgb(144, 202, 249) : Color.Gray,
+
+                    ForeColor = date.Date == DateTime.Now.Date ? Color.FromArgb(144, 202, 249) : Color.White
                 };
                 tlp_mainCalendarHeader.Controls.Add(dayLabel, i + 1, 0);
             }
@@ -77,11 +89,11 @@ namespace BtlApp
                 {
                     Text = $"{hour} AM".Replace("AM", h >= 12 ? "PM" : "AM"),
                     Dock = DockStyle.Fill,
-                    Font = new Font("Microsoft Sans Serif", 8F),
+                    Font = new Font("Microsoft Sans Serif", 8F,FontStyle.Bold),
                     TextAlign = ContentAlignment.MiddleCenter,
-                    Padding = new Padding(5),
-                    BackColor = Color.FromArgb(250, 250, 250),
-                    ForeColor = Color.Black
+                    Margin = new Padding(0, 0, 0, BORDER),
+                    BackColor = Color.Gray,
+                    ForeColor = Color.White,
                 };
                 tlp_mainCalendar.Controls.Add(timeLabel, 0, h);
 
@@ -90,10 +102,10 @@ namespace BtlApp
                     UIPanel panel = new UIPanel
                     {
                         Dock = DockStyle.Fill,
-                        FillColor = Color.White,
-                        RectColor = Color.FromArgb(230, 230, 230),
-                        Radius = 10,
-                        Margin = new Padding(0),
+                        FillColor = Color.Gray,
+                        RectColor = Color.Gray,
+                        Radius = 0,
+                        Margin = new Padding(BORDER, 0, 0, BORDER),
                         Tag = new { Day = d, Hour = hour }
                     };
                     //panel.MouseClick += Panel_MouseClick;
@@ -113,16 +125,15 @@ namespace BtlApp
             tlp_mainCalendar.ColumnStyles.Clear();
             tlp_mainCalendar.RowStyles.Clear();
 
-            tlp_mainCalendar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80));
+            tlp_mainCalendar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, TIMELIME_WIDTH));
             for(int i=0; i<WEEK; ++i)
             {
-                tlp_mainCalendar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.28F));
+                tlp_mainCalendar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100/WEEK));
             }
 
-            //tlp_mainCalendar.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
             for(int i=0; i<HOUR; ++i)
             {
-                tlp_mainCalendar.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
+                tlp_mainCalendar.RowStyles.Add(new RowStyle(SizeType.Absolute, TASK_CELL_HEIGHT));
             }
 
             createTimeSlotCalendar();

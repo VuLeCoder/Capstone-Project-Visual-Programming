@@ -28,144 +28,244 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.btn_createTask = new Sunny.UI.UIButton();
-            this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.panelHeader = new System.Windows.Forms.Panel();
+            this.panelAside = new System.Windows.Forms.Panel();
             this.panelMain = new System.Windows.Forms.Panel();
-            this.panelBody = new System.Windows.Forms.Panel();
-            this.tlp_mainCalendar = new System.Windows.Forms.TableLayoutPanel();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.tlp_mainCalendarHeader = new System.Windows.Forms.TableLayoutPanel();
-            this.uiGroupBox1.SuspendLayout();
+            this.tlp_mainCalendar = new System.Windows.Forms.TableLayoutPanel();
+            this.panelMainBody = new System.Windows.Forms.Panel();
+            this.uiButton1 = new Sunny.UI.UIButton();
+            this.uiButton2 = new Sunny.UI.UIButton();
+            this.uiButton3 = new Sunny.UI.UIButton();
+            this.uiButton4 = new Sunny.UI.UIButton();
+            this.panelHeader.SuspendLayout();
+            this.panelAside.SuspendLayout();
             this.panelMain.SuspendLayout();
-            this.panelBody.SuspendLayout();
+            this.panelMainBody.SuspendLayout();
             this.SuspendLayout();
             // 
-            // monthCalendar1
+            // panelHeader
             // 
-            this.monthCalendar1.BackColor = System.Drawing.Color.Black;
-            this.monthCalendar1.ForeColor = System.Drawing.Color.White;
-            this.monthCalendar1.Location = new System.Drawing.Point(9, 101);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 0;
+            this.panelHeader.BackColor = System.Drawing.Color.White;
+            this.panelHeader.Controls.Add(this.uiButton3);
+            this.panelHeader.Controls.Add(this.uiButton2);
+            this.panelHeader.Controls.Add(this.uiButton1);
+            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelHeader.Location = new System.Drawing.Point(0, 0);
+            this.panelHeader.Name = "panelHeader";
+            this.panelHeader.Size = new System.Drawing.Size(1200, 50);
+            this.panelHeader.TabIndex = 0;
             // 
-            // btn_createTask
+            // panelAside
             // 
-            this.btn_createTask.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.btn_createTask.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(103)))));
-            this.btn_createTask.FillColor2 = System.Drawing.Color.White;
-            this.btn_createTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btn_createTask.Location = new System.Drawing.Point(62, 35);
-            this.btn_createTask.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btn_createTask.Name = "btn_createTask";
-            this.btn_createTask.Radius = 20;
-            this.btn_createTask.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(103)))));
-            this.btn_createTask.Size = new System.Drawing.Size(128, 36);
-            this.btn_createTask.TabIndex = 1;
-            this.btn_createTask.Text = "Tạo";
-            this.btn_createTask.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            // 
-            // uiGroupBox1
-            // 
-            this.uiGroupBox1.Controls.Add(this.monthCalendar1);
-            this.uiGroupBox1.Controls.Add(this.btn_createTask);
-            this.uiGroupBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.uiGroupBox1.FillColor = System.Drawing.Color.White;
-            this.uiGroupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiGroupBox1.Location = new System.Drawing.Point(10, 10);
-            this.uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiGroupBox1.Name = "uiGroupBox1";
-            this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox1.RectColor = System.Drawing.Color.White;
-            this.uiGroupBox1.Size = new System.Drawing.Size(255, 591);
-            this.uiGroupBox1.TabIndex = 2;
-            this.uiGroupBox1.Text = null;
-            this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.panelAside.BackColor = System.Drawing.Color.White;
+            this.panelAside.Controls.Add(this.uiButton4);
+            this.panelAside.Controls.Add(this.monthCalendar1);
+            this.panelAside.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelAside.Location = new System.Drawing.Point(0, 50);
+            this.panelAside.Margin = new System.Windows.Forms.Padding(0);
+            this.panelAside.Name = "panelAside";
+            this.panelAside.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.panelAside.Size = new System.Drawing.Size(237, 550);
+            this.panelAside.TabIndex = 1;
             // 
             // panelMain
             // 
-            this.panelMain.Controls.Add(this.panelBody);
+            this.panelMain.BackColor = System.Drawing.Color.Gray;
+            this.panelMain.Controls.Add(this.panelMainBody);
             this.panelMain.Controls.Add(this.tlp_mainCalendarHeader);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(265, 10);
+            this.panelMain.Location = new System.Drawing.Point(237, 50);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(0);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(909, 591);
-            this.panelMain.TabIndex = 3;
+            this.panelMain.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.panelMain.Size = new System.Drawing.Size(963, 550);
+            this.panelMain.TabIndex = 2;
             // 
-            // panelBody
+            // monthCalendar1
             // 
-            this.panelBody.AutoScroll = true;
-            this.panelBody.Controls.Add(this.tlp_mainCalendar);
-            this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBody.Location = new System.Drawing.Point(0, 53);
-            this.panelBody.Name = "panelBody";
-            this.panelBody.Size = new System.Drawing.Size(909, 538);
-            this.panelBody.TabIndex = 1;
+            this.monthCalendar1.BackColor = System.Drawing.Color.White;
+            this.monthCalendar1.Location = new System.Drawing.Point(5, 80);
+            this.monthCalendar1.Margin = new System.Windows.Forms.Padding(0);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 0;
+            // 
+            // tlp_mainCalendarHeader
+            // 
+            this.tlp_mainCalendarHeader.BackColor = System.Drawing.Color.White;
+            this.tlp_mainCalendarHeader.ColumnCount = 3;
+            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.33758F));
+            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.66242F));
+            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 387F));
+            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendarHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tlp_mainCalendarHeader.Location = new System.Drawing.Point(10, 0);
+            this.tlp_mainCalendarHeader.Margin = new System.Windows.Forms.Padding(0);
+            this.tlp_mainCalendarHeader.Name = "tlp_mainCalendarHeader";
+            this.tlp_mainCalendarHeader.RowCount = 1;
+            this.tlp_mainCalendarHeader.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_mainCalendarHeader.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_mainCalendarHeader.Size = new System.Drawing.Size(953, 56);
+            this.tlp_mainCalendarHeader.TabIndex = 1;
             // 
             // tlp_mainCalendar
             // 
             this.tlp_mainCalendar.AutoSize = true;
-            this.tlp_mainCalendar.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tlp_mainCalendar.ColumnCount = 2;
-            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_mainCalendar.BackColor = System.Drawing.Color.White;
+            this.tlp_mainCalendar.ColumnCount = 8;
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.33758F));
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.66242F));
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 387F));
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendar.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlp_mainCalendar.Location = new System.Drawing.Point(0, 0);
+            this.tlp_mainCalendar.Margin = new System.Windows.Forms.Padding(0);
             this.tlp_mainCalendar.Name = "tlp_mainCalendar";
             this.tlp_mainCalendar.RowCount = 3;
             this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlp_mainCalendar.Size = new System.Drawing.Size(909, 24);
-            this.tlp_mainCalendar.TabIndex = 1;
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_mainCalendar.Size = new System.Drawing.Size(953, 20);
+            this.tlp_mainCalendar.TabIndex = 2;
             // 
-            // tlp_mainCalendarHeader
+            // panelMainBody
             // 
-            this.tlp_mainCalendarHeader.ColumnCount = 2;
-            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_mainCalendarHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tlp_mainCalendarHeader.Location = new System.Drawing.Point(0, 0);
-            this.tlp_mainCalendarHeader.Name = "tlp_mainCalendarHeader";
-            this.tlp_mainCalendarHeader.RowCount = 1;
-            this.tlp_mainCalendarHeader.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_mainCalendarHeader.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_mainCalendarHeader.Size = new System.Drawing.Size(909, 53);
-            this.tlp_mainCalendarHeader.TabIndex = 0;
+            this.panelMainBody.AutoScroll = true;
+            this.panelMainBody.Controls.Add(this.tlp_mainCalendar);
+            this.panelMainBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMainBody.Location = new System.Drawing.Point(10, 56);
+            this.panelMainBody.Name = "panelMainBody";
+            this.panelMainBody.Size = new System.Drawing.Size(953, 494);
+            this.panelMainBody.TabIndex = 2;
+            // 
+            // uiButton1
+            // 
+            this.uiButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiButton1.Location = new System.Drawing.Point(1118, 5);
+            this.uiButton1.Margin = new System.Windows.Forms.Padding(0);
+            this.uiButton1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton1.Name = "uiButton1";
+            this.uiButton1.Radius = 40;
+            this.uiButton1.Size = new System.Drawing.Size(40, 40);
+            this.uiButton1.TabIndex = 0;
+            this.uiButton1.Text = "V";
+            this.uiButton1.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            // 
+            // uiButton2
+            // 
+            this.uiButton2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton2.FillColor = System.Drawing.Color.White;
+            this.uiButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiButton2.ForeColor = System.Drawing.Color.Black;
+            this.uiButton2.Location = new System.Drawing.Point(1067, 5);
+            this.uiButton2.Margin = new System.Windows.Forms.Padding(0);
+            this.uiButton2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton2.Name = "uiButton2";
+            this.uiButton2.Radius = 40;
+            this.uiButton2.RectColor = System.Drawing.Color.Silver;
+            this.uiButton2.Size = new System.Drawing.Size(40, 40);
+            this.uiButton2.TabIndex = 1;
+            this.uiButton2.Text = "⚙️";
+            this.uiButton2.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            // 
+            // uiButton3
+            // 
+            this.uiButton3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton3.FillColor = System.Drawing.Color.White;
+            this.uiButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiButton3.ForeColor = System.Drawing.Color.Black;
+            this.uiButton3.Location = new System.Drawing.Point(1013, 5);
+            this.uiButton3.Margin = new System.Windows.Forms.Padding(0);
+            this.uiButton3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton3.Name = "uiButton3";
+            this.uiButton3.Radius = 40;
+            this.uiButton3.RectColor = System.Drawing.Color.Silver;
+            this.uiButton3.Size = new System.Drawing.Size(40, 40);
+            this.uiButton3.TabIndex = 2;
+            this.uiButton3.Text = "🔔";
+            this.uiButton3.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            // 
+            // uiButton4
+            // 
+            this.uiButton4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiButton4.Location = new System.Drawing.Point(50, 21);
+            this.uiButton4.Margin = new System.Windows.Forms.Padding(0);
+            this.uiButton4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton4.Name = "uiButton4";
+            this.uiButton4.Radius = 15;
+            this.uiButton4.Size = new System.Drawing.Size(130, 35);
+            this.uiButton4.TabIndex = 1;
+            this.uiButton4.Text = "Tạo Task";
+            this.uiButton4.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             // 
             // FormMyTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1184, 611);
+            this.ClientSize = new System.Drawing.Size(1200, 600);
             this.Controls.Add(this.panelMain);
-            this.Controls.Add(this.uiGroupBox1);
+            this.Controls.Add(this.panelAside);
+            this.Controls.Add(this.panelHeader);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.ForeColor = System.Drawing.Color.White;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormMyTask";
-            this.Padding = new System.Windows.Forms.Padding(10);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MyTask";
-            this.uiGroupBox1.ResumeLayout(false);
+            this.panelHeader.ResumeLayout(false);
+            this.panelAside.ResumeLayout(false);
             this.panelMain.ResumeLayout(false);
-            this.panelBody.ResumeLayout(false);
-            this.panelBody.PerformLayout();
+            this.panelMainBody.ResumeLayout(false);
+            this.panelMainBody.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.Panel panelHeader;
+        private System.Windows.Forms.Panel panelAside;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
-        private Sunny.UI.UIButton btn_createTask;
-        private Sunny.UI.UIGroupBox uiGroupBox1;
         private System.Windows.Forms.Panel panelMain;
-        private System.Windows.Forms.TableLayoutPanel tlp_mainCalendarHeader;
-        private System.Windows.Forms.Panel panelBody;
+        private System.Windows.Forms.Panel panelMainBody;
         private System.Windows.Forms.TableLayoutPanel tlp_mainCalendar;
+        private System.Windows.Forms.TableLayoutPanel tlp_mainCalendarHeader;
+        private Sunny.UI.UIButton uiButton1;
+        private Sunny.UI.UIButton uiButton3;
+        private Sunny.UI.UIButton uiButton2;
+        private Sunny.UI.UIButton uiButton4;
     }
 }
 
