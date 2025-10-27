@@ -31,9 +31,21 @@ namespace BtlApp
 
 // ====================== ... ======================
         private readonly int WEEK = 7, HOUR = 24;
-        private readonly string[] dayNames = { "CN", "TH 2", "TH 3", "TH 4", "TH 5", "TH 6", "TH 7" };
+        private readonly string[] DAY_NAMES = { "CN", "TH 2", "TH 3", "TH 4", "TH 5", "TH 6", "TH 7" };
         private void createHeaderCalendar()
         {
+            tlp_mainCalendarHeader.ColumnCount = DAY_NAMES.Length + 1;
+            tlp_mainCalendarHeader.Controls.Clear();
+            tlp_mainCalendarHeader.ColumnStyles.Clear();
+
+            tlp_mainCalendarHeader.Padding = new Padding(0, 0, SystemInformation.VerticalScrollBarWidth, 0);
+
+            tlp_mainCalendarHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80));
+            for (int i = 0; i < WEEK; ++i)
+            {
+                tlp_mainCalendarHeader.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.28F));
+            }
+
             DateTime currentWeekStart = GetStartOfWeek(DateTime.Now);
             DateTime date;
             
@@ -42,7 +54,7 @@ namespace BtlApp
                 date = currentWeekStart.AddDays(i);
                 Label dayLabel = new Label
                 {
-                    Text = $"{dayNames[(int)date.DayOfWeek]}\n{date:dd/MM/yyyy}",
+                    Text = $"{DAY_NAMES[(int)date.DayOfWeek]}\n{date:dd/MM/yyyy}",
                     Margin = new Padding(0),
                     Dock = DockStyle.Fill,
                     Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold),
@@ -51,7 +63,7 @@ namespace BtlApp
                     Color.FromArgb(144, 202, 249) : Color.FromArgb(240, 240, 240),
                     ForeColor = date.Date == DateTime.Now.Date ? Color.White : Color.Black
                 };
-                tlp_mainCalendar.Controls.Add(dayLabel, i + 1, 0);
+                tlp_mainCalendarHeader.Controls.Add(dayLabel, i + 1, 0);
             }
         }
 
@@ -66,11 +78,12 @@ namespace BtlApp
                     Text = $"{hour} AM".Replace("AM", h >= 12 ? "PM" : "AM"),
                     Dock = DockStyle.Fill,
                     Font = new Font("Microsoft Sans Serif", 8F),
-                    TextAlign = ContentAlignment.TopRight,
+                    TextAlign = ContentAlignment.MiddleCenter,
                     Padding = new Padding(5),
-                    BackColor = Color.FromArgb(250, 250, 250)
+                    BackColor = Color.FromArgb(250, 250, 250),
+                    ForeColor = Color.Black
                 };
-                tlp_mainCalendar.Controls.Add(timeLabel, 0, h + 1);
+                tlp_mainCalendar.Controls.Add(timeLabel, 0, h);
 
                 for(int d=0; d<WEEK; ++d)
                 {
@@ -84,15 +97,17 @@ namespace BtlApp
                         Tag = new { Day = d, Hour = hour }
                     };
                     //panel.MouseClick += Panel_MouseClick;
-                    tlp_mainCalendar.Controls.Add(panel, d + 1, h + 1);
+                    tlp_mainCalendar.Controls.Add(panel, d + 1, h);
                 }
             }
         }
 
         private void createCalendar()
         {
-            tlp_mainCalendar.ColumnCount = 8;
-            tlp_mainCalendar.RowCount = 25;
+            createHeaderCalendar();
+
+            tlp_mainCalendar.ColumnCount = WEEK + 1;
+            tlp_mainCalendar.RowCount = HOUR;
 
             tlp_mainCalendar.Controls.Clear();
             tlp_mainCalendar.ColumnStyles.Clear();
@@ -104,13 +119,12 @@ namespace BtlApp
                 tlp_mainCalendar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.28F));
             }
 
-            tlp_mainCalendar.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
+            //tlp_mainCalendar.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
             for(int i=0; i<HOUR; ++i)
             {
-                tlp_mainCalendar.RowStyles.Add(new RowStyle(SizeType.Absolute, 60));
+                tlp_mainCalendar.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
             }
 
-            createHeaderCalendar();
             createTimeSlotCalendar();
         }
 // =====================================================================
