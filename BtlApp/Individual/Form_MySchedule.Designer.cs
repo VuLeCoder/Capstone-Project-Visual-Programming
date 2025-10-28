@@ -1,6 +1,6 @@
 ﻿namespace BtlApp
 {
-    partial class FormMyTask
+    partial class Form_MySchedule
     {
         /// <summary>
         /// Required designer variable.

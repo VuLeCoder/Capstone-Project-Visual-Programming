@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace BtlApp
 {
     internal static class Program
@@ -16,7 +17,7 @@ namespace BtlApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMyTask());
+            Application.Run(new Form_MySchedule());
         }
     }
 }

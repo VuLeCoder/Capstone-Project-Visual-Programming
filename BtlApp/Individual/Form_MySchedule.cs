@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace BtlApp
 {
-    public partial class FormMyTask : Form
+    public partial class Form_MySchedule : Form
     {
-        public FormMyTask()
+        public Form_MySchedule()
         {
             InitializeComponent();
             createCalendar();
