@@ -38,6 +38,8 @@
             this.cb_EndHour = new System.Windows.Forms.ComboBox();
             this.btn_Add = new Sunny.UI.UIButton();
             this.btn_Save = new Sunny.UI.UIButton();
+            this.btn_Cancel = new Sunny.UI.UIButton();
+            this.btn_Delete = new Sunny.UI.UIButton();
             this.SuspendLayout();
             // 
             // label1
@@ -140,11 +142,42 @@
             this.btn_Save.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
+            // btn_Cancel
+            // 
+            this.btn_Cancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btn_Cancel.Location = new System.Drawing.Point(375, 416);
+            this.btn_Cancel.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btn_Cancel.Name = "btn_Cancel";
+            this.btn_Cancel.Radius = 20;
+            this.btn_Cancel.Size = new System.Drawing.Size(144, 43);
+            this.btn_Cancel.TabIndex = 6;
+            this.btn_Cancel.Text = "Hủy";
+            this.btn_Cancel.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
+            // 
+            // btn_Delete
+            // 
+            this.btn_Delete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Delete.Enabled = false;
+            this.btn_Delete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btn_Delete.Location = new System.Drawing.Point(90, 416);
+            this.btn_Delete.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.Radius = 20;
+            this.btn_Delete.Size = new System.Drawing.Size(144, 43);
+            this.btn_Delete.TabIndex = 7;
+            this.btn_Delete.Text = "Xóa";
+            this.btn_Delete.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
+            // 
             // Form_AddMySchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 435);
+            this.ClientSize = new System.Drawing.Size(628, 508);
+            this.Controls.Add(this.btn_Delete);
+            this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_Save);
             this.Controls.Add(this.btn_Add);
             this.Controls.Add(this.cb_EndHour);
@@ -180,5 +213,7 @@
         private System.Windows.Forms.ComboBox cb_EndHour;
         private Sunny.UI.UIButton btn_Add;
         private Sunny.UI.UIButton btn_Save;
+        private Sunny.UI.UIButton btn_Cancel;
+        private Sunny.UI.UIButton btn_Delete;
     }
 }

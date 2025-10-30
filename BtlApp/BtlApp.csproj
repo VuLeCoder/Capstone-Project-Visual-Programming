@@ -93,6 +93,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\DataProcesser.cs" />
+    <Compile Include="Database\Models\MySchedule.cs" />
+    <Compile Include="Individual\Form_AddMySchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Individual\Form_AddMySchedule.Designer.cs">
+      <DependentUpon>Form_AddMySchedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Individual\Form_MySchedule.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +109,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Individual\Form_AddMySchedule.resx">
+      <DependentUpon>Form_AddMySchedule.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Individual\Form_MySchedule.resx">
       <DependentUpon>Form_MySchedule.cs</DependentUpon>
     </EmbeddedResource>

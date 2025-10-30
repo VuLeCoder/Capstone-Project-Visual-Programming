@@ -1,15 +1,20 @@
-﻿using Krypton.Toolkit;
+﻿using BtlApp.Database.Models;
+using BtlApp.Individual;
+using FormProduct.Classes;
+using Krypton.Toolkit;
 using Sunny.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using static Syncfusion.Windows.Forms.Tools.MenuDropDown;
+using System.Xml.Serialization;
+//using BtlApp.Database;
 
 namespace BtlApp
 {
@@ -27,9 +32,11 @@ namespace BtlApp
         private readonly int TIMELIME_WIDTH = 40, TASK_CELL_HEIGHT = 60, BORDER = 1;
         private readonly Color CALENDAR_BACKCOLOR = Color.FromArgb(19, 19, 20);
 
-        private readonly float WIDTH_PERCENT = 0.9F;
+        private readonly float WIDTH_PERCENT = 0.7F;
+        private readonly Font TITLE_FONT = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold);
 
         // ==================== Các biến toàn cục ======================
+        private readonly DataProcesser Db = new DataProcesser();
         private DateTime currentWeek;
 
 
@@ -65,9 +72,6 @@ namespace BtlApp
 
         private void updateCalendar()
         {
-            
-            //tlp_mainCalendar.Controls.Clear();
-
             for (int h = 0; h < HOUR; ++h)
             {
                 for (int d = 0; d < WEEK; ++d)
@@ -82,13 +86,10 @@ namespace BtlApp
                         panel.Controls.Clear();
                     }
 
-
-
+                    LoadScheduleFromDB();
                 }
             }
         }
-        // Margin = new Padding(BORDER, 0, 0, BORDER),
-        //FillColor = CALENDAR_BACKCOLOR,
 // =====================================================================
 
 // =====================================================================
@@ -170,7 +171,7 @@ namespace BtlApp
                         Padding = new Padding(0),
                         Tag = new { Day = d, Hour = h }
                     };
-                    //panel.MouseClick += Panel_MouseClick;
+                    panel.MouseClick += TimeSlot_MouseClick;
                     tlp_mainCalendar.Controls.Add(panel, d + 1, h);
                 }
             }
@@ -200,11 +201,9 @@ namespace BtlApp
             }
 
             createTimeSlotCalendar();
+            LoadScheduleFromDB();
 
-
-            //test
-
-            AddScheduleToCell(1, 7.25F, 10.5F, "Lịch học Toán", Color.FromArgb(66, 165, 245));
+            AddScheduleToCell(1, 7.25F, 10.5F, "Lịch học Toán", Color.FromArgb(66, 165, 245), "1");
         }
 
 
@@ -212,23 +211,156 @@ namespace BtlApp
 
 // =====================================================================
 
+        // ====================== Database ======================
+        private void LoadScheduleFromDB()
+        {
+            DateTime DayStart = currentWeek;
+            DateTime DayEnd = currentWeek.AddDays(6);
+
+            string query = "select * from MySchedule where ScheduleDate between @Start and @End order by ScheduleDate";
+            SqlParameter[] parameters = {
+                new SqlParameter("@Start", DayStart.Date),
+                new SqlParameter("@End", DayEnd.Date)
+            };
+
+            DataTable dt = Db.ReadTable(query, parameters);
+
+            // cout << :)))
+            //MessageBox.Show(dt.Rows.Count.ToString());
+
+            foreach (DataRow row in dt.Rows)
+            {
+                DateTime scheduleDate = Convert.ToDateTime(row["ScheduleDate"]);
+                int dayIndex = (scheduleDate - DayStart).Days;
+
+                float startSchedule = Convert.ToSingle(row["StartTime"]);
+                float endSchedule = Convert.ToSingle(row["EndTime"]);
+
+                string title = row["Title"].ToString();
+                Color blockColor = Color.FromArgb(66, 165, 245);
+                string id = row["ID"].ToString();
+
+                AddScheduleToCell(dayIndex, startSchedule, endSchedule, title, blockColor, id);
+            }
+        }
 
 
+        private void AddScheduleToDB(MySchedule schedule)
+        {
+            string query = "select * from MySchedule where ScheduleDate = @Date and (StartTime < @End AND EndTime > @Start)";
+            SqlParameter[] parameters = {
+                new SqlParameter("@Date", schedule.ScheduleDate),
+                new SqlParameter("@Start", schedule.StartTime),
+                new SqlParameter("@End", schedule.EndTime)
+            };
+            
+            DataTable dt = Db.ReadTable(query, parameters);
+            if(dt.Rows.Count > 0)
+            {
+                MessageBox.Show("Lịch bị trùng thời gian");
+                return;
+            }
+
+            try
+            {
+                query = @"
+                    insert into MySchedule (Title, ScheduleDate, StartTime, EndTime)
+                    output inserted.ID
+                    values (@Title, @ScheduleDate, @StartTime, @EndTime);
+                ";
+
+                SqlParameter[] InsertParameters = {
+                    new SqlParameter("@Title", schedule.Title),
+                    new SqlParameter("@ScheduleDate", schedule.ScheduleDate),
+                    new SqlParameter("@StartTime", schedule.StartTime),
+                    new SqlParameter("@EndTime", schedule.EndTime)
+                };
+
+                object result = Db.ExecuteScalar(query, InsertParameters);
+
+                if (result != null)
+                {
+                    // cout << :)))
+                    string newId = Convert.ToInt32(result).ToString();
+                    schedule.Id = newId;
+                    MessageBox.Show($"✅ Thêm lịch thành công! ID mới: {newId}", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    int dayIndex = (schedule.ScheduleDate - currentWeek).Days;
+                    if(dayIndex >= 0 && dayIndex < 7)
+                    {
+                        AddScheduleToCell(dayIndex, schedule.StartTime, schedule.EndTime, schedule.Title, Color.Red, schedule.Id);
+                    }
+                }
+                else
+                {
+                    // cout << :)))
+                    MessageBox.Show("⚠️ Không lấy được ID mới.", "Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                // cout << :)))
+                MessageBox.Show("❌ Lỗi khi thêm lịch:\n" + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void UpdateScheduleDB()
+        {
+
+        }
 
 
 
         // ====================== Hàm xử lý logic ======================
+        private void TimeSlot_MouseClick(object sender, MouseEventArgs e)
+        {
+            UIPanel panel = sender as UIPanel;
+            dynamic tagData = panel.Tag;
+            int dayIndex = tagData.Day;
+
+            Form_AddMySchedule addSchedlueForm = new Form_AddMySchedule();
+            addSchedlueForm.formType(Form_AddMySchedule.TYPE_ADD);
+            DialogResult result = addSchedlueForm.ShowDialog();
+
+            if (result == DialogResult.OK) // Them lich
+            {
+                
+                AddScheduleToDB(addSchedlueForm.ScheduleResult);
+                return;
+            }
+        }
+
+        private void btn_AddSchedule_Click(object sender, EventArgs e)
+        {
+            Form_AddMySchedule addSchedlueForm = new Form_AddMySchedule();
+            addSchedlueForm.formType(Form_AddMySchedule.TYPE_ADD);
+            DialogResult result = addSchedlueForm.ShowDialog();
+
+            if (result == DialogResult.OK) // Them lich
+            {
+                //string data = child.EnteredData;
+                //lblResult.Text = "Dữ liệu nhận được: " + data;
+                return;
+            }
+
+            if (result == DialogResult.Cancel) // Huy
+            {
+
+            }
+        }
+
         private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
             DateTime selectedDay = monthCalendar.SelectionStart;
             updateHeaderCalendar(GetStartOfWeek(selectedDay));
         }
 
-
-
-
         private void AddScheduleToCell(int dayIndex, float startSchedule, float endSchedule, string title, Color blockColor, string id)
         {
+            //blockColor = Color.Red;
             int startHour = (int)startSchedule;
             int endHour = (int)endSchedule;
             float startMinute = startSchedule - startHour;
@@ -240,6 +372,7 @@ namespace BtlApp
                 Name = id,
                 Margin = new Padding(0),
                 BackColor = blockColor,
+                FillColor = blockColor,
                 Tag = dayIndex,
             };
 
@@ -257,18 +390,16 @@ namespace BtlApp
             }
             scheduleBlockFirst.Size = new Size(width, height + 1);
 
-
-            //Label lblTitle = new Label
-            //{
-            //    Text = $"{title}\n{startHour}:00 - {endHour}:00",
-            //    Dock = DockStyle.Fill,
-            //    ForeColor = Color.White,
-            //    Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold),
-            //    TextAlign = ContentAlignment.TopLeft,
-            //    BackColor = Color.Transparent
-            //};
-            //scheduleBlock.Controls.Add(lblTitle);
-
+            Label lblTitle = new Label
+            {
+                Text = $"{title}",
+                Dock = DockStyle.Fill,
+                ForeColor = Color.White,
+                Font = TITLE_FONT,
+                TextAlign = ContentAlignment.TopLeft,
+                BackColor = Color.Transparent
+            };
+            scheduleBlockFirst.Controls.Add(lblTitle);
 
             cell.Controls.Add(scheduleBlockFirst);
 
@@ -283,6 +414,7 @@ namespace BtlApp
                         Location = new Point(0, 0),
                         Size = new Size(width, panel.Height + 1),
                         BackColor = blockColor,
+                        FillColor = blockColor,
                         Margin = new Padding(0),
                         Tag = dayIndex,
                     };
@@ -301,6 +433,7 @@ namespace BtlApp
                     Name = id,
                     Location = new Point(0, 0),
                     BackColor = blockColor,
+                    FillColor = blockColor,
                     Margin = new Padding(0),
                     Tag = dayIndex,
                 };
