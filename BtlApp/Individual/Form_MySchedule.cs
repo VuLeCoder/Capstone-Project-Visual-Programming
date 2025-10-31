@@ -201,8 +201,6 @@ namespace BtlApp
 
             createTimeSlotCalendar();
             LoadScheduleFromDB();
-
-            AddScheduleToCell(1, 7.25F, 10.5F, "Lịch học Toán", Color.FromArgb(66, 165, 245), "1");
         }
 
 
@@ -236,10 +234,11 @@ namespace BtlApp
                 float endSchedule = Convert.ToSingle(row["EndTime"]);
 
                 string title = row["Title"].ToString();
-                Color blockColor = Color.FromArgb(66, 165, 245);
                 string id = row["ID"].ToString();
 
-                AddScheduleToCell(dayIndex, startSchedule, endSchedule, title, blockColor, id);
+                Color blockColor = Color.FromArgb(66, 165, 245);
+                MySchedule schedule = new MySchedule(id, title,scheduleDate,startSchedule, endSchedule);
+                AddScheduleToCell(dayIndex, blockColor, schedule);
             }
         }
 
@@ -291,8 +290,9 @@ namespace BtlApp
                     MessageBox.Show($"✅ Thêm lịch thành công! ID mới: {newId}", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                    Color blockColor = Color.FromArgb(66, 165, 245);
                     int dayIndex = (schedule.ScheduleDate - currentWeek).Days;
-                    AddScheduleToCell(dayIndex, schedule.StartTime, schedule.EndTime, schedule.Title, Color.Red, schedule.Id);
+                    AddScheduleToCell(dayIndex, blockColor, schedule);
                     
                 }
                 else
@@ -429,8 +429,9 @@ namespace BtlApp
 
                 RemoveSchedule(dayIndex, id);
 
+                Color blockColor = Color.FromArgb(66, 165, 245);
                 dayIndex = (schedule.ScheduleDate - currentWeek).Days;
-                AddScheduleToCell(dayIndex, schedule.StartTime, schedule.EndTime, schedule.Title, Color.Red, schedule.Id);
+                AddScheduleToCell(dayIndex, blockColor, schedule);
 
                 return;
             }
@@ -450,23 +451,23 @@ namespace BtlApp
         // ====================== Hàm xử lý logic ======================
 
 
-        private void AddScheduleToCell(int dayIndex, float startSchedule, float endSchedule, string title, Color blockColor, string id)
+        private void AddScheduleToCell(int dayIndex, Color blockColor, MySchedule schedule)
         {
             if (dayIndex < 0 || dayIndex >= 7) return;
 
-            int startHour = (int)startSchedule;
-            int endHour = (int)endSchedule;
-            float startMinute = startSchedule - startHour;
-            float endMinute = endSchedule - endHour;
+            int startHour = (int)schedule.StartTime;
+            int endHour = (int)schedule.EndTime;
+            float startMinute = schedule.StartTime - startHour;
+            float endMinute = schedule.EndTime - endHour;
 
             Control cell = tlp_mainCalendar.GetControlFromPosition(dayIndex + 1, startHour);
             UIPanel scheduleBlockFirst = new UIPanel
             {
-                Name = id,
+                Name = schedule.Id,
                 Margin = new Padding(0),
                 BackColor = blockColor,
                 FillColor = blockColor,
-                Tag = new { Day = dayIndex, Id = id }
+                Tag = new { Day = dayIndex, Id = schedule.Id }
             };
 
             int height = (int)((1 - startMinute) * cell.Height);
@@ -486,7 +487,7 @@ namespace BtlApp
 
             Label lblTitle = new Label
             {
-                Text = $"{title}",
+                Text = $"{schedule.Title}",
                 Dock = DockStyle.Fill,
                 ForeColor = Color.White,
                 Font = TITLE_FONT,
@@ -504,13 +505,13 @@ namespace BtlApp
                 {
                     UIPanel scheduleBlock = new UIPanel
                     {
-                        Name = id,
+                        Name = schedule.Id,
                         Location = new Point(0, 0),
                         Size = new Size(width, panel.Height + 1),
                         BackColor = blockColor,
                         FillColor = blockColor,
                         Margin = new Padding(0),
-                        Tag = new { Day = dayIndex, Id = id }
+                        Tag = new { Day = dayIndex, Id = schedule.Id }
                     };
 
                     panel.Controls.Add(scheduleBlock);
@@ -525,12 +526,12 @@ namespace BtlApp
                 cell = tlp_mainCalendar.GetControlFromPosition(dayIndex + 1, endHour);
                 UIPanel scheduleBlockEnd = new UIPanel
                 {
-                    Name = id,
+                    Name = schedule.Id,
                     Location = new Point(0, 0),
                     BackColor = blockColor,
                     FillColor = blockColor,
                     Margin = new Padding(0),
-                    Tag = new { Day = dayIndex, Id = id }
+                    Tag = new { Day = dayIndex, Id = schedule.Id }
                 };
 
                 height = (int)(cell.Height * endMinute);
