@@ -108,11 +108,12 @@ insert into time_slot (time_string, time_val) values
 ('11:15 PM', 23.25),
 ('11:30 PM', 23.50),
 ('11:45 PM', 23.75);
+('00:00 PM', 24);
 go
 
 
 create table MySchedule (
-    ID int primary key identityY(1,1),
+    ID int primary key identity(1,1),
     ScheduleDate datetime not null,
     StartTime float not null,
     EndTime float not null,
