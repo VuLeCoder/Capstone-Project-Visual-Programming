@@ -19,8 +19,9 @@ namespace BtlApp
 {
     public partial class Form_MySchedule : Form
     {
-        public Form_MySchedule()
+        public Form_MySchedule(Form_Manager manager)
         {
+            this.manager = manager;
             InitializeComponent();
             createCalendar();
         }
@@ -37,6 +38,7 @@ namespace BtlApp
         // ==================== Các biến toàn cục ======================
         private readonly DataProcesser Db = new DataProcesser();
         private DateTime currentWeek;
+        private readonly Form_Manager manager;
 
 
 
@@ -357,7 +359,6 @@ namespace BtlApp
 
 
         // ====================== Các sự kiện ======================
-
         private void btn_AddSchedule_Click(object sender, EventArgs e)
         {
             Form_AddMySchedule addSchedlueForm = new Form_AddMySchedule();
@@ -395,6 +396,16 @@ namespace BtlApp
                 AddScheduleToDB(addSchedlueForm.getData());
                 return;
             }
+        }
+
+        private void btn_Return_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Form_MySchedule_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            manager.Show();
         }
 
         private void ScheduleBlock_MouseClick(object sender, MouseEventArgs e)

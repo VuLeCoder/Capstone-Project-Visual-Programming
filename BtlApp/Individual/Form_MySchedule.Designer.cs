@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             this.panelHeader = new System.Windows.Forms.Panel();
+            this.lbl_User = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.uiButton3 = new Sunny.UI.UIButton();
             this.uiButton2 = new Sunny.UI.UIButton();
             this.uiButton1 = new Sunny.UI.UIButton();
             this.panelAside = new System.Windows.Forms.Panel();
+            this.btn_Return = new Sunny.UI.UIButton();
             this.monthCalendar = new Krypton.Toolkit.KryptonMonthCalendar();
             this.btn_AddSchedule = new Sunny.UI.UIButton();
             this.panelMain = new System.Windows.Forms.Panel();
             this.panelMainBody = new System.Windows.Forms.Panel();
             this.tlp_mainCalendar = new System.Windows.Forms.TableLayoutPanel();
             this.tlp_mainCalendarHeader = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btn_Return = new Sunny.UI.UIButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lbl_User = new System.Windows.Forms.Label();
             this.panelHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelAside.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.panelMainBody.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -64,6 +64,36 @@
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(1200, 60);
             this.panelHeader.TabIndex = 0;
+            // 
+            // lbl_User
+            // 
+            this.lbl_User.AutoSize = true;
+            this.lbl_User.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_User.Location = new System.Drawing.Point(258, 20);
+            this.lbl_User.Name = "lbl_User";
+            this.lbl_User.Size = new System.Drawing.Size(111, 20);
+            this.lbl_User.TabIndex = 6;
+            this.lbl_User.Text = "Lịch cá nhân";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::BtlApp.Properties.Resources.Icon;
+            this.pictureBox1.Location = new System.Drawing.Point(33, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(79, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(116, 20);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Btl_Schedule";
             // 
             // uiButton3
             // 
@@ -126,6 +156,21 @@
             this.panelAside.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.panelAside.Size = new System.Drawing.Size(240, 540);
             this.panelAside.TabIndex = 1;
+            // 
+            // btn_Return
+            // 
+            this.btn_Return.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Return.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btn_Return.Location = new System.Drawing.Point(37, 282);
+            this.btn_Return.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_Return.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btn_Return.Name = "btn_Return";
+            this.btn_Return.Radius = 15;
+            this.btn_Return.Size = new System.Drawing.Size(153, 35);
+            this.btn_Return.TabIndex = 3;
+            this.btn_Return.Text = "Quay về trang chủ";
+            this.btn_Return.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btn_Return.Click += new System.EventHandler(this.btn_Return_Click);
             // 
             // monthCalendar
             // 
@@ -204,7 +249,7 @@
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tlp_mainCalendar.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlp_mainCalendar.Location = new System.Drawing.Point(0, 0);
             this.tlp_mainCalendar.Margin = new System.Windows.Forms.Padding(0);
@@ -243,7 +288,7 @@
             this.tlp_mainCalendarHeader.ColumnCount = 3;
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.33758F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.66242F));
-            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 390F));
+            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 391F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -257,50 +302,6 @@
             this.tlp_mainCalendarHeader.Size = new System.Drawing.Size(950, 56);
             this.tlp_mainCalendarHeader.TabIndex = 1;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(79, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 20);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Btl_Schedule";
-            // 
-            // btn_Return
-            // 
-            this.btn_Return.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Return.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btn_Return.Location = new System.Drawing.Point(37, 282);
-            this.btn_Return.Margin = new System.Windows.Forms.Padding(0);
-            this.btn_Return.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btn_Return.Name = "btn_Return";
-            this.btn_Return.Radius = 15;
-            this.btn_Return.Size = new System.Drawing.Size(153, 35);
-            this.btn_Return.TabIndex = 3;
-            this.btn_Return.Text = "Quay về trang chủ";
-            this.btn_Return.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::BtlApp.Properties.Resources.Icon;
-            this.pictureBox1.Location = new System.Drawing.Point(33, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
-            // 
-            // lbl_User
-            // 
-            this.lbl_User.AutoSize = true;
-            this.lbl_User.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_User.Location = new System.Drawing.Point(258, 20);
-            this.lbl_User.Name = "lbl_User";
-            this.lbl_User.Size = new System.Drawing.Size(111, 20);
-            this.lbl_User.TabIndex = 6;
-            this.lbl_User.Text = "Lịch cá nhân";
-            // 
             // Form_MySchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -312,18 +313,20 @@
             this.Controls.Add(this.panelHeader);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.ForeColor = System.Drawing.Color.White;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form_MySchedule";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MyTask";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_MySchedule_FormClosed);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelAside.ResumeLayout(false);
             this.panelMain.ResumeLayout(false);
             this.panelMainBody.ResumeLayout(false);
             this.panelMainBody.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

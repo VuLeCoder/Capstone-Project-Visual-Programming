@@ -113,6 +113,12 @@
     <Compile Include="Individual\Form_AddMySchedule.Designer.cs">
       <DependentUpon>Form_AddMySchedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Individual\Form_Manager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Individual\Form_Manager.Designer.cs">
+      <DependentUpon>Form_Manager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Individual\Form_MySchedule.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Individual\Form_Login.resx">
       <DependentUpon>Form_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Individual\Form_Manager.resx">
+      <DependentUpon>Form_Manager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Individual\Form_MySchedule.resx">
       <DependentUpon>Form_MySchedule.cs</DependentUpon>
