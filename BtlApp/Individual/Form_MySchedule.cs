@@ -292,10 +292,8 @@ namespace BtlApp
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     int dayIndex = (schedule.ScheduleDate - currentWeek).Days;
-                    if(dayIndex >= 0 && dayIndex < 7)
-                    {
-                        AddScheduleToCell(dayIndex, schedule.StartTime, schedule.EndTime, schedule.Title, Color.Red, schedule.Id);
-                    }
+                    AddScheduleToCell(dayIndex, schedule.StartTime, schedule.EndTime, schedule.Title, Color.Red, schedule.Id);
+                    
                 }
                 else
                 {
@@ -396,6 +394,7 @@ namespace BtlApp
         {
             UIPanel panel = sender as UIPanel;
             dynamic tagData = panel.Tag;
+            int dayIndex = tagData.Day;
             string id = tagData.Id;
 
             DataTable dt = Db.ReadTable("SELECT * FROM MySchedule WHERE ID = @ID",
@@ -427,101 +426,25 @@ namespace BtlApp
                 schedule = addSchedlueForm.getData();
                 schedule.Id = id;
                 UpdateSchedule(schedule);
+
+                RemoveSchedule(dayIndex, id);
+
+                dayIndex = (schedule.ScheduleDate - currentWeek).Days;
+                AddScheduleToCell(dayIndex, schedule.StartTime, schedule.EndTime, schedule.Title, Color.Red, schedule.Id);
+
                 return;
             }
 
             if(result == DialogResult.No)
             {
                 DeleteSchedule(id);
+                RemoveSchedule(dayIndex, id);
             }
         }
 
 
 
-        /*
-         * 
-         * private void ScheduleBlock_MouseClick(object sender, MouseEventArgs e)
-{
-    UIPanel panel = sender as UIPanel;
-    if (panel == null) return;
-
-    // Lấy thông tin từ Tag
-    dynamic tagData = panel.Tag;
-    int dayIndex = tagData.Day;
-    string scheduleId = tagData.Id;
-
-    // Lấy dữ liệu lịch hiện tại từ Db để gửi sang Form chỉnh sửa
-    DataTable dt = Db.ReadTable("SELECT * FROM MySchedule WHERE ID = @ID", 
-        new SqlParameter[] { new SqlParameter("@ID", scheduleId) });
-
-    if (dt.Rows.Count == 0)
-    {
-        MessageBox.Show("Không tìm thấy lịch!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        return;
-    }
-
-    DataRow row = dt.Rows[0];
-    MySchedule schedule = new MySchedule(
-        row["ID"].ToString(),
-        row["Title"].ToString(),
-        Convert.ToDateTime(row["ScheduleDate"]),
-        Convert.ToSingle(row["StartTime"]),
-        Convert.ToSingle(row["EndTime"])
-    );
-
-    // Mở Form chỉnh sửa
-    Form_AddMySchedule addScheduleForm = new Form_AddMySchedule();
-    addScheduleForm.formType(Form_AddMySchedule.TYPE_EDIT);
-    addScheduleForm.SetScheduleData(schedule); // truyền dữ liệu cũ sang Form
-    DialogResult result = addScheduleForm.ShowDialog();
-
-    if (result == DialogResult.Yes) // Chỉnh sửa
-    {
-        // Lấy dữ liệu mới từ Form
-        MySchedule updatedSchedule = addScheduleForm.GetScheduleData();
-
-        // Kiểm tra trùng lịch trước khi cập nhật
-        if (IsTimeSlotAvailable(updatedSchedule, scheduleId))
-        {
-            bool updated = UpdateSchedule(updatedSchedule);
-            if (updated)
-            {
-                MessageBox.Show("Cập nhật lịch thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                RefreshCalendar(); // vẽ lại lịch
-            }
-            else
-            {
-                MessageBox.Show("Cập nhật thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        else
-        {
-            MessageBox.Show("Thời gian trùng với lịch khác!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
-        return;
-    }
-
-    if (result == DialogResult.No) // Xóa
-    {
-        DialogResult confirm = MessageBox.Show("Bạn có chắc muốn xóa lịch này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-        if (confirm == DialogResult.Yes)
-        {
-            bool deleted = DeleteSchedule(scheduleId);
-            if (deleted)
-            {
-                MessageBox.Show("Xóa lịch thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                RefreshCalendar(); // vẽ lại lịch
-            }
-            else
-            {
-                MessageBox.Show("Xóa thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-    }
-}
-
-         */
+        
 
 
         // ====================== Hàm xử lý logic ======================
@@ -529,6 +452,8 @@ namespace BtlApp
 
         private void AddScheduleToCell(int dayIndex, float startSchedule, float endSchedule, string title, Color blockColor, string id)
         {
+            if (dayIndex < 0 || dayIndex >= 7) return;
+
             int startHour = (int)startSchedule;
             int endHour = (int)endSchedule;
             float startMinute = startSchedule - startHour;
@@ -617,12 +542,14 @@ namespace BtlApp
 
         private void RemoveSchedule(int dayIndex, string id)
         {
+            if (dayIndex < 0 || dayIndex >= 7) return;
+
             for(int h=0; h<HOUR; ++h)
             {
                 Control cell = tlp_mainCalendar.GetControlFromPosition(dayIndex + 1, h);
                 cell.Controls.RemoveByKey(id);
 
-                if(cell.Controls.Count == 0 )
+                if(cell.Controls.Count == 0)
                 {
                     cell.Margin = new Padding(BORDER, 0, 0, BORDER);
                 }
