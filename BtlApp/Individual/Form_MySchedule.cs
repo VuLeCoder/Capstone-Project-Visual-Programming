@@ -392,13 +392,29 @@ namespace BtlApp
 
         private void ScheduleBlock_MouseClick(object sender, MouseEventArgs e)
         {
-            UIPanel panel = sender as UIPanel;
-            dynamic tagData = panel.Tag;
-            int dayIndex = tagData.Day;
-            string id = tagData.Id;
+            int dayIndex;
+            string id;
+            if(sender is UIPanel panel)
+            {
+                dynamic tagData = panel.Tag;
+                dayIndex = tagData.Day;
+                id = tagData.Id;
+            }
+            else if(sender is Label lbl)
+            {
+                dynamic tagData = lbl.Tag;
+                dayIndex = tagData.Day;
+                id = tagData.Id;
+            }
+            else
+            {
+                // cout
+                MessageBox.Show("Có lỗi gì đó khi bấm vào lịch");
+                return;
+            }
 
-            DataTable dt = Db.ReadTable("SELECT * FROM MySchedule WHERE ID = @ID",
-                new SqlParameter[] { new SqlParameter("@ID", id) });
+                DataTable dt = Db.ReadTable("SELECT * FROM MySchedule WHERE ID = @ID",
+                    new SqlParameter[] { new SqlParameter("@ID", id) });
 
             if (dt.Rows.Count == 0)
             {
@@ -444,13 +460,7 @@ namespace BtlApp
         }
 
 
-
-        
-
-
         // ====================== Hàm xử lý logic ======================
-
-
         private void AddScheduleToCell(int dayIndex, Color blockColor, MySchedule schedule)
         {
             if (dayIndex < 0 || dayIndex >= 7) return;
@@ -492,8 +502,10 @@ namespace BtlApp
                 ForeColor = Color.White,
                 Font = TITLE_FONT,
                 TextAlign = ContentAlignment.TopLeft,
-                BackColor = Color.Transparent
+                BackColor = Color.Transparent,
+                Tag = new { Day = dayIndex, Id = schedule.Id }
             };
+            lblTitle.MouseClick += ScheduleBlock_MouseClick;
             scheduleBlockFirst.Controls.Add(lblTitle);
 
             cell.Controls.Add(scheduleBlockFirst);
