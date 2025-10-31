@@ -37,7 +37,7 @@ namespace BtlApp.Individual
             }
         }
 
-        private void getData()
+        public MySchedule getData()
         {
             string title = txt_Title.Text;
             DateTime date = dtp_Date.Value.Date;
@@ -47,20 +47,23 @@ namespace BtlApp.Individual
             float startTime = 4.5F;
             float endTime = 5.5F;
 
-            ScheduleResult = new MySchedule("", title, date, startTime, endTime);
+            return new MySchedule("", title, date, startTime, endTime);
+        }
+
+        public void setData(MySchedule schedule)
+        {
+
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-            getData();
             this.Close();
         }
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Yes;
-            getData();
             this.Close();
         }
 
@@ -73,7 +76,6 @@ namespace BtlApp.Individual
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.No;
-            getData();
             this.Close();
         }
     }
