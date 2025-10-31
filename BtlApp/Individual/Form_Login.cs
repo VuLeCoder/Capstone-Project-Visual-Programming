@@ -16,7 +16,7 @@ namespace BtlApp
     public partial class Form_Login : Form
     {
         private readonly DataProcesser Db = new DataProcesser();
-
+        private string userId;
         public Form_Login()
         {
             InitializeComponent();
@@ -31,6 +31,11 @@ namespace BtlApp
                 return false;
             }
             return true;
+        }
+
+        public string getUserId()
+        {
+            return userId;
         }
 
         private void btn_Login_Click(object sender, EventArgs e)
@@ -50,8 +55,11 @@ namespace BtlApp
                 return;
             }
 
-            string userId = dt.Rows[0]["userId"].ToString();
+            userId = dt.Rows[0]["userId"].ToString();
+            
 
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void link_ForgotPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
