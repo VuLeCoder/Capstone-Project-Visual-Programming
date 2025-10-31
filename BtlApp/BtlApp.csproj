@@ -95,6 +95,18 @@
   <ItemGroup>
     <Compile Include="Database\DataProcesser.cs" />
     <Compile Include="Database\Models\MySchedule.cs" />
+    <Compile Include="Individual\Form_ForgetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Individual\Form_ForgetPassword.Designer.cs">
+      <DependentUpon>Form_ForgetPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Individual\Form_Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Individual\Form_Login.Designer.cs">
+      <DependentUpon>Form_Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="Individual\Form_AddMySchedule.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,13 +119,28 @@
     <Compile Include="Individual\Form_MySchedule.Designer.cs">
       <DependentUpon>Form_MySchedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Individual\Form_Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Individual\Form_Register.Designer.cs">
+      <DependentUpon>Form_Register.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Individual\Form_AddMySchedule.resx">
       <DependentUpon>Form_AddMySchedule.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Individual\Form_ForgetPassword.resx">
+      <DependentUpon>Form_ForgetPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Individual\Form_Login.resx">
+      <DependentUpon>Form_Login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Individual\Form_MySchedule.resx">
       <DependentUpon>Form_MySchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Individual\Form_Register.resx">
+      <DependentUpon>Form_Register.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

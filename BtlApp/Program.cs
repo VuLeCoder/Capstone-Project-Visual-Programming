@@ -17,7 +17,7 @@ namespace BtlApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_MySchedule());
+            Application.Run(new Form_Login());
         }
     }
 }
