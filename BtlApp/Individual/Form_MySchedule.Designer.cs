@@ -39,15 +39,23 @@
             this.panelMainBody = new System.Windows.Forms.Panel();
             this.tlp_mainCalendar = new System.Windows.Forms.TableLayoutPanel();
             this.tlp_mainCalendarHeader = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_Return = new Sunny.UI.UIButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lbl_User = new System.Windows.Forms.Label();
             this.panelHeader.SuspendLayout();
             this.panelAside.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.panelMainBody.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
             // 
             this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            this.panelHeader.Controls.Add(this.lbl_User);
+            this.panelHeader.Controls.Add(this.pictureBox1);
+            this.panelHeader.Controls.Add(this.label1);
             this.panelHeader.Controls.Add(this.uiButton3);
             this.panelHeader.Controls.Add(this.uiButton2);
             this.panelHeader.Controls.Add(this.uiButton1);
@@ -108,6 +116,7 @@
             // panelAside
             // 
             this.panelAside.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            this.panelAside.Controls.Add(this.btn_Return);
             this.panelAside.Controls.Add(this.monthCalendar);
             this.panelAside.Controls.Add(this.btn_AddSchedule);
             this.panelAside.Dock = System.Windows.Forms.DockStyle.Left;
@@ -123,7 +132,7 @@
             this.monthCalendar.Location = new System.Drawing.Point(5, 80);
             this.monthCalendar.MaxSelectionCount = 1;
             this.monthCalendar.Name = "monthCalendar";
-            this.monthCalendar.Size = new System.Drawing.Size(293, 218);
+            this.monthCalendar.Size = new System.Drawing.Size(230, 182);
             this.monthCalendar.StateCheckedNormal.Day.Back.Color1 = System.Drawing.Color.LightSkyBlue;
             this.monthCalendar.StateCheckedNormal.Day.Border.Color1 = System.Drawing.Color.LightSkyBlue;
             this.monthCalendar.StateCheckedTracking.Day.Back.Color1 = System.Drawing.Color.Gray;
@@ -195,7 +204,7 @@
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.tlp_mainCalendar.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlp_mainCalendar.Location = new System.Drawing.Point(0, 0);
             this.tlp_mainCalendar.Margin = new System.Windows.Forms.Padding(0);
@@ -234,7 +243,7 @@
             this.tlp_mainCalendarHeader.ColumnCount = 3;
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.33758F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.66242F));
-            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 389F));
+            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 390F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -248,9 +257,53 @@
             this.tlp_mainCalendarHeader.Size = new System.Drawing.Size(950, 56);
             this.tlp_mainCalendarHeader.TabIndex = 1;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(79, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(116, 20);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Btl_Schedule";
+            // 
+            // btn_Return
+            // 
+            this.btn_Return.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Return.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btn_Return.Location = new System.Drawing.Point(37, 282);
+            this.btn_Return.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_Return.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btn_Return.Name = "btn_Return";
+            this.btn_Return.Radius = 15;
+            this.btn_Return.Size = new System.Drawing.Size(153, 35);
+            this.btn_Return.TabIndex = 3;
+            this.btn_Return.Text = "Quay về trang chủ";
+            this.btn_Return.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::BtlApp.Properties.Resources.Icon;
+            this.pictureBox1.Location = new System.Drawing.Point(33, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
+            // lbl_User
+            // 
+            this.lbl_User.AutoSize = true;
+            this.lbl_User.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_User.Location = new System.Drawing.Point(258, 20);
+            this.lbl_User.Name = "lbl_User";
+            this.lbl_User.Size = new System.Drawing.Size(111, 20);
+            this.lbl_User.TabIndex = 6;
+            this.lbl_User.Text = "Lịch cá nhân";
+            // 
             // Form_MySchedule
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
             this.ClientSize = new System.Drawing.Size(1200, 600);
@@ -265,10 +318,12 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MyTask";
             this.panelHeader.ResumeLayout(false);
+            this.panelHeader.PerformLayout();
             this.panelAside.ResumeLayout(false);
             this.panelMain.ResumeLayout(false);
             this.panelMainBody.ResumeLayout(false);
             this.panelMainBody.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -286,6 +341,10 @@
         private Sunny.UI.UIButton uiButton2;
         private Sunny.UI.UIButton btn_AddSchedule;
         private Krypton.Toolkit.KryptonMonthCalendar monthCalendar;
+        private System.Windows.Forms.Label label1;
+        private Sunny.UI.UIButton btn_Return;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lbl_User;
     }
 }
 
