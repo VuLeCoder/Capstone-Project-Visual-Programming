@@ -381,6 +381,13 @@ namespace BtlApp
         {
             Form_AddMySchedule addSchedlueForm = new Form_AddMySchedule();
             addSchedlueForm.formType(Form_AddMySchedule.TYPE_ADD);
+
+            if(sender is UIPanel panel)
+            {
+                dynamic tagData = panel.Tag;
+                addSchedlueForm.setData(currentWeek.AddDays(tagData.Day), tagData.Hour);
+            }
+
             DialogResult result = addSchedlueForm.ShowDialog();
 
             if (result == DialogResult.OK) // Them lich
@@ -413,8 +420,8 @@ namespace BtlApp
                 return;
             }
 
-                DataTable dt = Db.ReadTable("SELECT * FROM MySchedule WHERE ID = @ID",
-                    new SqlParameter[] { new SqlParameter("@ID", id) });
+            DataTable dt = Db.ReadTable("SELECT * FROM MySchedule WHERE ID = @ID",
+                new SqlParameter[] { new SqlParameter("@ID", id) });
 
             if (dt.Rows.Count == 0)
             {
@@ -434,7 +441,9 @@ namespace BtlApp
 
             Form_AddMySchedule addSchedlueForm = new Form_AddMySchedule();
             addSchedlueForm.formType(Form_AddMySchedule.TYPE_EDIT);
+
             addSchedlueForm.setData(schedule);
+
             DialogResult result = addSchedlueForm.ShowDialog();
 
             if(result == DialogResult.Yes)
