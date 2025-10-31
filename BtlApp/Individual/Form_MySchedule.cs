@@ -544,6 +544,7 @@ namespace BtlApp
 
             if(startHour < endHour)
             {
+                endHour = Math.Min(endHour, HOUR - 1);
                 cell = tlp_mainCalendar.GetControlFromPosition(dayIndex + 1, endHour);
                 UIPanel scheduleBlockEnd = new UIPanel
                 {
