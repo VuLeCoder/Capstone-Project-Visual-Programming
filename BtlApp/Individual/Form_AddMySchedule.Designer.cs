@@ -98,16 +98,22 @@
             // 
             // cb_StartHour
             // 
+            this.cb_StartHour.DropDownHeight = 120;
             this.cb_StartHour.FormattingEnabled = true;
+            this.cb_StartHour.IntegralHeight = false;
             this.cb_StartHour.Location = new System.Drawing.Point(204, 186);
+            this.cb_StartHour.MaxDropDownItems = 5;
             this.cb_StartHour.Name = "cb_StartHour";
             this.cb_StartHour.Size = new System.Drawing.Size(134, 33);
             this.cb_StartHour.TabIndex = 2;
             // 
             // cb_EndHour
             // 
+            this.cb_EndHour.DropDownHeight = 120;
             this.cb_EndHour.FormattingEnabled = true;
+            this.cb_EndHour.IntegralHeight = false;
             this.cb_EndHour.Location = new System.Drawing.Point(204, 247);
+            this.cb_EndHour.MaxDropDownItems = 5;
             this.cb_EndHour.Name = "cb_EndHour";
             this.cb_EndHour.Size = new System.Drawing.Size(134, 33);
             this.cb_EndHour.TabIndex = 3;
@@ -196,6 +202,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form_AddMySchedule";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.Form_AddMySchedule_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
