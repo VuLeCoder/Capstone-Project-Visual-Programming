@@ -115,6 +115,7 @@
             this.Controls.Add(this.txt_Email);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form_ForgetPassword";
             this.Text = "ForgetPassword";
