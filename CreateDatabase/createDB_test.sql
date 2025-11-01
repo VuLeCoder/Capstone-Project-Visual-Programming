@@ -128,3 +128,16 @@ insert into MySchedule (ScheduleDate, StartTime, EndTime, Title) values
 ('2025-10-30', 11.0, 12.0, 'Project Planning'),
 ('2025-10-31', 9.0, 12.0, 'Client Discussion');
 
+
+CREATE TABLE tblUser (
+    UserId INT PRIMARY KEY IDENTITY(1,1),
+    UserName NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(255) UNIQUE NOT NULL,
+    PasswordHash NVARCHAR(255) NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+GO
+
+INSERT INTO tblUser (UserName, Email, PasswordHash)
+VALUES
+('An Nguyen', '1', '1'),
