@@ -45,7 +45,7 @@
             this.btn_Find.Name = "btn_Find";
             this.btn_Find.Radius = 20;
             this.btn_Find.Size = new System.Drawing.Size(128, 35);
-            this.btn_Find.TabIndex = 9;
+            this.btn_Find.TabIndex = 2;
             this.btn_Find.Text = "Tìm kiếm";
             this.btn_Find.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.btn_Find.Click += new System.EventHandler(this.btn_Find_Click);
@@ -55,7 +55,7 @@
             this.txt_Email.Location = new System.Drawing.Point(157, 70);
             this.txt_Email.Name = "txt_Email";
             this.txt_Email.Size = new System.Drawing.Size(209, 26);
-            this.txt_Email.TabIndex = 7;
+            this.txt_Email.TabIndex = 1;
             this.txt_Email.TextChanged += new System.EventHandler(this.txt_Email_TextChanged);
             // 
             // label1
@@ -65,7 +65,7 @@
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 20);
-            this.label1.TabIndex = 5;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Email";
             // 
             // btn_Cancel
@@ -79,7 +79,7 @@
             this.btn_Cancel.Radius = 20;
             this.btn_Cancel.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(178)))), ((int)(((byte)(181)))));
             this.btn_Cancel.Size = new System.Drawing.Size(76, 35);
-            this.btn_Cancel.TabIndex = 10;
+            this.btn_Cancel.TabIndex = 3;
             this.btn_Cancel.Text = "Hủy";
             this.btn_Cancel.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
@@ -100,7 +100,7 @@
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(222, 20);
-            this.label2.TabIndex = 12;
+            this.label2.TabIndex = 0;
             this.label2.Text = "Nhập email để lấy lại mật khẩu";
             // 
             // Form_ForgetPassword
