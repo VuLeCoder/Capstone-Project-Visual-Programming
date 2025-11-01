@@ -13,6 +13,7 @@ namespace BtlApp.Individual
     public partial class Form_Manager : Form
     {
         private readonly string userId;
+        private bool isLogout = false;
 
         public Form_Manager(string userId)
         {
@@ -20,9 +21,20 @@ namespace BtlApp.Individual
             InitializeComponent();
         }
 
-        private void uiButton1_Click(object sender, EventArgs e)
+        public bool IsLogout()
         {
+            return isLogout == true;
+        }
 
+        private void Form_Manager_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            isLogout = true;
+            this.Close();
         }
     }
 }

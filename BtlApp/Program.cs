@@ -31,6 +31,7 @@ namespace BtlApp
                     using (Form_Manager formManager = new Form_Manager(formLogin.getUserId()))
                     {
                         Application.Run(formManager);
+                        if (!formManager.IsLogout()) break;
                     }
                 }
             }
