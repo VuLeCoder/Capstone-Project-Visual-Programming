@@ -8,21 +8,30 @@ namespace BtlApp.Database.Models
 {
     public class MySchedule
     {
-        public string Id { get; set; }
+        public int IdSchedule { get; set; }
+        public int IdType {  get; set; }
         public string Title { get; set; }
         public DateTime ScheduleDate { get; set; }
         public float StartTime { get; set; }
         public float EndTime { get; set; }
-        //public string Description { get; set; }
 
-        public MySchedule(string Id, string Title, DateTime ScheduleDate, float startTime, float EndTime)
+        public MySchedule(int IdSchedule, string Title, DateTime ScheduleDate, float startTime, float EndTime)
         {
-            this.Id = Id;
+            this.IdSchedule = IdSchedule;
             this.Title = Title;
             this.ScheduleDate = ScheduleDate;
             this.StartTime = startTime;
             this.EndTime = EndTime;
-            //this.Description = Description;
+        }
+
+        public MySchedule(int IdSchedule, int IdType, string Title, DateTime ScheduleDate, float startTime, float EndTime)
+        {
+            this.IdSchedule = IdSchedule;
+            this.IdType = IdType;
+            this.Title = Title;
+            this.ScheduleDate = ScheduleDate;
+            this.StartTime = startTime;
+            this.EndTime = EndTime;
         }
     }
 }

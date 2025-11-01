@@ -1,4 +1,5 @@
-﻿using BtlApp.Database.Models;
+﻿using BtlApp.Database;
+using BtlApp.Database.Models;
 using BtlApp.Individual;
 using FormProduct.Classes;
 using Krypton.Toolkit;
@@ -22,9 +23,11 @@ namespace BtlApp
         public Form_MySchedule(Form_Manager manager)
         {
             this.manager = manager;
+            UserId = manager.getUserId();
             InitializeComponent();
             createCalendar();
         }
+
         // ========================= Các hằng ==========================
         private readonly Color TASK_COLOR = Color.FromArgb(168, 199, 250);
         private readonly int WEEK = 7, HOUR = 24;
@@ -35,11 +38,13 @@ namespace BtlApp
         private readonly float WIDTH_PERCENT = 0.7F;
         private readonly Font TITLE_FONT = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold);
 
+        private readonly string NAME_CALENDAR_BLOCK = "Schedule_";
+
         // ==================== Các biến toàn cục ======================
         private readonly DataProcesser Db = new DataProcesser();
         private DateTime currentWeek;
         private readonly Form_Manager manager;
-
+        private readonly int UserId;
 
 
 // =====================================================================
@@ -211,13 +216,37 @@ namespace BtlApp
 // =====================================================================
 
         // ====================== Database ======================
+        private Color getColorFromScheduleType(int TypeId)
+        {
+            string query = $@"
+                select {DbTables.tbl_ScheduleType.ColorCode} 
+                from {DbTables.tbl_ScheduleType.Table} 
+                where {DbTables.tbl_ScheduleType.Id} = @TypeId
+            ";
+            DataTable dt = Db.ReadTable(query, new SqlParameter[] { new SqlParameter("@TypeId", TypeId) });
+            return ColorTranslator.FromHtml(dt.Rows[0][DbTables.tbl_ScheduleType.ColorCode].ToString());
+        }
+
         private void LoadScheduleFromDB()
         {
             DateTime DayStart = currentWeek;
             DateTime DayEnd = currentWeek.AddDays(6);
 
-            string query = "select * from MySchedule where ScheduleDate between @Start and @End order by ScheduleDate";
+            string query = $@"
+                select 
+                    s.{DbTables.tbl_Schedule.IdSchedule}, 
+                    s.{DbTables.tbl_Schedule.Title}, 
+                    s.{DbTables.tbl_Schedule.Date},  
+                    s.{DbTables.tbl_Schedule.Start}, 
+                    s.{DbTables.tbl_Schedule.End}, 
+                    s.{DbTables.tbl_Schedule.IdType} 
+                from {DbTables.tbl_Schedule.Table} s  
+                where s.{DbTables.tbl_Schedule.IdUser} = @UserId and 
+                    s.{DbTables.tbl_Schedule.Date} between @Start and @End 
+                order by s.{DbTables.tbl_Schedule.Date}";
+
             SqlParameter[] parameters = {
+                new SqlParameter("@UserId", UserId),
                 new SqlParameter("@Start", DayStart.Date),
                 new SqlParameter("@End", DayEnd.Date)
             };
@@ -229,17 +258,19 @@ namespace BtlApp
 
             foreach (DataRow row in dt.Rows)
             {
-                DateTime scheduleDate = Convert.ToDateTime(row["ScheduleDate"]);
+                DateTime scheduleDate = Convert.ToDateTime(row[DbTables.tbl_Schedule.Date]);
                 int dayIndex = (scheduleDate - DayStart).Days;
 
-                float startSchedule = Convert.ToSingle(row["StartTime"]);
-                float endSchedule = Convert.ToSingle(row["EndTime"]);
+                float startSchedule = Convert.ToSingle(row[DbTables.tbl_Schedule.Start]);
+                float endSchedule = Convert.ToSingle(row[DbTables.tbl_Schedule.End]);
 
-                string title = row["Title"].ToString();
-                string id = row["ID"].ToString();
+                string title = row[DbTables.tbl_Schedule.Title].ToString();
+                int id = Convert.ToInt32(row[DbTables.tbl_Schedule.IdSchedule]);
 
-                Color blockColor = Color.FromArgb(66, 165, 245);
                 MySchedule schedule = new MySchedule(id, title,scheduleDate,startSchedule, endSchedule);
+
+                id = Convert.ToInt32(row[DbTables.tbl_Schedule.IdType]);
+                Color blockColor = getColorFromScheduleType(id); //Color.FromArgb(66, 165, 245);
                 AddScheduleToCell(dayIndex, blockColor, schedule);
             }
         }
@@ -247,12 +278,18 @@ namespace BtlApp
 
         private bool IsDuplicate(MySchedule schedule)
         {
-            string query = "select * from MySchedule where ScheduleDate = @Date and (StartTime < @End and EndTime > @Start) and ID <> @ID";
+            string query = $@"
+                select {DbTables.tbl_Schedule.IdSchedule} 
+                from {DbTables.tbl_Schedule.Table} 
+                where {DbTables.tbl_Schedule.Date} = @Date 
+                    and ({DbTables.tbl_Schedule.Start} < @End and {DbTables.tbl_Schedule.End} > @Start) 
+                    and {DbTables.tbl_Schedule.IdSchedule} <> @ID";
+
             SqlParameter[] parameters = {
                 new SqlParameter("@Date", schedule.ScheduleDate),
                 new SqlParameter("@Start", schedule.StartTime),
                 new SqlParameter("@End", schedule.EndTime),
-                new SqlParameter("@ID", schedule.Id)
+                new SqlParameter("@ID", schedule.IdSchedule)
             };
 
             DataTable dt = Db.ReadTable(query, parameters);
@@ -269,13 +306,18 @@ namespace BtlApp
 
             try
             {
-                string query = @"
-                    insert into MySchedule (Title, ScheduleDate, StartTime, EndTime)
-                    output inserted.ID
-                    values (@Title, @ScheduleDate, @StartTime, @EndTime);
+                string query = $@"
+                    insert into {DbTables.tbl_Schedule.Table} 
+                        ({DbTables.tbl_Schedule.IdUser}, {DbTables.tbl_Schedule.IdType},
+                        {DbTables.tbl_Schedule.Title}, {DbTables.tbl_Schedule.Date}, 
+                        {DbTables.tbl_Schedule.Start}, {DbTables.tbl_Schedule.End}) 
+                    output inserted.{DbTables.tbl_Schedule.IdSchedule} 
+                    values (@UserId, @TypeId, @Title, @ScheduleDate, @StartTime, @EndTime);
                 ";
 
                 SqlParameter[] InsertParameters = {
+                    new SqlParameter("@UserId", UserId),
+                    new SqlParameter("@TypeId", schedule.IdType),
                     new SqlParameter("@Title", schedule.Title),
                     new SqlParameter("@ScheduleDate", schedule.ScheduleDate),
                     new SqlParameter("@StartTime", schedule.StartTime),
@@ -283,13 +325,12 @@ namespace BtlApp
                 };
 
                 object result = Db.ExecuteScalar(query, InsertParameters);
-
                 if (result != null)
                 {
+                    schedule.IdSchedule = Convert.ToInt32(result);
+
                     // cout << :)))
-                    string newId = Convert.ToInt32(result).ToString();
-                    schedule.Id = newId;
-                    MessageBox.Show($"✅ Thêm lịch thành công! ID mới: {newId}", "Success",
+                    MessageBox.Show($"✅ Thêm lịch thành công! ID mới: {schedule.IdSchedule}", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Color blockColor = Color.FromArgb(66, 165, 245);
@@ -320,17 +361,19 @@ namespace BtlApp
                 return false;
             }
 
-            string query = @"
-                UPDATE MySchedule
-                SET 
-                    Title = @Title,
-                    ScheduleDate = @Date,
-                    StartTime = @Start,
-                    EndTime = @End
-                WHERE ID = @ID";
+            string query = $@"
+                update {DbTables.tbl_Schedule.Table} 
+                set 
+                    {DbTables.tbl_Schedule.IdType} = @TypeId,
+                    {DbTables.tbl_Schedule.Title} = @Title,
+                    {DbTables.tbl_Schedule.Date} = @Date,
+                    {DbTables.tbl_Schedule.Start} = @Start,
+                    {DbTables.tbl_Schedule.End} = @End
+                where {DbTables.tbl_Schedule.IdSchedule} = @ScheduleId";
 
             SqlParameter[] parameters = {
-                new SqlParameter("@ID", schedule.Id),
+                new SqlParameter("@ScheduleId", schedule.IdSchedule),
+                new SqlParameter("@TypeId", schedule.IdType),
                 new SqlParameter("@Title", schedule.Title),
                 new SqlParameter("@Date", schedule.ScheduleDate.Date),
                 new SqlParameter("@Start", schedule.StartTime),
@@ -342,12 +385,12 @@ namespace BtlApp
         }
 
 
-        public bool DeleteSchedule(string scheduleId)
+        public bool DeleteSchedule(int scheduleId)
         {
-            string query = "DELETE FROM MySchedule WHERE ID = @ID";
+            string query = $@"delete from {DbTables.tbl_Schedule.Table} where {DbTables.tbl_Schedule.IdSchedule} = @IdSchedule";
 
             SqlParameter[] parameters = {
-                new SqlParameter("@ID", scheduleId)
+                new SqlParameter("@IdSchedule", scheduleId)
             };
 
             int rowsAffected = Db.ExecuteNonQuery(query, parameters);
@@ -411,18 +454,18 @@ namespace BtlApp
         private void ScheduleBlock_MouseClick(object sender, MouseEventArgs e)
         {
             int dayIndex;
-            string id;
+            int scheduleId;
             if(sender is UIPanel panel)
             {
                 dynamic tagData = panel.Tag;
                 dayIndex = tagData.Day;
-                id = tagData.Id;
+                scheduleId = tagData.ScheduleId;
             }
             else if(sender is Label lbl)
             {
                 dynamic tagData = lbl.Tag;
                 dayIndex = tagData.Day;
-                id = tagData.Id;
+                scheduleId = tagData.ScheduleId;
             }
             else
             {
@@ -431,8 +474,17 @@ namespace BtlApp
                 return;
             }
 
-            DataTable dt = Db.ReadTable("SELECT * FROM MySchedule WHERE ID = @ID",
-                new SqlParameter[] { new SqlParameter("@ID", id) });
+            string query = $@"
+                select 
+                    {DbTables.tbl_Schedule.IdType},
+                    {DbTables.tbl_Schedule.Title},
+                    {DbTables.tbl_Schedule.Date},
+                    {DbTables.tbl_Schedule.Start},
+                    {DbTables.tbl_Schedule.End} 
+                from {DbTables.tbl_Schedule.Table} 
+                where {DbTables.tbl_Schedule.IdSchedule} = @IdSchedule";
+
+            DataTable dt = Db.ReadTable(query, new SqlParameter[] { new SqlParameter("@IdSchedule", scheduleId) });
 
             if (dt.Rows.Count == 0)
             {
@@ -443,11 +495,12 @@ namespace BtlApp
 
             DataRow row = dt.Rows[0];
             MySchedule schedule = new MySchedule(
-                row["ID"].ToString(),
-                row["Title"].ToString(),
-                Convert.ToDateTime(row["ScheduleDate"]),
-                Convert.ToSingle(row["StartTime"]),
-                Convert.ToSingle(row["EndTime"])
+                scheduleId,
+                Convert.ToInt32(row[DbTables.tbl_Schedule.IdType]),
+                row[DbTables.tbl_Schedule.Title].ToString(),
+                Convert.ToDateTime(row[DbTables.tbl_Schedule.Date]),
+                Convert.ToSingle(row[DbTables.tbl_Schedule.Start]),
+                Convert.ToSingle(row[DbTables.tbl_Schedule.End])
             );
 
             Form_AddMySchedule addSchedlueForm = new Form_AddMySchedule();
@@ -460,12 +513,12 @@ namespace BtlApp
             if(result == DialogResult.Yes)
             {
                 schedule = addSchedlueForm.getData();
-                schedule.Id = id;
+                schedule.IdSchedule = scheduleId;
                 UpdateSchedule(schedule);
 
-                RemoveSchedule(dayIndex, id);
+                RemoveSchedule(dayIndex, scheduleId);
 
-                Color blockColor = Color.FromArgb(66, 165, 245);
+                Color blockColor = getColorFromScheduleType(schedule.IdType);
                 dayIndex = (schedule.ScheduleDate - currentWeek).Days;
                 AddScheduleToCell(dayIndex, blockColor, schedule);
 
@@ -474,8 +527,8 @@ namespace BtlApp
 
             if(result == DialogResult.No)
             {
-                DeleteSchedule(id);
-                RemoveSchedule(dayIndex, id);
+                DeleteSchedule(scheduleId);
+                RemoveSchedule(dayIndex, scheduleId);
             }
         }
 
@@ -493,11 +546,11 @@ namespace BtlApp
             Control cell = tlp_mainCalendar.GetControlFromPosition(dayIndex + 1, startHour);
             UIPanel scheduleBlockFirst = new UIPanel
             {
-                Name = schedule.Id,
+                Name = NAME_CALENDAR_BLOCK + (schedule.IdSchedule).ToString(),
                 Margin = new Padding(0),
                 BackColor = blockColor,
                 FillColor = blockColor,
-                Tag = new { Day = dayIndex, Id = schedule.Id }
+                Tag = new { Day = dayIndex, ScheduleId = schedule.IdSchedule }
             };
 
             int height = (int)((1 - startMinute) * cell.Height);
@@ -523,7 +576,7 @@ namespace BtlApp
                 Font = TITLE_FONT,
                 TextAlign = ContentAlignment.TopLeft,
                 BackColor = Color.Transparent,
-                Tag = new { Day = dayIndex, Id = schedule.Id }
+                Tag = new { Day = dayIndex, ScheduleId = schedule.IdSchedule }
             };
             lblTitle.MouseClick += ScheduleBlock_MouseClick;
             scheduleBlockFirst.Controls.Add(lblTitle);
@@ -537,13 +590,13 @@ namespace BtlApp
                 {
                     UIPanel scheduleBlock = new UIPanel
                     {
-                        Name = schedule.Id,
+                        Name = NAME_CALENDAR_BLOCK + (schedule.IdSchedule).ToString(),
                         Location = new Point(0, 0),
                         Size = new Size(width, panel.Height + 1),
                         BackColor = blockColor,
                         FillColor = blockColor,
                         Margin = new Padding(0),
-                        Tag = new { Day = dayIndex, Id = schedule.Id }
+                        Tag = new { Day = dayIndex, ScheduleId = schedule.IdSchedule }
                     };
 
                     panel.Controls.Add(scheduleBlock);
@@ -559,12 +612,12 @@ namespace BtlApp
                 cell = tlp_mainCalendar.GetControlFromPosition(dayIndex + 1, endHour);
                 UIPanel scheduleBlockEnd = new UIPanel
                 {
-                    Name = schedule.Id,
+                    Name = NAME_CALENDAR_BLOCK + (schedule.IdSchedule).ToString(),
                     Location = new Point(0, 0),
                     BackColor = blockColor,
                     FillColor = blockColor,
                     Margin = new Padding(0),
-                    Tag = new { Day = dayIndex, Id = schedule.Id }
+                    Tag = new { Day = dayIndex, ScheduleId = schedule.IdSchedule }
                 };
 
                 height = (int)(cell.Height * endMinute);
@@ -574,14 +627,15 @@ namespace BtlApp
             }
         }
 
-        private void RemoveSchedule(int dayIndex, string id)
+        private void RemoveSchedule(int dayIndex, int ScheduleId)
         {
             if (dayIndex < 0 || dayIndex >= 7) return;
+            string name = NAME_CALENDAR_BLOCK + ScheduleId.ToString();
 
-            for(int h=0; h<HOUR; ++h)
+            for (int h=0; h<HOUR; ++h)
             {
                 Control cell = tlp_mainCalendar.GetControlFromPosition(dayIndex + 1, h);
-                cell.Controls.RemoveByKey(id);
+                cell.Controls.RemoveByKey(name);
 
                 if(cell.Controls.Count == 0)
                 {

@@ -22,12 +22,12 @@ namespace BtlApp.Individual
         private readonly Color GROUP_BACKCOLOR = Color.FromArgb(56,56, 56);
 
         // ====================== Biến ======================
-        private readonly string userId;
+        private readonly int UserId;
         private bool isLogout = false;
 
-        public Form_Manager(string userId)
+        public Form_Manager(int UserId)
         {
-            this.userId = userId;
+            this.UserId = UserId;
             InitializeComponent();
             GROUP_GAP -= SystemInformation.VerticalScrollBarWidth / 5;
         }
@@ -36,7 +36,7 @@ namespace BtlApp.Individual
         // ====================== Hàm ======================
         public bool IsLogout() { return isLogout; }
 
-        public string getUserId() { return userId; }
+        public int getUserId() { return UserId; }
 
 
         // ============= Giao diện tab: Nhóm ===============
