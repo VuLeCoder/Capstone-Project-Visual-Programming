@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\DataProcesser.cs" />
+    <Compile Include="Database\DbTables.cs" />
     <Compile Include="Database\Models\MySchedule.cs" />
     <Compile Include="Individual\Form_ForgetPassword.cs">
       <SubType>Form</SubType>
