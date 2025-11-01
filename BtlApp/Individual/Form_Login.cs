@@ -17,7 +17,7 @@ namespace BtlApp
     public partial class Form_Login : Form
     {
         private readonly DataProcesser Db = new DataProcesser();
-        private string userId;
+        private int UserId;
 
         private bool isLoggedIn = false;
         public Form_Login()
@@ -36,7 +36,7 @@ namespace BtlApp
             return true;
         }
 
-        public string getUserId() { return userId; }
+        public int getUserId() { return UserId; }
 
         public bool IsLoggedIn() { return isLoggedIn; }
 
@@ -61,7 +61,7 @@ namespace BtlApp
                 return;
             }
 
-            userId = dt.Rows[0]["userId"].ToString();
+            UserId = Convert.ToInt32(dt.Rows[0]["userId"]);
 
             isLoggedIn = true;
             this.Close();

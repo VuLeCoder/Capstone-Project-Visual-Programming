@@ -1,4 +1,5 @@
-﻿using BtlApp.Database.Models;
+﻿using BtlApp.Database;
+using BtlApp.Database.Models;
 using FormProduct.Classes;
 using System;
 using System.Collections.Generic;
@@ -26,16 +27,19 @@ namespace BtlApp.Individual
 
         // ===================================================================================
         // ======================== Hàm hỗ trợ ========================
-        private void FillComboBox(ComboBox comboBox)
+        private void FillComboBox(ComboBox comboBox, string table, string display, string val)
         {
             if (comboBox.Items.Count > 0) return;
 
-            string query = "SELECT time_string, time_val FROM time_slot ORDER BY time_val";
+            string query = $@"
+                select {display}, {val} 
+                from {table} 
+                order by {val}";
             DataTable dt = Db.ReadTable(query);
 
             comboBox.DataSource = dt;
-            comboBox.DisplayMember = "time_string";
-            comboBox.ValueMember = "time_val";
+            comboBox.DisplayMember = display;
+            comboBox.ValueMember = val;
         }
 
         private bool IsValid()
@@ -53,8 +57,9 @@ namespace BtlApp.Individual
 
         private void FillAllComboBox()
         {
-            FillComboBox(cb_StartHour);
-            FillComboBox(cb_EndHour);
+            FillComboBox(cb_StartHour, DbTables.tbl_TimeSLot.Table, DbTables.tbl_TimeSLot.TimeStr, DbTables.tbl_TimeSLot.TimeVal);
+            FillComboBox(cb_EndHour, DbTables.tbl_TimeSLot.Table, DbTables.tbl_TimeSLot.TimeStr, DbTables.tbl_TimeSLot.TimeVal);
+            FillComboBox(cb_TypeSchedule, DbTables.tbl_ScheduleType.Table, DbTables.tbl_ScheduleType.Name, DbTables.tbl_ScheduleType.Id);
         }
 
         // ================ Tương tác với form ngoài ==================
@@ -75,12 +80,13 @@ namespace BtlApp.Individual
 
         public MySchedule getData()
         {
+            int typeId = Convert.ToInt32(cb_TypeSchedule.SelectedValue);
             string title = txt_Title.Text;
             DateTime date = dtp_Date.Value.Date;
             float startTime = Convert.ToSingle(cb_StartHour.SelectedValue); // BUG bug Bug
             float endTime = Convert.ToSingle(cb_EndHour.SelectedValue);
 
-            return new MySchedule("", title, date, startTime, endTime);
+            return new MySchedule(-1, typeId, title, date, startTime, endTime);
         }
 
         public void setData(DateTime currDay, float currHour)
@@ -106,8 +112,12 @@ namespace BtlApp.Individual
 
         private void Form_AddMySchedule_Load(object sender, EventArgs e)
         {
-            //FillComboBox(cb_StartHour);
-            //FillComboBox(cb_EndHour);
+            FillAllComboBox();
+            if(cb_StartHour.SelectedIndex == cb_EndHour.SelectedIndex) cb_EndHour.SelectedIndex = 2;
+        }
+        private void btn_AddTypeSchedule_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btn_Add_Click(object sender, EventArgs e)

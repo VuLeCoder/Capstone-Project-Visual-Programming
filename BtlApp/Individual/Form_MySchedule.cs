@@ -29,7 +29,6 @@ namespace BtlApp
         }
 
         // ========================= Các hằng ==========================
-        private readonly Color TASK_COLOR = Color.FromArgb(168, 199, 250);
         private readonly int WEEK = 7, HOUR = 24;
         private readonly string[] DAY_NAMES = { "CN", "TH 2", "TH 3", "TH 4", "TH 5", "TH 6", "TH 7" };
         private readonly int TIMELIME_WIDTH = 40, TASK_CELL_HEIGHT = 60, BORDER = 1;
@@ -333,7 +332,7 @@ namespace BtlApp
                     MessageBox.Show($"✅ Thêm lịch thành công! ID mới: {schedule.IdSchedule}", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    Color blockColor = Color.FromArgb(66, 165, 245);
+                    Color blockColor = getColorFromScheduleType(schedule.IdType);
                     int dayIndex = (schedule.ScheduleDate - currentWeek).Days;
                     AddScheduleToCell(dayIndex, blockColor, schedule);
                     
@@ -550,6 +549,7 @@ namespace BtlApp
                 Margin = new Padding(0),
                 BackColor = blockColor,
                 FillColor = blockColor,
+                RectColor = blockColor,
                 Tag = new { Day = dayIndex, ScheduleId = schedule.IdSchedule }
             };
 
@@ -595,6 +595,7 @@ namespace BtlApp
                         Size = new Size(width, panel.Height + 1),
                         BackColor = blockColor,
                         FillColor = blockColor,
+                        RectColor = blockColor,
                         Margin = new Padding(0),
                         Tag = new { Day = dayIndex, ScheduleId = schedule.IdSchedule }
                     };
@@ -616,6 +617,7 @@ namespace BtlApp
                     Location = new Point(0, 0),
                     BackColor = blockColor,
                     FillColor = blockColor,
+                    RectColor = blockColor,
                     Margin = new Padding(0),
                     Tag = new { Day = dayIndex, ScheduleId = schedule.IdSchedule }
                 };
