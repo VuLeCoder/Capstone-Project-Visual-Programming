@@ -117,7 +117,9 @@ namespace BtlApp.Individual
         }
         private void btn_AddTypeSchedule_Click(object sender, EventArgs e)
         {
-
+            Form_CRUDScheduleType formEditScheduleType = new Form_CRUDScheduleType(this);
+            formEditScheduleType.Show();
+            this.Hide();
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
