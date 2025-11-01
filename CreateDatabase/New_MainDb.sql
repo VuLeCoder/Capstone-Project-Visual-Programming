@@ -193,3 +193,8 @@ insert into tbl_TimeSlot (timeStr, timeVal) values
 insert into tbl_User (UserName, Email, PasswordHash)
 values
 ('VuLe', '1', '1')
+
+insert into tbl_ScheduleType (TypeName, Description, ColorCode)
+values 
+    ('Study', '', '#42A5F5'),
+    ('Meeting', 'Regular team meeting to discuss progress', '#FF5733')
