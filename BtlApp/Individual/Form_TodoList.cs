@@ -41,12 +41,26 @@ namespace BtlApp.Individual
         {
             dgvTodo.Columns.Clear();
             dgvTodo.Columns.Add(new DataGridViewTextBoxColumn { Name = "Id", DataPropertyName = "ToDoId", Visible = false });
-            dgvTodo.Columns.Add(new DataGridViewTextBoxColumn { Name = "Title", HeaderText = "Title", DataPropertyName = "Title", Width = 360 });
-            dgvTodo.Columns.Add(new DataGridViewTextBoxColumn { Name = "Description", HeaderText = "Description", DataPropertyName = "Description", Width = 300 });
+            dgvTodo.Columns.Add(new DataGridViewTextBoxColumn { Name = "Title", HeaderText = "Title", DataPropertyName = "Title", Width = 300 });
+            dgvTodo.Columns.Add(new DataGridViewTextBoxColumn { Name = "Description", HeaderText = "Description", DataPropertyName = "Description", Width = 360 });
             dgvTodo.Columns.Add(new DataGridViewTextBoxColumn { Name = "Priority", HeaderText = "Priority", DataPropertyName = "Priority", Width = 90 });
-            dgvTodo.Columns.Add(new DataGridViewTextBoxColumn { Name = "Status", HeaderText = "Status", DataPropertyName = "Status", Width = 120 });
+            dgvTodo.Columns.Add(new DataGridViewTextBoxColumn { Name = "Status", HeaderText = "Status", DataPropertyName = "Status", Width = 90 });
             dgvTodo.Columns.Add(new DataGridViewTextBoxColumn { Name = "DueDate", HeaderText = "Due Date", DataPropertyName = "DueDate", Width = 120 });
             dgvTodo.Columns.Add(new DataGridViewTextBoxColumn { Name = "CreatedAt", HeaderText = "Created At", DataPropertyName = "CreatedAt", Width = 140 });
+            // Cột nút Xóa
+            var deleteCol = new DataGridViewButtonColumn();
+            deleteCol.Name = "Delete";
+            deleteCol.HeaderText = "";
+            deleteCol.Text = "🗑️ Delete";
+            deleteCol.UseColumnTextForButtonValue = true;
+            deleteCol.Width = 100;
+            deleteCol.DefaultCellStyle.BackColor = Color.FromArgb(244, 67, 54);
+            deleteCol.DefaultCellStyle.ForeColor = Color.Red;
+            deleteCol.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211, 47, 47);
+            deleteCol.FlatStyle = FlatStyle.Flat;
+
+            dgvTodo.Columns.Add(deleteCol);
+
             cbStatusFilter.SelectedIndex = 0;
             cbPriorityFilter.SelectedIndex = 0;
             RefreshGrid();
@@ -105,6 +119,25 @@ namespace BtlApp.Individual
                     row.DefaultCellStyle.BackColor = Color.FromArgb(200, 230, 201);
                     row.DefaultCellStyle.ForeColor = Color.Gray;
                     break;
+            }
+        }
+        private void dgvTodo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            if (dgvTodo.Columns[e.ColumnIndex].Name == "Delete")
+            {
+                int id = Convert.ToInt32(dgvTodo.Rows[e.RowIndex].Cells["Id"].Value);
+                var confirm = MessageBox.Show("Bạn có chắc muốn xóa công việc này không?",
+                                              "Xác nhận xóa",
+                                              MessageBoxButtons.YesNo,
+                                              MessageBoxIcon.Warning);
+                if (confirm == DialogResult.Yes)
+                {
+                    string query = "DELETE FROM tblToDoList WHERE ToDoId = @id";
+                    Db.ExecuteNonQuery(query, new SqlParameter[] { new SqlParameter("@id", id) });
+                    RefreshGrid();
+                }
             }
         }
         private void dgvTodo_DoubleClick_1(object sender, EventArgs e)
@@ -201,7 +234,7 @@ namespace BtlApp.Individual
             {
                 new SqlParameter("@user", this.userId),
                 new SqlParameter("@title", txtTitle.Text.Trim()),
-                new SqlParameter("@desc", lbl100.Text.Trim()),
+                new SqlParameter("@desc", txtDescription.Text.Trim()),
                 new SqlParameter("@prio", string.IsNullOrWhiteSpace(cbPriority.Text) ? "Normal" : cbPriority.Text),
                 new SqlParameter("@status", string.IsNullOrWhiteSpace(cbStatus.Text) ? "Pending" : cbStatus.Text),
                 new SqlParameter("@due", (object)dtDueDate.Value.Date ?? DBNull.Value)
@@ -271,5 +304,6 @@ namespace BtlApp.Individual
 
         #endregion
 
+        
     }  
 }
