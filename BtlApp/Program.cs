@@ -25,8 +25,8 @@ namespace BtlApp
             {
                 using (Form_Login formLogin = new Form_Login())
                 {
-                    DialogResult res = formLogin.ShowDialog();
-                    if (res != DialogResult.OK) break;
+                    Application.Run(formLogin);
+                    MessageBox.Show("Login thanh cong");
 
                     using (Form_Manager formManager = new Form_Manager(formLogin.getUserId()))
                     {

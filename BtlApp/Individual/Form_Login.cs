@@ -17,6 +17,8 @@ namespace BtlApp
     {
         private readonly DataProcesser Db = new DataProcesser();
         private string userId;
+
+        private bool isLoggedIn = false;
         public Form_Login()
         {
             InitializeComponent();
@@ -33,10 +35,9 @@ namespace BtlApp
             return true;
         }
 
-        public string getUserId()
-        {
-            return userId;
-        }
+        public string getUserId() { return userId; }
+
+        public bool IsLoggedIn() { return isLoggedIn; }
 
         private void btn_Login_Click(object sender, EventArgs e)
         {
@@ -56,9 +57,8 @@ namespace BtlApp
             }
 
             userId = dt.Rows[0]["userId"].ToString();
-            
 
-            this.DialogResult = DialogResult.OK;
+            isLoggedIn = true;
             this.Close();
         }
 
