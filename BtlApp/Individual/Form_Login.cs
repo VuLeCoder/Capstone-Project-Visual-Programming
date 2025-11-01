@@ -1,4 +1,5 @@
-﻿using BtlApp.Individual;
+﻿using BtlApp.Database;
+using BtlApp.Individual;
 using FormProduct.Classes;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,11 @@ namespace BtlApp
         {
             if (!isFullFill()) return;
 
-            string query = "select userId from tblUser where email = @Email and passwordHash = @Password";
+            string query = 
+                $@"select {DbTables.tbl_User.Id} 
+                    from {DbTables.tbl_User.Table} 
+                    where {DbTables.tbl_User.Email} = @Email and {DbTables.tbl_User.Password} = @Password";
+
             SqlParameter[] parameters = {
                 new SqlParameter("@Email", txt_Email.Text),
                 new SqlParameter("@Password", txt_Password.Text)

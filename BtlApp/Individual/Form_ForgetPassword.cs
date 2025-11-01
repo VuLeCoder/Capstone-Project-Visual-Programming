@@ -1,4 +1,5 @@
-﻿using FormProduct.Classes;
+﻿using BtlApp.Database;
+using FormProduct.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,10 +26,14 @@ namespace BtlApp.Individual
 
         private void btn_Find_Click(object sender, EventArgs e)
         {
-            string query = "select * from tblUser where email = @Email";
+            string query = 
+                $@"select {DbTables.tbl_User.Password} 
+                    from {DbTables.tbl_User.Table} 
+                    where {DbTables.tbl_User.Email} = @Email";
             SqlParameter[] parameters = {
                 new SqlParameter("@Email", txt_Email.Text)
             };
+
             DataTable dt = Db.ReadTable(query, parameters);
             if(dt.Rows.Count == 0 )
             {
@@ -37,7 +42,7 @@ namespace BtlApp.Individual
             }
 
             string text = "Mật khẩu: ";
-            text += dt.Rows[0]["PasswordHash"].ToString();
+            text += dt.Rows[0][DbTables.tbl_User.Password].ToString();
             lbl_Notification.Text = text;
         }
 
