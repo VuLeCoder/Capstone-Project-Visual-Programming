@@ -101,6 +101,12 @@
     <Compile Include="Database\DataProcesser.cs" />
     <Compile Include="Database\DbTables.cs" />
     <Compile Include="Database\Models\MySchedule.cs" />
+    <Compile Include="Individual\Form_CRUDScheduleType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Individual\Form_CRUDScheduleType.Designer.cs">
+      <DependentUpon>Form_CRUDScheduleType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Individual\Form_ForgetPassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Individual\Form_AddMySchedule.resx">
       <DependentUpon>Form_AddMySchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Individual\Form_CRUDScheduleType.resx">
+      <DependentUpon>Form_CRUDScheduleType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Individual\Form_ForgetPassword.resx">
       <DependentUpon>Form_ForgetPassword.cs</DependentUpon>
