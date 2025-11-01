@@ -1,3 +1,5 @@
+-- Chạy tạm cho bài này :>
+
 create database Schedule
 go
 
