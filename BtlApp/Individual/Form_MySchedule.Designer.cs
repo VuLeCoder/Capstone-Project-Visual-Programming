@@ -32,9 +32,6 @@
             this.lbl_User = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.uiButton3 = new Sunny.UI.UIButton();
-            this.uiButton2 = new Sunny.UI.UIButton();
-            this.uiButton1 = new Sunny.UI.UIButton();
             this.panelAside = new System.Windows.Forms.Panel();
             this.btn_Return = new Sunny.UI.UIButton();
             this.monthCalendar = new Krypton.Toolkit.KryptonMonthCalendar();
@@ -43,22 +40,26 @@
             this.panelMainBody = new System.Windows.Forms.Panel();
             this.tlp_mainCalendar = new System.Windows.Forms.TableLayoutPanel();
             this.tlp_mainCalendarHeader = new System.Windows.Forms.TableLayoutPanel();
+            this.menu_User = new System.Windows.Forms.MenuStrip();
+            this.MenuItem_Notification = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItem_User = new System.Windows.Forms.ToolStripMenuItem();
+            this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelAside.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.panelMainBody.SuspendLayout();
+            this.menu_User.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelHeader
             // 
             this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            this.panelHeader.Controls.Add(this.menu_User);
             this.panelHeader.Controls.Add(this.lbl_User);
             this.panelHeader.Controls.Add(this.pictureBox1);
             this.panelHeader.Controls.Add(this.label1);
-            this.panelHeader.Controls.Add(this.uiButton3);
-            this.panelHeader.Controls.Add(this.uiButton2);
-            this.panelHeader.Controls.Add(this.uiButton1);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
@@ -94,54 +95,6 @@
             this.label1.Size = new System.Drawing.Size(116, 20);
             this.label1.TabIndex = 4;
             this.label1.Text = "Btl_Schedule";
-            // 
-            // uiButton3
-            // 
-            this.uiButton3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiButton3.FillColor = System.Drawing.Color.White;
-            this.uiButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiButton3.ForeColor = System.Drawing.Color.Black;
-            this.uiButton3.Location = new System.Drawing.Point(1029, 9);
-            this.uiButton3.Margin = new System.Windows.Forms.Padding(0);
-            this.uiButton3.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiButton3.Name = "uiButton3";
-            this.uiButton3.Radius = 40;
-            this.uiButton3.RectColor = System.Drawing.Color.Silver;
-            this.uiButton3.Size = new System.Drawing.Size(40, 40);
-            this.uiButton3.TabIndex = 2;
-            this.uiButton3.Text = "🔔";
-            this.uiButton3.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            // 
-            // uiButton2
-            // 
-            this.uiButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiButton2.FillColor = System.Drawing.Color.White;
-            this.uiButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiButton2.ForeColor = System.Drawing.Color.Black;
-            this.uiButton2.Location = new System.Drawing.Point(1084, 9);
-            this.uiButton2.Margin = new System.Windows.Forms.Padding(0);
-            this.uiButton2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiButton2.Name = "uiButton2";
-            this.uiButton2.Radius = 40;
-            this.uiButton2.RectColor = System.Drawing.Color.Silver;
-            this.uiButton2.Size = new System.Drawing.Size(40, 40);
-            this.uiButton2.TabIndex = 1;
-            this.uiButton2.Text = "⚙️";
-            this.uiButton2.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            // 
-            // uiButton1
-            // 
-            this.uiButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiButton1.Location = new System.Drawing.Point(1138, 9);
-            this.uiButton1.Margin = new System.Windows.Forms.Padding(0);
-            this.uiButton1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiButton1.Name = "uiButton1";
-            this.uiButton1.Radius = 40;
-            this.uiButton1.Size = new System.Drawing.Size(40, 40);
-            this.uiButton1.TabIndex = 0;
-            this.uiButton1.Text = "V";
-            this.uiButton1.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             // 
             // panelAside
             // 
@@ -249,7 +202,7 @@
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tlp_mainCalendar.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlp_mainCalendar.Location = new System.Drawing.Point(0, 0);
             this.tlp_mainCalendar.Margin = new System.Windows.Forms.Padding(0);
@@ -288,7 +241,7 @@
             this.tlp_mainCalendarHeader.ColumnCount = 3;
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.33758F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.66242F));
-            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 391F));
+            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 392F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -301,6 +254,60 @@
             this.tlp_mainCalendarHeader.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlp_mainCalendarHeader.Size = new System.Drawing.Size(950, 56);
             this.tlp_mainCalendarHeader.TabIndex = 1;
+            // 
+            // menu_User
+            // 
+            this.menu_User.BackColor = System.Drawing.Color.Black;
+            this.menu_User.Dock = System.Windows.Forms.DockStyle.None;
+            this.menu_User.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.menu_User.GripMargin = new System.Windows.Forms.Padding(0);
+            this.menu_User.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItem_Notification,
+            this.MenuItem_User});
+            this.menu_User.Location = new System.Drawing.Point(1016, 9);
+            this.menu_User.Name = "menu_User";
+            this.menu_User.Padding = new System.Windows.Forms.Padding(0);
+            this.menu_User.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.menu_User.Size = new System.Drawing.Size(172, 40);
+            this.menu_User.TabIndex = 7;
+            this.menu_User.Text = "menuStrip1";
+            // 
+            // MenuItem_Notification
+            // 
+            this.MenuItem_Notification.AutoSize = false;
+            this.MenuItem_Notification.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.MenuItem_Notification.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.MenuItem_Notification.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.MenuItem_Notification.Name = "MenuItem_Notification";
+            this.MenuItem_Notification.Size = new System.Drawing.Size(80, 40);
+            this.MenuItem_Notification.Text = "Notification";
+            // 
+            // MenuItem_User
+            // 
+            this.MenuItem_User.AutoSize = false;
+            this.MenuItem_User.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.MenuItem_User.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.profileToolStripMenuItem,
+            this.toolStripMenuItem2});
+            this.MenuItem_User.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.MenuItem_User.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.MenuItem_User.Name = "MenuItem_User";
+            this.MenuItem_User.Size = new System.Drawing.Size(80, 40);
+            this.MenuItem_User.Text = "User";
+            // 
+            // profileToolStripMenuItem
+            // 
+            this.profileToolStripMenuItem.AutoSize = false;
+            this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
+            this.profileToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.profileToolStripMenuItem.Text = "Profile";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.AutoSize = false;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(120, 22);
+            this.toolStripMenuItem2.Text = "Setting";
             // 
             // Form_MySchedule
             // 
@@ -327,6 +334,8 @@
             this.panelMain.ResumeLayout(false);
             this.panelMainBody.ResumeLayout(false);
             this.panelMainBody.PerformLayout();
+            this.menu_User.ResumeLayout(false);
+            this.menu_User.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -339,15 +348,17 @@
         private System.Windows.Forms.Panel panelMainBody;
         private System.Windows.Forms.TableLayoutPanel tlp_mainCalendar;
         private System.Windows.Forms.TableLayoutPanel tlp_mainCalendarHeader;
-        private Sunny.UI.UIButton uiButton1;
-        private Sunny.UI.UIButton uiButton3;
-        private Sunny.UI.UIButton uiButton2;
         private Sunny.UI.UIButton btn_AddSchedule;
         private Krypton.Toolkit.KryptonMonthCalendar monthCalendar;
         private System.Windows.Forms.Label label1;
         private Sunny.UI.UIButton btn_Return;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lbl_User;
+        private System.Windows.Forms.MenuStrip menu_User;
+        private System.Windows.Forms.ToolStripMenuItem MenuItem_Notification;
+        private System.Windows.Forms.ToolStripMenuItem MenuItem_User;
+        private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
     }
 }
 

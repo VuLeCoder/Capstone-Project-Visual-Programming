@@ -21,10 +21,9 @@ namespace BtlApp.Individual
             InitializeComponent();
         }
 
-        public bool IsLogout()
-        {
-            return isLogout == true;
-        }
+        public bool IsLogout() { return isLogout; }
+
+        public string getUserId() { return userId; }
 
         private void Form_Manager_Load(object sender, EventArgs e)
         {
@@ -35,6 +34,13 @@ namespace BtlApp.Individual
         {
             isLogout = true;
             this.Close();
+        }
+
+        private void btn_MySchedule_Click(object sender, EventArgs e)
+        {
+            Form_MySchedule formMySchedule = new Form_MySchedule(this);
+            formMySchedule.Show();
+            this.Hide();
         }
     }
 }

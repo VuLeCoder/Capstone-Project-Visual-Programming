@@ -193,6 +193,7 @@
             this.btn_MySchedule.TabIndex = 0;
             this.btn_MySchedule.Text = "Xem lịch cá nhân";
             this.btn_MySchedule.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btn_MySchedule.Click += new System.EventHandler(this.btn_MySchedule_Click);
             // 
             // btn_MyTodolist
             // 
@@ -276,7 +277,7 @@
             this.menu_User.Name = "menu_User";
             this.menu_User.Padding = new System.Windows.Forms.Padding(0);
             this.menu_User.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menu_User.Size = new System.Drawing.Size(292, 40);
+            this.menu_User.Size = new System.Drawing.Size(172, 40);
             this.menu_User.TabIndex = 2;
             this.menu_User.Text = "menuStrip1";
             // 
