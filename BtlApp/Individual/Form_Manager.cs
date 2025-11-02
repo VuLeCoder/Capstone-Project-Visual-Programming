@@ -80,17 +80,43 @@ namespace BtlApp.Individual
         {
             try
             {
-                string query =
-                    $@"insert into tbl_GroupMember
-                        (GroupId, UserId, Role)
-                      values
-                        (@GroupId,@UserId, @Role)";
+                string query = $@"
+                    insert into {DbTables.tbl_GroupMember.Table} 
+                        ({DbTables.tbl_GroupMember.GroupId}, {DbTables.tbl_GroupMember.UserId}, {DbTables.tbl_GroupMember.Role}) 
+                    values (@GroupId,@UserId, @Role)
+                ";
+
                 SqlParameter[] parameters = {
                     new SqlParameter("@GroupId", groupId),
                     new SqlParameter("@Role", "Member"),
                     new SqlParameter("@UserId", UserId)
                 };
                 Db.ExecuteNonQuery(query, parameters);
+
+                string querySelect = $@"
+                    select {DbTables.tbl_Group.Id}, {DbTables.tbl_Group.GroupName}, {DbTables.tbl_Group.Description}
+                    from {DbTables.tbl_Group.Table}
+                    where {DbTables.tbl_Group.Id} = @GroupId
+                ";
+                SqlParameter[] parametersSelect = {
+                    new SqlParameter("@GroupId", groupId)
+                };
+                var dt = Db.ReadTable(querySelect, parametersSelect);
+
+                if (dt.Rows.Count > 0)
+                {
+                    var row = dt.Rows[0];
+                    MyGroup group = new MyGroup(
+                        Convert.ToInt32(row[DbTables.tbl_Group.Id]),
+                        row[DbTables.tbl_Group.GroupName].ToString(),
+                        row[DbTables.tbl_Group.Description].ToString()
+                    );
+
+                    addNewGroup(group);
+                }
+
+                MessageBox.Show("Tham gia nhóm thành công", "Thông báo",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -151,21 +177,31 @@ namespace BtlApp.Individual
                         delete from {DbTables.tbl_Schedule.Table} 
                         where {DbTables.tbl_Schedule.IdGroup} = @GroupId
                     ";
-                    Db.ExecuteNonQuery(queryDeleteSchedules, parameters);
+                    SqlParameter[] parameters1 = {
+                        new SqlParameter("@GroupId", groupId),
+                    };
+                    Db.ExecuteNonQuery(queryDeleteSchedules, parameters1);
 
                     // Xóa thành viên trong nhóm
                     string queryDeleteMembers = $@"
                         delete from {DbTables.tbl_GroupMember.Table} 
                         where {DbTables.tbl_GroupMember.GroupId} = @GroupId
                     ";
-                    Db.ExecuteNonQuery(queryDeleteMembers, parameters);
+                    SqlParameter[] parameters2 = {
+                        new SqlParameter("@GroupId", groupId),
+                    };
+                    Db.ExecuteNonQuery(queryDeleteMembers, parameters2);
 
                     // Xóa nhóm
                     string queryDeleteGroup = $@"
                         DELETE FROM {DbTables.tbl_Group.Table}
                         WHERE {DbTables.tbl_Group.Id} = @GroupId
                     ";
-                    Db.ExecuteNonQuery(queryDeleteGroup, parameters);
+                    SqlParameter[] parameters3 = {
+                        new SqlParameter("@GroupId", groupId),
+                        new SqlParameter("@UserId", UserId)
+                    };
+                    Db.ExecuteNonQuery(queryDeleteGroup, parameters3);
 
                     MessageBox.Show("Nhóm đã bị xóa!", "Thông báo",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -189,14 +225,22 @@ namespace BtlApp.Individual
                         where {DbTables.tbl_Schedule.IdGroup} = @GroupId
                             and {DbTables.tbl_Schedule.IdUser} = @UserId
                     ";
-                    Db.ExecuteNonQuery(queryDeleteSchedules, parameters);
+                    SqlParameter[] parameters1 = {
+                        new SqlParameter("@GroupId", groupId),
+                        new SqlParameter("@UserId", UserId)
+                    };
+                    Db.ExecuteNonQuery(queryDeleteSchedules, parameters1);
 
                     string queryLeave = $@"
                         delete from {DbTables.tbl_GroupMember.Table} 
                         where {DbTables.tbl_GroupMember.GroupId} = @GroupId 
                             and {DbTables.tbl_GroupMember.UserId} = @UserId
                     ";
-                    Db.ExecuteNonQuery(queryLeave, parameters);
+                    SqlParameter[] parameters2 = {
+                        new SqlParameter("@GroupId", groupId),
+                        new SqlParameter("@UserId", UserId)
+                    };
+                    Db.ExecuteNonQuery(queryLeave, parameters2);
                     
                     MessageBox.Show("Bạn đã rời nhóm!", "Thông báo",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -241,14 +285,11 @@ namespace BtlApp.Individual
 
         private void btn_Participate_Click(object sender, EventArgs e)
         {
-            //bug;
-            Form_JoinGroup formJoinGroup = new Form_JoinGroup();
-
+            Form_JoinGroup formJoinGroup = new Form_JoinGroup(UserId);
             DialogResult result = formJoinGroup.ShowDialog();
 
             if (result == DialogResult.OK) {
-                int groupId = formJoinGroup.GroupId;
-                JoinGroup(groupId);
+                JoinGroup(formJoinGroup.GetGroupId());
             }
         }
     }
