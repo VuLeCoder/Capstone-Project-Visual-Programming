@@ -13,6 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BtlApp.Group;
+using BtlApp.Database.Models;
 
 namespace BtlApp.Individual
 {
@@ -20,11 +22,12 @@ namespace BtlApp.Individual
     {
         // ================== slot group ====================
         private const int GROUP_WIDTH = 150;
-        private const int GROUP_HEIGHT = 60;
+        private const int GROUP_HEIGHT = 100;
         private const int NUM_GROUP = 4; // số nhóm 1 hàng
-        private readonly int GROUP_GAP = (int)((650 - NUM_GROUP * GROUP_WIDTH) / 5); //flp_group.Width = 650;
+        private readonly int GROUP_GAP = (int)((650 - NUM_GROUP * GROUP_WIDTH) / (NUM_GROUP + 1)); //flp_group.Width = 650;
 
         private readonly Color GROUP_BACKCOLOR = Color.FromArgb(56,56, 56);
+        private const string NAME = "Group_";
 
         // ====================== Biến ======================
         private readonly int UserId;
@@ -47,64 +50,32 @@ namespace BtlApp.Individual
 
 
         // ============= Giao diện tab: Nhóm ===============
-        private void addNewGroup(string groupName, string Desc)
+        private void addNewGroup(MyGroup group)
         {
-
-            // Thêm nhóm vào database
-            try
-            {
-                string query =
-                    $@"insert into {DbTables.tbl_Group.Table}
-                        ({DbTables.tbl_Group.GroupName},
-                         {DbTables.tbl_Group.Description},{DbTables.tbl_Group.CreatedBy})
-                      values
-                        (@GroupName,
-                         @Description, @CreatedBy);
-                    select scope_identity();";
-                SqlParameter[] parameters = {
-                    new SqlParameter("@GroupName", groupName),
-                    new SqlParameter("@Description", Desc),
-                    new SqlParameter("@CreatedBy", UserId)
-                };
-                object newId = Db.ExecuteScalar(query, parameters);
-
-                GroupPanel panel = new GroupPanel(groupName, Convert.ToString(newId));
-                flp_group.Controls.Add(panel);
-                panel.OnLeaveGroup += () =>
-                {
-                    LeaveGroup(Convert.ToInt32(newId));
-                };
-
-                if (newId != null)
-                {
-                    MessageBox.Show("Tạo nhóm thành công!", "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Tạo nhóm thất bại!", "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                query = 
-                    $@"insert into tbl_GroupMember
-                        (GroupId, UserId, Role)
-                      values
-                        (@GroupId,@UserId, @Role)";
-                SqlParameter[] parameters1 = {
-                    new SqlParameter("@GroupId", newId),
-                    new SqlParameter("@Role", "Leader"),
-                    new SqlParameter("@UserId", UserId)
-                };
-                Db.ExecuteNonQuery(query, parameters1);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi tạo nhóm:\n" + ex.Message, "SQL Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //UIPanel panel = new UIPanel
+            //{
+            //    Name = (NAME + group.GroupId.ToString()),
+            //    Size = new Size(GROUP_WIDTH, GROUP_HEIGHT),
+            //    FillColor = GROUP_BACKCOLOR,
+            //    RectColor = GROUP_BACKCOLOR,
+            //    Radius = 10,
+            //    Margin = new Padding(GROUP_GAP, GROUP_GAP, 0, 0),
+            //    Padding = new Padding(5),
+            //    Tag = group.GroupId
+            //};
+            GroupPanel panel = new GroupPanel(group, new Size(GROUP_WIDTH, GROUP_HEIGHT), 
+                new Padding(GROUP_GAP, GROUP_GAP, 0, 0), GROUP_BACKCOLOR);
+            panel.OnLeaveGroup += () => { LeaveGroup(group.GroupId); };
+            flp_group.Controls.Add(panel);
         }
 
+        private void RemoveGroup(int groupId)
+        {
+            string name = NAME + groupId;
+            flp_group.Controls.RemoveByKey(name);
+        }
+
+        // =============== Xử lý logic, truy vấn DB ================
         private void JoinGroup(int groupId)
         {
             try
@@ -128,85 +99,119 @@ namespace BtlApp.Individual
             }
         }
 
-        private void LoadGroups()
+        private void LoadGroupsFromDB()
         {
             flp_group.Controls.Clear();
 
-            string query = @"
-            select *
-            from tbl_GroupMember gm
-            join tbl_Group g on gm.GroupId = g.GroupId
-            where gm.UserId = @UserId";
-
+            string query = $@"
+                select * 
+                from {DbTables.tbl_Group.Table} gr 
+                join {DbTables.tbl_GroupMember.Table} gm on gm.{DbTables.tbl_GroupMember.GroupId} = gr.{DbTables.tbl_Group.Id} 
+                where gm.{DbTables.tbl_GroupMember.UserId} = @UserId 
+            ";
             SqlParameter[] parameters = {
-            new SqlParameter("@UserId", UserId)
+                new SqlParameter("@UserId", UserId)
             };
 
             DataTable dt = Db.ReadTable(query, parameters);
-
             foreach (DataRow row in dt.Rows)
             {
-                string line = "";
-                foreach (DataColumn col in dt.Columns)
-                    line += $"{col.ColumnName}: {row[col]} | ";
+                MyGroup group = new MyGroup(Convert.ToInt32(row[DbTables.tbl_Group.Id]), 
+                    row[DbTables.tbl_Group.GroupName].ToString(), row[DbTables.tbl_Group.Description].ToString());
 
-                Console.WriteLine(line);
-                Console.WriteLine("-----");
-
-                string groupId = row["GroupId"].ToString();
-                string groupName = row["GroupName"].ToString();
-                string role = row["Role"].ToString();
-
-                GroupPanel panel = new GroupPanel(groupName, groupId);
-
-                //Gắn thêm tooltip hoặc chi tiết nhỏ nếu muốn
-               ToolTip tip = new ToolTip();
-                tip.SetToolTip(panel, $"Vai trò: {role}");
-
-                // Gắn event khi click “Rời nhóm”
-                panel.OnLeaveGroup += () =>
-                {
-                    LeaveGroup((int)row["GroupId"]);
-
-                };
-
-                flp_group.Controls.Add(panel);
+                addNewGroup(group);
             }
         }
 
         private void LeaveGroup(int groupId)
         {
-            DialogResult confirm = MessageBox.Show(
-            "Bạn có chắc chắn muốn rời nhóm này không?",
-            "Xác nhận rời nhóm",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
-            );
-            
-            if (confirm == DialogResult.Yes) {
-                string query = "delete from tbl_GroupMember where GroupId = @GroupId and UserId = @UserId";
-                SqlParameter[] parameters = {
-                    new SqlParameter("@GroupId", groupId),
-                    new SqlParameter("@UserId", UserId)
-                };
+            string roleQuery = $@"
+                select {DbTables.tbl_GroupMember.Role} 
+                from {DbTables.tbl_GroupMember.Table} 
+                where {DbTables.tbl_GroupMember.GroupId} = @GroupId and {DbTables.tbl_GroupMember.UserId} = @UserId
+            ";
+            SqlParameter[] parameters = {
+                new SqlParameter("@GroupId", groupId),
+                new SqlParameter("@UserId", UserId)
+            };
 
-                int result = Db.ExecuteNonQuery(query, parameters);
-                if (result > 0)
+            string myRole = Db.ReadTable(roleQuery, parameters).Rows[0][DbTables.tbl_GroupMember.Role].ToString();
+            if (myRole == "Leader")
+            {
+                DialogResult confirm = MessageBox.Show(
+                    "Bạn là nhóm trưởng, nếu rời sẽ xóa nhóm",
+                    "Xác nhận rời nhóm",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+                if (confirm == DialogResult.Yes)
                 {
+                    // Xóa lịch
+                    string queryDeleteSchedules = $@"
+                        delete from {DbTables.tbl_Schedule.Table} 
+                        where {DbTables.tbl_Schedule.IdGroup} = @GroupId
+                    ";
+                    Db.ExecuteNonQuery(queryDeleteSchedules, parameters);
+
+                    // Xóa thành viên trong nhóm
+                    string queryDeleteMembers = $@"
+                        delete from {DbTables.tbl_GroupMember.Table} 
+                        where {DbTables.tbl_GroupMember.GroupId} = @GroupId
+                    ";
+                    Db.ExecuteNonQuery(queryDeleteMembers, parameters);
+
+                    // Xóa nhóm
+                    string queryDeleteGroup = $@"
+                        DELETE FROM {DbTables.tbl_Group.Table}
+                        WHERE {DbTables.tbl_Group.Id} = @GroupId
+                    ";
+                    Db.ExecuteNonQuery(queryDeleteGroup, parameters);
+
+                    MessageBox.Show("Nhóm đã bị xóa!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    RemoveGroup(groupId);
+                }
+            }
+            else
+            {
+                DialogResult confirm = MessageBox.Show(
+                    "Bạn có chắc chắn muốn rời nhóm này không?",
+                    "Xác nhận rời nhóm",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+                if (confirm == DialogResult.Yes)
+                {
+                    //Xóa lịch
+                    string queryDeleteSchedules = $@"
+                        delete from {DbTables.tbl_Schedule.Table} 
+                        where {DbTables.tbl_Schedule.IdGroup} = @GroupId
+                            and {DbTables.tbl_Schedule.IdUser} = @UserId
+                    ";
+                    Db.ExecuteNonQuery(queryDeleteSchedules, parameters);
+
+                    string queryLeave = $@"
+                        delete from {DbTables.tbl_GroupMember.Table} 
+                        where {DbTables.tbl_GroupMember.GroupId} = @GroupId 
+                            and {DbTables.tbl_GroupMember.UserId} = @UserId
+                    ";
+                    Db.ExecuteNonQuery(queryLeave, parameters);
+                    
                     MessageBox.Show("Bạn đã rời nhóm!", "Thông báo",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadGroups(); // reload lại danh sách
+                    RemoveGroup(groupId);
                 }
             }
         }
 
 
-        // =====================================================================
-        // =====================================================================
+// =====================================================================
+// =====================================================================
         // ================== Sự kiện form ===================
         private void Form_Manager_Load(object sender, EventArgs e)
         {
-            LoadGroups();
+            LoadGroupsFromDB();
         }
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -224,22 +229,19 @@ namespace BtlApp.Individual
 
         private void btn_CreateGroup_Click(object sender, EventArgs e)
         {
-            Form_CreateGroup formCreateGroup = new Form_CreateGroup();
-
+            Form_CreateGroup formCreateGroup = new Form_CreateGroup(UserId);
             DialogResult result = formCreateGroup.ShowDialog();
 
 
             if (result == DialogResult.OK)
             {
-                string groupName = formCreateGroup.GroupName;
-                string description = formCreateGroup.Description;
-                
-                addNewGroup(groupName, description);
+                addNewGroup(formCreateGroup.GetDetailGroup());
             }
         }
 
         private void btn_Participate_Click(object sender, EventArgs e)
         {
+            //bug;
             Form_JoinGroup formJoinGroup = new Form_JoinGroup();
 
             DialogResult result = formJoinGroup.ShowDialog();
@@ -247,7 +249,6 @@ namespace BtlApp.Individual
             if (result == DialogResult.OK) {
                 int groupId = formJoinGroup.GroupId;
                 JoinGroup(groupId);
-                LoadGroups();
             }
         }
     }
