@@ -40,6 +40,7 @@
             this.parentBarItem1 = new Syncfusion.Windows.Forms.Tools.XPMenus.ParentBarItem();
             this.parentBarItem2 = new Syncfusion.Windows.Forms.Tools.XPMenus.ParentBarItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btn_Participate = new Sunny.UI.UIButton();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_CreateGroup = new Sunny.UI.UIButton();
             this.panel_group = new System.Windows.Forms.Panel();
@@ -53,7 +54,6 @@
             this.barItem2 = new Syncfusion.Windows.Forms.Tools.XPMenus.BarItem();
             this.barItem3 = new Syncfusion.Windows.Forms.Tools.XPMenus.BarItem();
             this.parentBarItem4 = new Syncfusion.Windows.Forms.Tools.XPMenus.ParentBarItem();
-            this.btn_Participate = new Sunny.UI.UIButton();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menu_User.SuspendLayout();
@@ -92,7 +92,7 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.label1.Location = new System.Drawing.Point(79, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 20);
+            this.label1.Size = new System.Drawing.Size(140, 25);
             this.label1.TabIndex = 4;
             this.label1.Text = "Btl_Schedule";
             // 
@@ -102,6 +102,7 @@
             this.menu_User.Dock = System.Windows.Forms.DockStyle.None;
             this.menu_User.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.menu_User.GripMargin = new System.Windows.Forms.Padding(0);
+            this.menu_User.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menu_User.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuItem_Notification,
             this.MenuItem_User});
@@ -190,12 +191,25 @@
             this.tabPage2.Text = "Nhóm";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btn_Participate
+            // 
+            this.btn_Participate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Participate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btn_Participate.Location = new System.Drawing.Point(167, 16);
+            this.btn_Participate.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btn_Participate.Name = "btn_Participate";
+            this.btn_Participate.Size = new System.Drawing.Size(130, 35);
+            this.btn_Participate.TabIndex = 4;
+            this.btn_Participate.Text = "Tham gia nhóm";
+            this.btn_Participate.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btn_Participate.Click += new System.EventHandler(this.btn_Participate_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(11, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(168, 20);
+            this.label2.Size = new System.Drawing.Size(208, 25);
             this.label2.TabIndex = 3;
             this.label2.Text = "Các nhóm đã tham gia";
             // 
@@ -326,21 +340,9 @@
             this.parentBarItem4.SizeToFit = true;
             this.parentBarItem4.WrapLength = 20;
             // 
-            // btn_Participate
-            // 
-            this.btn_Participate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Participate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btn_Participate.Location = new System.Drawing.Point(167, 16);
-            this.btn_Participate.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btn_Participate.Name = "btn_Participate";
-            this.btn_Participate.Size = new System.Drawing.Size(130, 35);
-            this.btn_Participate.TabIndex = 4;
-            this.btn_Participate.Text = "Tham gia nhóm";
-            this.btn_Participate.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            // 
             // Form_Manager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
             this.ClientSize = new System.Drawing.Size(827, 393);
