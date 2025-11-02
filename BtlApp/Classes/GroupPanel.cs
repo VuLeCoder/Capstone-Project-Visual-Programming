@@ -1,4 +1,5 @@
-﻿using Sunny.UI;
+﻿using BtlApp.Database.Models;
+using Sunny.UI;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,30 +8,33 @@ namespace BtlApp.Classes
 {
     public class GroupPanel : UIPanel
     {
+        private const string NAME = "Group_";
+
         private UILabel lblName;
-        private UILabel lblId;
+        private UILabel lblDescription;
         private UIButton btnMore;
         private UIContextMenuStrip menu;
 
         public event Action OnLeaveGroup;
-
-        public GroupPanel(string groupName, string groupId)
+        //Size(220, 120)
+        public GroupPanel(MyGroup group, Size panelSize, Padding panelMargin, Color blockColor)
         {
             // Cấu hình panel
-            this.Size = new Size(220, 120);
-            this.FillColor = Color.FromArgb(30, 30, 30); // đen
-            this.RectColor = Color.FromArgb(30, 30, 30);
+            this.Name = NAME + group.GroupId.ToString();
+            this.Size = panelSize;
+            this.FillColor = blockColor;
+            this.RectColor = blockColor;
             this.Radius = 10;
-            this.Margin = new Padding(10);
+            this.Margin = panelMargin;
             this.Padding = new Padding(10);
             //this.Cursor = Cursors.Hand;
 
             // Label tên group
             lblName = new UILabel
             {
-                Text = groupName,
+                Text = group.GroupName,
                 ForeColor = Color.White,
-                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 AutoSize = false,
                 AutoEllipsis = true,
                 Location = new Point(10, 10),
@@ -39,23 +43,22 @@ namespace BtlApp.Classes
             };
             this.Controls.Add(lblName);
 
-            lblId = new UILabel
+            lblDescription = new UILabel
             {
-                Text = "#" + groupId,
+                Text = group.Description,
                 ForeColor = Color.Gray,
-                Font = new Font("Segoe UI", 14, FontStyle.Italic),
+                Font = new Font("Segoe UI", 10, FontStyle.Italic),
                 AutoSize = true,
                 Location = new Point(10, this.Height - 40),
-                //Size = new Size(50, 30),
                 TextAlign = ContentAlignment.TopLeft
             };
-            this.Controls.Add(lblId);
+            this.Controls.Add(lblDescription);
 
             // Nút "⋮" (ba chấm dọc)
             btnMore = new UIButton
             {
                 Text = "⋮",
-                Font = new Font("Segoe UI Symbol", 12, FontStyle.Bold),
+                Font = new Font("Segoe UI Symbol", 10, FontStyle.Bold),
                 Size = new Size(30, 30),
                 Location = new Point(this.Width - 40, this.Height - 40),
                 FillColor = Color.Transparent,
@@ -71,7 +74,7 @@ namespace BtlApp.Classes
             // Hover effect: hiện nút ⋮
             this.MouseEnter += (s, e) => btnMore.Visible = true;
             lblName.MouseEnter += (s, e) => btnMore.Visible = true;
-            lblId.MouseEnter += (s, e) => btnMore.Visible = true;
+            //lblId.MouseEnter += (s, e) => btnMore.Visible = true;
             this.MouseLeave += (s, e) =>
             {
                 // Ẩn nút nếu chuột rời cả panel và nút
