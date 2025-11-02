@@ -8,7 +8,7 @@ namespace FormProduct.Classes
     internal class DataProcesser
     {
         private readonly string dbName = "Schedule";
-        private readonly string serverName = @"(local)\SQLEXPRESS";
+        private readonly string serverName = @"MINHDUC5A12\SQLEXPRESS";
         private string connectionString =>
             $@"Server={serverName};Database={dbName};Trusted_Connection=True;";
 

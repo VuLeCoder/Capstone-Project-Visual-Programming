@@ -17,6 +17,7 @@ namespace BtlApp.Individual
     {
         public const int TYPE_ADD = 1;
         public const int TYPE_EDIT = 2;
+        public const int TYPE_VIEW = 3;
 
         private readonly DataProcesser Db = new DataProcesser();
 
@@ -75,6 +76,22 @@ namespace BtlApp.Individual
                     btn_Save.Enabled = true;
                     btn_Delete.Enabled = true;
                     break;
+                
+                case TYPE_VIEW:
+                    btn_Add.Enabled = false;
+                    btn_Save.Enabled = false;
+                    btn_Delete.Enabled = false;
+
+                    txt_Title.ReadOnly = true;
+                    cb_TypeSchedule.Enabled = false;
+                    dtp_Date.Enabled = false;
+                    cb_StartHour.Enabled = false;
+                    cb_EndHour.Enabled = false;
+                    btn_AddTypeSchedule.Enabled = false;
+
+                    btn_Cancel.Text = "Đóng";
+                    break;
+
             }
         }
 
