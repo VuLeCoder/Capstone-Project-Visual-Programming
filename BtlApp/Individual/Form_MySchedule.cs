@@ -405,7 +405,7 @@ namespace BtlApp
         {
             Form_AddMySchedule addSchedlueForm = new Form_AddMySchedule();
             addSchedlueForm.formType(Form_AddMySchedule.TYPE_ADD);
-            DialogResult result = addSchedlueForm.ShowDialog();
+            DialogResult result = addSchedlueForm.ShowDialog(this);
 
             if (result == DialogResult.OK) // Them lich
             {
@@ -431,7 +431,7 @@ namespace BtlApp
                 addSchedlueForm.setData(currentWeek.AddDays(tagData.Day), tagData.Hour);
             }
 
-            DialogResult result = addSchedlueForm.ShowDialog();
+            DialogResult result = addSchedlueForm.ShowDialog(this);
 
             if (result == DialogResult.OK) // Them lich
             {
@@ -507,7 +507,7 @@ namespace BtlApp
 
             addSchedlueForm.setData(schedule);
 
-            DialogResult result = addSchedlueForm.ShowDialog();
+            DialogResult result = addSchedlueForm.ShowDialog(this);
 
             if(result == DialogResult.Yes)
             {
