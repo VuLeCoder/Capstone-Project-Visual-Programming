@@ -19,9 +19,9 @@ namespace BtlApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form_Login());
-            //Application.Run(new Form_Manager());
+            //Application.Run(new Form_CRUDScheduleType(null));
 
-            while(true)
+            while (true)
             {
                 using (Form_Login formLogin = new Form_Login())
                 {
@@ -35,6 +35,8 @@ namespace BtlApp
                     }
                 }
             }
+
+            MessageBox.Show("End");
         }
     }
 }
