@@ -83,5 +83,12 @@ namespace BtlApp.Individual
         {
             addNewGroup("HeHe");
         }
+
+        private void btn_MyTodolist_Click(object sender, EventArgs e)
+        {
+            Form_TodoList form_TodoList = new Form_TodoList(this,this.userId);
+            form_TodoList.Show();
+            this.Hide();
+        }
     }
 }
