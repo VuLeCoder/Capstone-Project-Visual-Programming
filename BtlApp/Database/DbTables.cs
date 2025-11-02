@@ -2,6 +2,7 @@
 using Syncfusion.Reflection;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
@@ -47,6 +48,15 @@ namespace BtlApp.Database
             public const string Date = "ScheduleDate";
             public const string Start = "StartTime";
             public const string End = "EndTime";
+        }
+
+        public static class tbl_Group
+        {
+            public const string Table = "tbl_Group";
+            public const string Id = "GroupId";
+            public const string GroupName = "GroupName";
+            public const string Description = "Description";
+            public const string CreatedBy = "CreatedBy";
         }
     }
 }
