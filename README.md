@@ -5,12 +5,21 @@
 - có gì thì gpt để hỏi lại :>
 
 ## 📋 Mục lục
+- [Note](#-note)
 - [⚠️ Lỗi và tình trạng các nhánh](#️-lỗi-và-tình-trạng-các-nhánh)
 - [🎯 Mục tiêu & Chức năng](#-mục-tiêu--chức-năng)
   - [👤 Individual (Cá nhân)](#-individual-cá-nhân)
   - [👥 Group (Nhóm)](#-group-nhóm)
 - [🧠 Chức năng Form GroupSchedule](#-Chức-năng-Form-GroupSchedule)
 
+
+---
+
+## Note
+- Folder database: 
+    - Folder Model để lưu các đối tượng
+    - DataProcesser: Truy vấn CSDL (đổi serverName và dbName theo local)
+    - DbTables.cs: Các biến static gồm tên bảng và tên thuộc tính
 
 ---
 
