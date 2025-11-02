@@ -58,5 +58,14 @@ namespace BtlApp.Database
             public const string Description = "Description";
             public const string CreatedBy = "CreatedBy";
         }
+
+        public static class tbl_GroupMember
+        {
+            public const string Table = "tbl_GroupMember";
+            public const string GroupId = "GroupId";
+            public const string UserId = "UserId";
+            public const string Role = "Role";
+            public const string JoinedAt = "JoinedAt";
+        }
     }
 }
