@@ -118,8 +118,14 @@ namespace BtlApp.Individual
         private void btn_AddTypeSchedule_Click(object sender, EventArgs e)
         {
             Form_CRUDScheduleType formEditScheduleType = new Form_CRUDScheduleType(this);
-            formEditScheduleType.Show();
-            this.Hide();
+            DialogResult res = formEditScheduleType.ShowDialog(this);
+
+            if(res == DialogResult.OK)
+            {
+                cb_TypeSchedule.DataSource = null;
+                cb_TypeSchedule.Items.Clear();
+                FillComboBox(cb_TypeSchedule, DbTables.tbl_ScheduleType.Table, DbTables.tbl_ScheduleType.Name, DbTables.tbl_ScheduleType.Id);
+            }
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -146,6 +152,11 @@ namespace BtlApp.Individual
         {
             this.DialogResult = DialogResult.No;
             this.Close();
+        }
+
+        private void Form_AddMySchedule_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //formMySchedule.Enabled = true;
         }
     }
 }

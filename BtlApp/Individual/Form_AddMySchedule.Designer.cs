@@ -243,6 +243,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form_AddMySchedule";
             this.TopMost = true;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_AddMySchedule_FormClosed);
             this.Load += new System.EventHandler(this.Form_AddMySchedule_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
