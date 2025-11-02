@@ -98,9 +98,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\GroupPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Database\DataProcesser.cs" />
     <Compile Include="Database\DbTables.cs" />
     <Compile Include="Database\Models\MySchedule.cs" />
+    <Compile Include="Individual\Form_CreateGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Individual\Form_CreateGroup.Designer.cs">
+      <DependentUpon>Form_CreateGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Individual\Form_CRUDScheduleType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +121,12 @@
     </Compile>
     <Compile Include="Individual\Form_ForgetPassword.Designer.cs">
       <DependentUpon>Form_ForgetPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Individual\Form_JoinGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Individual\Form_JoinGroup.Designer.cs">
+      <DependentUpon>Form_JoinGroup.cs</DependentUpon>
     </Compile>
     <Compile Include="Individual\Form_Login.cs">
       <SubType>Form</SubType>
@@ -145,14 +160,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Classes\GroupPanel.resx">
+      <DependentUpon>GroupPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Individual\Form_AddMySchedule.resx">
       <DependentUpon>Form_AddMySchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Individual\Form_CreateGroup.resx">
+      <DependentUpon>Form_CreateGroup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Individual\Form_CRUDScheduleType.resx">
       <DependentUpon>Form_CRUDScheduleType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Individual\Form_ForgetPassword.resx">
       <DependentUpon>Form_ForgetPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Individual\Form_JoinGroup.resx">
+      <DependentUpon>Form_JoinGroup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Individual\Form_Login.resx">
       <DependentUpon>Form_Login.cs</DependentUpon>
@@ -196,5 +220,6 @@
   <ItemGroup>
     <None Include="Resources\Icon.bmp" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
