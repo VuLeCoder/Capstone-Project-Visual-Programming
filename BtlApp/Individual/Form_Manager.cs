@@ -63,7 +63,7 @@ namespace BtlApp.Individual
         // ================== Sự kiện form ===================
         private void Form_Manager_Load(object sender, EventArgs e)
         {
-            
+            // chỗ này load tên người dùng để hiển thị chỗ MenuItem_User được ko?
         }
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)

@@ -208,7 +208,9 @@ insert into tbl_TimeSlot (timeStr, timeVal) values
 
 insert into tbl_User (UserName, Email, PasswordHash)
 values
-('VuLe', '1', '1')
+('VuLe', '1', '1'),
+('Tung', '2', '2'),
+('Huy', '3', '3')
 
 insert into tbl_ScheduleType (TypeName, Description, ColorCode)
 values 
