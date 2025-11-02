@@ -218,5 +218,5 @@ values
 insert into tbl_ToDoList (UserId, Title, Description, Priority, Status, DueDate)
 values
 (1, N'Gọi điện cho khách hàng A', N'Thảo luận về gia hạn hợp đồng.', 'Normal', 'Pending', '2025-11-02 09:00:00'),
-(1, N'Hoàn thành báo cáo quý', N'Viết báo cáo tổng kết quý 4.', 'High', 'In Progress', '2025-11-04 17:00:00'),
+(1, N'Hoàn thành báo cáo quý', N'Viết báo cáo tổng kết quý 4.', 'High', 'InProgress', '2025-11-04 17:00:00'),
 (1, N'Đẩy code lên production', N'Merge branch "feature-xyz" vào main và deploy.', 'Low', 'Completed', '2025-11-06 14:00:00');
