@@ -111,6 +111,12 @@
     <Compile Include="Group\Form_CreateGroup.Designer.cs">
       <DependentUpon>Form_CreateGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Group\Form_GroupSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Group\Form_GroupSchedule.Designer.cs">
+      <DependentUpon>Form_GroupSchedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Individual\Form_CRUDScheduleType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Group\Form_CreateGroup.resx">
       <DependentUpon>Form_CreateGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Group\Form_GroupSchedule.resx">
+      <DependentUpon>Form_GroupSchedule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Individual\Form_AddMySchedule.resx">
       <DependentUpon>Form_AddMySchedule.cs</DependentUpon>

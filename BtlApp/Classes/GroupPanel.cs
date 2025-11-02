@@ -15,10 +15,17 @@ namespace BtlApp.Classes
         private UIButton btnMore;
         private UIContextMenuStrip menu;
 
+        public event EventHandler PanelClick;
+
         public event Action OnLeaveGroup;
+
+        public MyGroup GroupData { get; private set; }
         //Size(220, 120)
         public GroupPanel(MyGroup group, Size panelSize, Padding panelMargin, Color blockColor)
         {
+
+            this.GroupData = group;
+
             // Cấu hình panel
             this.Name = NAME + group.GroupId.ToString();
             this.Size = panelSize;
@@ -98,6 +105,11 @@ namespace BtlApp.Classes
             // Giới hạn hiển thị label để thêm "..."
             lblName.AutoEllipsis = true;
             lblName.MaximumSize = new Size(this.Width - 20, this.Height - 20);
+
+            // Gán sự kiện click cho panel và label
+            this.MouseClick += OnPanelClicked;
+            lblName.MouseClick += OnPanelClicked;
+            lblDescription.MouseClick += OnPanelClicked;
         }
 
         private void BtnMore_Click(object sender, EventArgs e)
@@ -111,6 +123,13 @@ namespace BtlApp.Classes
                 menu.Items.Add("Rời nhóm", null, (s, ev) => OnLeaveGroup?.Invoke());
             }
             menu.Show(btnMore, new Point(btnMore.Width, 0));
+        }
+
+        private void OnPanelClicked(object sender, EventArgs e)
+        {
+            // Bỏ qua nếu click vào nút "..."
+            if (sender is UIButton) return;
+            PanelClick?.Invoke(this, e);
         }
 
         private void InitializeComponent()

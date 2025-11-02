@@ -66,7 +66,43 @@ namespace BtlApp.Individual
             GroupPanel panel = new GroupPanel(group, new Size(GROUP_WIDTH, GROUP_HEIGHT), 
                 new Padding(GROUP_GAP, GROUP_GAP, 0, 0), GROUP_BACKCOLOR);
             panel.OnLeaveGroup += () => { LeaveGroup(group.GroupId); };
+
+            panel.PanelClick += GroupPanel_Click;
+
             flp_group.Controls.Add(panel);
+        }
+
+        private void GroupPanel_Click(object sender, EventArgs e)
+        {
+            if (sender is GroupPanel panel)
+            {
+                MyGroup group = panel.GroupData;
+                string userRole = GetUserRoleInGroup(group.GroupId);
+
+                Form_GroupSchedule formGroupSchedule = new Form_GroupSchedule(this, group, this.UserId, userRole);
+                formGroupSchedule.Show();
+                this.Hide();
+            }
+        }
+
+        private string GetUserRoleInGroup(int groupId)
+        {
+            string query = $@"
+                select {DbTables.tbl_GroupMember.Role} 
+                from {DbTables.tbl_GroupMember.Table} 
+                where {DbTables.tbl_GroupMember.GroupId} = @GroupId and {DbTables.tbl_GroupMember.UserId} = @UserId
+            ";
+            SqlParameter[] parameters = {
+                new SqlParameter("@GroupId", groupId),
+                new SqlParameter("@UserId", this.UserId)
+            };
+
+            DataTable dt = Db.ReadTable(query, parameters);
+            if (dt.Rows.Count > 0)
+            {
+                return dt.Rows[0][DbTables.tbl_GroupMember.Role].ToString();
+            }
+            return "Member";
         }
 
         private void RemoveGroup(int groupId)
