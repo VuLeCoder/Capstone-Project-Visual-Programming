@@ -35,24 +35,36 @@ namespace BtlApp.Classes
                 Text = group.GroupName,
                 ForeColor = Color.White,
                 Font = new Font("Segoe UI", 12, FontStyle.Bold),
-                AutoSize = false,
                 AutoEllipsis = true,
                 Location = new Point(10, 10),
-                Size = new Size(this.Width - 20, this.Height - 50),
                 TextAlign = ContentAlignment.TopLeft
             };
             this.Controls.Add(lblName);
+
+            //lblDescription = new UILabel
+            //{
+            //    Text = group.Description,
+            //    ForeColor = Color.Gray,
+            //    Font = new Font("Segoe UI", 10, FontStyle.Italic),
+            //    AutoSize = true,
+            //    Location = new Point(10, this.Height - 40),
+            //    TextAlign = ContentAlignment.TopLeft
+            //};
+            //this.Controls.Add(lblDescription);
 
             lblDescription = new UILabel
             {
                 Text = group.Description,
                 ForeColor = Color.Gray,
                 Font = new Font("Segoe UI", 10, FontStyle.Italic),
-                AutoSize = true,
-                Location = new Point(10, this.Height - 40),
-                TextAlign = ContentAlignment.TopLeft
+                AutoSize = false, // bắt buộc false để giới hạn height
+                Size = new Size(this.Width - 50, 40), // 2 dòng ~ 40px (tùy font size)
+                Location = new Point(10, 50),
+                TextAlign = ContentAlignment.TopLeft,
+                AutoEllipsis = true // hiển thị "..." nếu text quá dài
             };
             this.Controls.Add(lblDescription);
+
 
             // Nút "⋮" (ba chấm dọc)
             btnMore = new UIButton
@@ -74,7 +86,6 @@ namespace BtlApp.Classes
             // Hover effect: hiện nút ⋮
             this.MouseEnter += (s, e) => btnMore.Visible = true;
             lblName.MouseEnter += (s, e) => btnMore.Visible = true;
-            //lblId.MouseEnter += (s, e) => btnMore.Visible = true;
             this.MouseLeave += (s, e) =>
             {
                 // Ẩn nút nếu chuột rời cả panel và nút

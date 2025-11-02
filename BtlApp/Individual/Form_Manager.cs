@@ -21,12 +21,12 @@ namespace BtlApp.Individual
     public partial class Form_Manager : Form
     {
         // ================== slot group ====================
-        private const int GROUP_WIDTH = 150;
+        private const int GROUP_WIDTH = 200;
         private const int GROUP_HEIGHT = 100;
-        private const int NUM_GROUP = 4; // số nhóm 1 hàng
+        private const int NUM_GROUP = 3; // số nhóm 1 hàng
         private readonly int GROUP_GAP = (int)((650 - NUM_GROUP * GROUP_WIDTH) / (NUM_GROUP + 1)); //flp_group.Width = 650;
 
-        private readonly Color GROUP_BACKCOLOR = Color.FromArgb(56,56, 56);
+        private readonly Color GROUP_BACKCOLOR = Color.FromArgb(56, 56, 56);
         private const string NAME = "Group_";
 
         // ====================== Biến ======================
