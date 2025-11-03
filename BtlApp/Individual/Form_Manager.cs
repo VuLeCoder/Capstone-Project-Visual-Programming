@@ -41,8 +41,8 @@ namespace BtlApp.Individual
             InitializeComponent();
             GROUP_GAP -= SystemInformation.VerticalScrollBarWidth / 5;
         }
-// =====================================================================
-// =====================================================================
+        // =====================================================================
+        // =====================================================================
         // ====================== Hàm ======================
         public bool IsLogout() { return isLogout; }
 
@@ -63,7 +63,7 @@ namespace BtlApp.Individual
             //    Padding = new Padding(5),
             //    Tag = group.GroupId
             //};
-            GroupPanel panel = new GroupPanel(group, new Size(GROUP_WIDTH, GROUP_HEIGHT), 
+            GroupPanel panel = new GroupPanel(group, new Size(GROUP_WIDTH, GROUP_HEIGHT),
                 new Padding(GROUP_GAP, GROUP_GAP, 0, 0), GROUP_BACKCOLOR);
             panel.OnLeaveGroup += () => { LeaveGroup(group.GroupId); };
 
@@ -178,7 +178,7 @@ namespace BtlApp.Individual
             DataTable dt = Db.ReadTable(query, parameters);
             foreach (DataRow row in dt.Rows)
             {
-                MyGroup group = new MyGroup(Convert.ToInt32(row[DbTables.tbl_Group.Id]), 
+                MyGroup group = new MyGroup(Convert.ToInt32(row[DbTables.tbl_Group.Id]),
                     row[DbTables.tbl_Group.GroupName].ToString(), row[DbTables.tbl_Group.Description].ToString());
 
                 addNewGroup(group);
@@ -277,7 +277,7 @@ namespace BtlApp.Individual
                         new SqlParameter("@UserId", UserId)
                     };
                     Db.ExecuteNonQuery(queryLeave, parameters2);
-                    
+
                     MessageBox.Show("Bạn đã rời nhóm!", "Thông báo",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     RemoveGroup(groupId);
@@ -286,8 +286,8 @@ namespace BtlApp.Individual
         }
 
 
-// =====================================================================
-// =====================================================================
+        // =====================================================================
+        // =====================================================================
         // ================== Sự kiện form ===================
         private void Form_Manager_Load(object sender, EventArgs e)
         {
@@ -324,9 +324,17 @@ namespace BtlApp.Individual
             Form_JoinGroup formJoinGroup = new Form_JoinGroup(UserId);
             DialogResult result = formJoinGroup.ShowDialog();
 
-            if (result == DialogResult.OK) {
+            if (result == DialogResult.OK)
+            {
                 JoinGroup(formJoinGroup.GetGroupId());
             }
+        }
+
+        private void profileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_Profile formProfile = new Form_Profile(this);
+            formProfile.Show();
+            this.Hide();
         }
     }
 }

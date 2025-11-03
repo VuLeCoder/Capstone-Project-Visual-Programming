@@ -9,8 +9,7 @@ namespace FormProduct.Classes
     {
         private readonly string dbName = "Schedule";
         private readonly string serverName = @"MINHDUC5A12\SQLEXPRESS";
-        private string connectionString =>
-            $@"Server={serverName};Database={dbName};Trusted_Connection=True;";
+        private string connectionString = "Data Source=TRANDUCTHINH\\SQLEXPRESS;Initial Catalog=Schedule;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
 
         public DataTable ReadTable(string query, SqlParameter[] parameters = null)

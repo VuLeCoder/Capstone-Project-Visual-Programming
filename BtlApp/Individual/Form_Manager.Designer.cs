@@ -35,7 +35,6 @@
             this.MenuItem_Notification = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItem_User = new System.Windows.Forms.ToolStripMenuItem();
             this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parentBarItem1 = new Syncfusion.Windows.Forms.Tools.XPMenus.ParentBarItem();
             this.parentBarItem2 = new Syncfusion.Windows.Forms.Tools.XPMenus.ParentBarItem();
@@ -92,7 +91,7 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.label1.Location = new System.Drawing.Point(79, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 20);
+            this.label1.Size = new System.Drawing.Size(140, 25);
             this.label1.TabIndex = 4;
             this.label1.Text = "Btl_Schedule";
             // 
@@ -110,7 +109,7 @@
             this.menu_User.Name = "menu_User";
             this.menu_User.Padding = new System.Windows.Forms.Padding(0);
             this.menu_User.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menu_User.Size = new System.Drawing.Size(172, 40);
+            this.menu_User.Size = new System.Drawing.Size(322, 40);
             this.menu_User.TabIndex = 2;
             this.menu_User.Text = "menuStrip1";
             // 
@@ -130,7 +129,6 @@
             this.MenuItem_User.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.MenuItem_User.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.profileToolStripMenuItem,
-            this.toolStripMenuItem2,
             this.logoutToolStripMenuItem});
             this.MenuItem_User.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
             this.MenuItem_User.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -144,13 +142,7 @@
             this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
             this.profileToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.profileToolStripMenuItem.Text = "Profile";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.AutoSize = false;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(120, 22);
-            this.toolStripMenuItem2.Text = "Setting";
+            this.profileToolStripMenuItem.Click += new System.EventHandler(this.profileToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
@@ -209,7 +201,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(11, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(168, 20);
+            this.label2.Size = new System.Drawing.Size(208, 25);
             this.label2.TabIndex = 3;
             this.label2.Text = "Các nhóm đã tham gia";
             // 
@@ -342,7 +334,7 @@
             // 
             // Form_Manager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
             this.ClientSize = new System.Drawing.Size(854, 393);
@@ -396,7 +388,6 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItem_Notification;
         private System.Windows.Forms.ToolStripMenuItem MenuItem_User;
         private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flp_group;
         private Sunny.UI.UIButton btn_Participate;
