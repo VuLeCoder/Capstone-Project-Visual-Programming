@@ -92,7 +92,7 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.label1.Location = new System.Drawing.Point(79, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 25);
+            this.label1.Size = new System.Drawing.Size(116, 20);
             this.label1.TabIndex = 4;
             this.label1.Text = "Btl_Schedule";
             // 
@@ -106,7 +106,7 @@
             this.menu_User.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuItem_Notification,
             this.MenuItem_User});
-            this.menu_User.Location = new System.Drawing.Point(634, 5);
+            this.menu_User.Location = new System.Drawing.Point(669, 5);
             this.menu_User.Name = "menu_User";
             this.menu_User.Padding = new System.Windows.Forms.Padding(0);
             this.menu_User.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -209,7 +209,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(11, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(208, 25);
+            this.label2.Size = new System.Drawing.Size(168, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "Các nhóm đã tham gia";
             // 
@@ -343,7 +343,7 @@
             // 
             // Form_Manager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
             this.ClientSize = new System.Drawing.Size(854, 393);
