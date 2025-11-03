@@ -43,7 +43,7 @@
             this.label1.Location = new System.Drawing.Point(117, 59);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 20);
+            this.label1.Size = new System.Drawing.Size(60, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Email";
             // 
@@ -53,7 +53,7 @@
             this.label2.Location = new System.Drawing.Point(117, 108);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 20);
+            this.label2.Size = new System.Drawing.Size(98, 25);
             this.label2.TabIndex = 0;
             this.label2.Text = "Password";
             // 
@@ -61,7 +61,7 @@
             // 
             this.txt_Email.Location = new System.Drawing.Point(201, 56);
             this.txt_Email.Name = "txt_Email";
-            this.txt_Email.Size = new System.Drawing.Size(195, 26);
+            this.txt_Email.Size = new System.Drawing.Size(195, 30);
             this.txt_Email.TabIndex = 1;
             // 
             // txt_Password
@@ -69,8 +69,9 @@
             this.txt_Password.Location = new System.Drawing.Point(201, 105);
             this.txt_Password.Name = "txt_Password";
             this.txt_Password.PasswordChar = '.';
-            this.txt_Password.Size = new System.Drawing.Size(195, 26);
+            this.txt_Password.Size = new System.Drawing.Size(195, 30);
             this.txt_Password.TabIndex = 2;
+            this.txt_Password.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Password_KeyDown);
             // 
             // btn_Login
             // 
@@ -92,7 +93,7 @@
             this.link_ForgotPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.link_ForgotPass.Location = new System.Drawing.Point(198, 213);
             this.link_ForgotPass.Name = "link_ForgotPass";
-            this.link_ForgotPass.Size = new System.Drawing.Size(121, 17);
+            this.link_ForgotPass.Size = new System.Drawing.Size(143, 20);
             this.link_ForgotPass.TabIndex = 4;
             this.link_ForgotPass.TabStop = true;
             this.link_ForgotPass.Text = "Forgot password?";
@@ -114,7 +115,7 @@
             // 
             // Form_Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 345);
             this.Controls.Add(this.btn_CreateAcc);
@@ -131,6 +132,7 @@
             this.MinimizeBox = false;
             this.Name = "Form_Login";
             this.Text = "Login";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form_Login_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

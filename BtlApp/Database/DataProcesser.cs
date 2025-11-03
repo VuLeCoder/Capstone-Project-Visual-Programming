@@ -9,6 +9,7 @@ namespace FormProduct.Classes
     {
         private readonly string dbName = "Schedule";
         private readonly string serverName = @"TRIPLEK\SQLEXPRESS";
+
         private string connectionString =>
             $@"Server={serverName};Database={dbName};Trusted_Connection=True;";
 

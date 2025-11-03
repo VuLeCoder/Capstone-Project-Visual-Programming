@@ -72,7 +72,7 @@
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(5, 5);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(817, 50);
+            this.panelHeader.Size = new System.Drawing.Size(844, 50);
             this.panelHeader.TabIndex = 1;
             // 
             // pictureBox1
@@ -186,7 +186,7 @@
             this.tabPage2.Controls.Add(this.panel_group);
             this.tabPage2.Location = new System.Drawing.Point(161, 0);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(656, 333);
+            this.tabPage2.Size = new System.Drawing.Size(683, 333);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Nhóm";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -202,6 +202,7 @@
             this.btn_Participate.TabIndex = 4;
             this.btn_Participate.Text = "Tham gia nhóm";
             this.btn_Participate.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btn_Participate.Click += new System.EventHandler(this.btn_Participate_Click);
             // 
             // label2
             // 
@@ -233,7 +234,7 @@
             this.panel_group.Location = new System.Drawing.Point(0, 90);
             this.panel_group.Name = "panel_group";
             this.panel_group.Padding = new System.Windows.Forms.Padding(3);
-            this.panel_group.Size = new System.Drawing.Size(656, 243);
+            this.panel_group.Size = new System.Drawing.Size(683, 243);
             this.panel_group.TabIndex = 1;
             // 
             // flp_group
@@ -242,7 +243,7 @@
             this.flp_group.Dock = System.Windows.Forms.DockStyle.Top;
             this.flp_group.Location = new System.Drawing.Point(3, 3);
             this.flp_group.Name = "flp_group";
-            this.flp_group.Size = new System.Drawing.Size(650, 0);
+            this.flp_group.Size = new System.Drawing.Size(677, 0);
             this.flp_group.TabIndex = 0;
             // 
             // tabPage1
@@ -251,7 +252,7 @@
             this.tabPage1.Controls.Add(this.btn_MySchedule);
             this.tabPage1.Location = new System.Drawing.Point(161, 0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(656, 333);
+            this.tabPage1.Size = new System.Drawing.Size(683, 333);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Cá nhân";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -296,7 +297,7 @@
             this.uiTabControlMenu1.Multiline = true;
             this.uiTabControlMenu1.Name = "uiTabControlMenu1";
             this.uiTabControlMenu1.SelectedIndex = 0;
-            this.uiTabControlMenu1.Size = new System.Drawing.Size(817, 333);
+            this.uiTabControlMenu1.Size = new System.Drawing.Size(844, 333);
             this.uiTabControlMenu1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControlMenu1.TabIndex = 5;
             // 
@@ -345,7 +346,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.ClientSize = new System.Drawing.Size(827, 393);
+            this.ClientSize = new System.Drawing.Size(854, 393);
             this.Controls.Add(this.uiTabControlMenu1);
             this.Controls.Add(this.panelHeader);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
