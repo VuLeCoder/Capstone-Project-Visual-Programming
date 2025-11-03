@@ -45,12 +45,14 @@
             this.panelMainBody = new System.Windows.Forms.Panel();
             this.tlp_mainCalendar = new System.Windows.Forms.TableLayoutPanel();
             this.tlp_mainCalendarHeader = new System.Windows.Forms.TableLayoutPanel();
+            this.dgv_Infor = new System.Windows.Forms.DataGridView();
             this.panelHeader.SuspendLayout();
             this.menu_Group.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelAside.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.panelMainBody.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Infor)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -72,6 +74,7 @@
             this.menu_Group.Dock = System.Windows.Forms.DockStyle.None;
             this.menu_Group.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.menu_Group.GripMargin = new System.Windows.Forms.Padding(0);
+            this.menu_Group.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menu_Group.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuItem_Notification,
             this.MenuItem_Group});
@@ -126,7 +129,7 @@
             this.lbl_GroupName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_GroupName.Location = new System.Drawing.Point(258, 20);
             this.lbl_GroupName.Name = "lbl_GroupName";
-            this.lbl_GroupName.Size = new System.Drawing.Size(88, 20);
+            this.lbl_GroupName.Size = new System.Drawing.Size(109, 25);
             this.lbl_GroupName.TabIndex = 6;
             this.lbl_GroupName.Text = "Tên nhóm";
             // 
@@ -146,13 +149,14 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(79, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 20);
+            this.label1.Size = new System.Drawing.Size(140, 25);
             this.label1.TabIndex = 4;
             this.label1.Text = "Btl_Schedule";
             // 
             // panelAside
             // 
             this.panelAside.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            this.panelAside.Controls.Add(this.dgv_Infor);
             this.panelAside.Controls.Add(this.btn_Return);
             this.panelAside.Controls.Add(this.monthCalendar);
             this.panelAside.Controls.Add(this.btn_AddSchedule);
@@ -168,7 +172,7 @@
             // 
             this.btn_Return.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Return.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btn_Return.Location = new System.Drawing.Point(42, 281);
+            this.btn_Return.Location = new System.Drawing.Point(33, 482);
             this.btn_Return.Margin = new System.Windows.Forms.Padding(0);
             this.btn_Return.MinimumSize = new System.Drawing.Size(1, 1);
             this.btn_Return.Name = "btn_Return";
@@ -184,7 +188,7 @@
             this.monthCalendar.Location = new System.Drawing.Point(5, 80);
             this.monthCalendar.MaxSelectionCount = 1;
             this.monthCalendar.Name = "monthCalendar";
-            this.monthCalendar.Size = new System.Drawing.Size(230, 182);
+            this.monthCalendar.Size = new System.Drawing.Size(293, 218);
             this.monthCalendar.StateCheckedNormal.Day.Back.Color1 = System.Drawing.Color.LightSkyBlue;
             this.monthCalendar.StateCheckedNormal.Day.Border.Color1 = System.Drawing.Color.LightSkyBlue;
             this.monthCalendar.StateCheckedTracking.Day.Back.Color1 = System.Drawing.Color.Gray;
@@ -256,7 +260,7 @@
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tlp_mainCalendar.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlp_mainCalendar.Location = new System.Drawing.Point(0, 0);
             this.tlp_mainCalendar.Margin = new System.Windows.Forms.Padding(0);
@@ -295,7 +299,7 @@
             this.tlp_mainCalendarHeader.ColumnCount = 3;
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.33758F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.66242F));
-            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 393F));
+            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 394F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -309,9 +313,21 @@
             this.tlp_mainCalendarHeader.Size = new System.Drawing.Size(950, 56);
             this.tlp_mainCalendarHeader.TabIndex = 1;
             // 
+            // dgv_Infor
+            // 
+            this.dgv_Infor.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dgv_Infor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Infor.GridColor = System.Drawing.SystemColors.ControlLight;
+            this.dgv_Infor.Location = new System.Drawing.Point(0, 304);
+            this.dgv_Infor.Name = "dgv_Infor";
+            this.dgv_Infor.RowHeadersWidth = 51;
+            this.dgv_Infor.RowTemplate.Height = 24;
+            this.dgv_Infor.Size = new System.Drawing.Size(240, 150);
+            this.dgv_Infor.TabIndex = 4;
+            // 
             // Form_GroupSchedule
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
             this.ClientSize = new System.Drawing.Size(1200, 600);
@@ -327,6 +343,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GroupTask";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_GroupSchedule_FormClosed);
+            this.Load += new System.EventHandler(this.Form_GroupSchedule_Load);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
             this.menu_Group.ResumeLayout(false);
@@ -336,6 +353,7 @@
             this.panelMain.ResumeLayout(false);
             this.panelMainBody.ResumeLayout(false);
             this.panelMainBody.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Infor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -359,6 +377,7 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItem_Group;
         private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.DataGridView dgv_Infor;
     }
 }
 

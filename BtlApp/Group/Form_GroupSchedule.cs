@@ -4,6 +4,7 @@ using BtlApp.Individual;
 using FormProduct.Classes;
 using Krypton.Toolkit;
 using Sunny.UI;
+using Syncfusion.Windows.Forms.Schedule;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -463,6 +464,11 @@ namespace BtlApp.Group
             manager.Show();
         }
 
+        private void Form_GroupSchedule_Load(object sender, EventArgs e)
+        {
+            getUserOfGroubInfor();
+        }
+
         // Click vào lịch đã có (Leader = Sửa/Xóa, Member = Xem)
         private void ScheduleBlock_MouseClick(object sender, MouseEventArgs e)
         {
@@ -668,5 +674,58 @@ namespace BtlApp.Group
                 }
             }
         }
+
+        private void getUserOfGroubInfor()
+        {
+            // Lấy danh sách họ tên và quyền user
+            string query = $@"
+        SELECT u.{DbTables.tbl_User.Name} AS Name,
+               gm.{DbTables.tbl_GroupMember.Role} AS Role
+        FROM {DbTables.tbl_GroupMember.Table} gm
+        JOIN {DbTables.tbl_User.Table} u
+            ON gm.{DbTables.tbl_GroupMember.UserId} = u.{DbTables.tbl_User.Id}
+        WHERE gm.{DbTables.tbl_GroupMember.GroupId} = @GroupId";
+
+            DataTable dt = Db.ReadTable(query, new SqlParameter[]
+            {
+        new SqlParameter("@GroupId", currentGroup.GroupId)
+            });
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                dgv_Infor.DataSource = dt;
+
+                dgv_Infor.Columns["Name"].HeaderText = "Thành viên";
+                dgv_Infor.Columns["Role"].HeaderText = "Vai Trò";
+
+                foreach (DataGridViewRow row in dgv_Infor.Rows)
+                {
+                    if (row.Cells["Role"].Value == null) continue;
+                    string role = row.Cells["Role"].Value.ToString();
+
+                    switch (role.ToLower())
+                    {
+                        case "leader":
+                            row.DefaultCellStyle.ForeColor = Color.DarkBlue;
+                            break;
+
+                        case "member":
+                            row.DefaultCellStyle.ForeColor = Color.Black;
+                            break;
+
+                        case "pending":
+                            row.DefaultCellStyle.ForeColor = Color.Gray;
+                            break;
+
+                        default:
+                            row.DefaultCellStyle.ForeColor = Color.DarkGreen;
+                            break;
+                    }
+                }
+                dgv_Infor.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgv_Infor.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            }
+        }
+
     }
 }

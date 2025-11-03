@@ -328,5 +328,12 @@ namespace BtlApp.Individual
                 JoinGroup(formJoinGroup.GetGroupId());
             }
         }
+
+        private void btn_MyTodolist_Click(object sender, EventArgs e)
+        {
+            Form_TodoList formTodoList = new Form_TodoList(this,this.UserId);
+            formTodoList.Show();
+            this.Hide();
+        }
     }
 }

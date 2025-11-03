@@ -165,6 +165,12 @@
     <Compile Include="Individual\Form_Register.Designer.cs">
       <DependentUpon>Form_Register.cs</DependentUpon>
     </Compile>
+    <Compile Include="Individual\Form_TodoList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Individual\Form_TodoList.Designer.cs">
+      <DependentUpon>Form_TodoList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Classes\GroupPanel.resx">
@@ -199,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Individual\Form_Register.resx">
       <DependentUpon>Form_Register.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Individual\Form_TodoList.resx">
+      <DependentUpon>Form_TodoList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
