@@ -14,6 +14,8 @@ namespace BtlApp.Database.Models
         public DateTime ScheduleDate { get; set; }
         public float StartTime { get; set; }
         public float EndTime { get; set; }
+        public int IdUser { get; set; }
+        public int IdGroup { get; set; }
 
         public MySchedule(int IdSchedule, string Title, DateTime ScheduleDate, float startTime, float EndTime)
         {
