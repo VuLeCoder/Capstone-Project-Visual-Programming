@@ -29,10 +29,16 @@
         private void InitializeComponent()
         {
             this.panelHeader = new System.Windows.Forms.Panel();
-            this.lbl_User = new System.Windows.Forms.Label();
+            this.menu_Group = new System.Windows.Forms.MenuStrip();
+            this.MenuItem_Notification = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItem_Group = new System.Windows.Forms.ToolStripMenuItem();
+            this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbl_GroupName = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panelAside = new System.Windows.Forms.Panel();
+            this.dgv_Infor = new System.Windows.Forms.DataGridView();
             this.btn_Return = new Sunny.UI.UIButton();
             this.monthCalendar = new Krypton.Toolkit.KryptonMonthCalendar();
             this.btn_AddSchedule = new Sunny.UI.UIButton();
@@ -40,24 +46,20 @@
             this.panelMainBody = new System.Windows.Forms.Panel();
             this.tlp_mainCalendar = new System.Windows.Forms.TableLayoutPanel();
             this.tlp_mainCalendarHeader = new System.Windows.Forms.TableLayoutPanel();
-            this.menu_User = new System.Windows.Forms.MenuStrip();
-            this.MenuItem_Notification = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItem_User = new System.Windows.Forms.ToolStripMenuItem();
-            this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.panelHeader.SuspendLayout();
+            this.menu_Group.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelAside.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Infor)).BeginInit();
             this.panelMain.SuspendLayout();
             this.panelMainBody.SuspendLayout();
-            this.menu_User.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelHeader
             // 
             this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
-            this.panelHeader.Controls.Add(this.menu_User);
-            this.panelHeader.Controls.Add(this.lbl_User);
+            this.panelHeader.Controls.Add(this.menu_Group);
+            this.panelHeader.Controls.Add(this.lbl_GroupName);
             this.panelHeader.Controls.Add(this.pictureBox1);
             this.panelHeader.Controls.Add(this.label1);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -66,15 +68,70 @@
             this.panelHeader.Size = new System.Drawing.Size(1200, 60);
             this.panelHeader.TabIndex = 0;
             // 
-            // lbl_User
+            // menu_Group
             // 
-            this.lbl_User.AutoSize = true;
-            this.lbl_User.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_User.Location = new System.Drawing.Point(258, 20);
-            this.lbl_User.Name = "lbl_User";
-            this.lbl_User.Size = new System.Drawing.Size(111, 20);
-            this.lbl_User.TabIndex = 6;
-            this.lbl_User.Text = "Lịch cá nhân";
+            this.menu_Group.BackColor = System.Drawing.Color.Black;
+            this.menu_Group.Dock = System.Windows.Forms.DockStyle.None;
+            this.menu_Group.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.menu_Group.GripMargin = new System.Windows.Forms.Padding(0);
+            this.menu_Group.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menu_Group.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItem_Notification,
+            this.MenuItem_Group});
+            this.menu_Group.Location = new System.Drawing.Point(1016, 9);
+            this.menu_Group.Name = "menu_Group";
+            this.menu_Group.Padding = new System.Windows.Forms.Padding(0);
+            this.menu_Group.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.menu_Group.Size = new System.Drawing.Size(172, 40);
+            this.menu_Group.TabIndex = 7;
+            this.menu_Group.Text = "menuStrip1";
+            // 
+            // MenuItem_Notification
+            // 
+            this.MenuItem_Notification.AutoSize = false;
+            this.MenuItem_Notification.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.MenuItem_Notification.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.MenuItem_Notification.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.MenuItem_Notification.Name = "MenuItem_Notification";
+            this.MenuItem_Notification.Size = new System.Drawing.Size(80, 40);
+            this.MenuItem_Notification.Text = "Notification";
+            // 
+            // MenuItem_Group
+            // 
+            this.MenuItem_Group.AutoSize = false;
+            this.MenuItem_Group.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.MenuItem_Group.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.profileToolStripMenuItem,
+            this.toolStripMenuItem2});
+            this.MenuItem_Group.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.MenuItem_Group.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.MenuItem_Group.Name = "MenuItem_Group";
+            this.MenuItem_Group.Size = new System.Drawing.Size(80, 40);
+            this.MenuItem_Group.Text = "Group";
+            // 
+            // profileToolStripMenuItem
+            // 
+            this.profileToolStripMenuItem.AutoSize = false;
+            this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
+            this.profileToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.profileToolStripMenuItem.Text = "Profile";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.AutoSize = false;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(120, 22);
+            this.toolStripMenuItem2.Text = "Setting";
+            // 
+            // lbl_GroupName
+            // 
+            this.lbl_GroupName.AutoSize = true;
+            this.lbl_GroupName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_GroupName.Location = new System.Drawing.Point(258, 20);
+            this.lbl_GroupName.Name = "lbl_GroupName";
+            this.lbl_GroupName.Size = new System.Drawing.Size(88, 20);
+            this.lbl_GroupName.TabIndex = 6;
+            this.lbl_GroupName.Text = "Tên nhóm";
             // 
             // pictureBox1
             // 
@@ -99,6 +156,7 @@
             // panelAside
             // 
             this.panelAside.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            this.panelAside.Controls.Add(this.dgv_Infor);
             this.panelAside.Controls.Add(this.btn_Return);
             this.panelAside.Controls.Add(this.monthCalendar);
             this.panelAside.Controls.Add(this.btn_AddSchedule);
@@ -110,11 +168,23 @@
             this.panelAside.Size = new System.Drawing.Size(240, 540);
             this.panelAside.TabIndex = 1;
             // 
+            // dgv_Infor
+            // 
+            this.dgv_Infor.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dgv_Infor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Infor.GridColor = System.Drawing.SystemColors.ControlLight;
+            this.dgv_Infor.Location = new System.Drawing.Point(5, 322);
+            this.dgv_Infor.Name = "dgv_Infor";
+            this.dgv_Infor.RowHeadersWidth = 51;
+            this.dgv_Infor.RowTemplate.Height = 24;
+            this.dgv_Infor.Size = new System.Drawing.Size(230, 206);
+            this.dgv_Infor.TabIndex = 4;
+            // 
             // btn_Return
             // 
             this.btn_Return.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Return.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btn_Return.Location = new System.Drawing.Point(37, 282);
+            this.btn_Return.Location = new System.Drawing.Point(42, 266);
             this.btn_Return.Margin = new System.Windows.Forms.Padding(0);
             this.btn_Return.MinimumSize = new System.Drawing.Size(1, 1);
             this.btn_Return.Name = "btn_Return";
@@ -202,7 +272,7 @@
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tlp_mainCalendar.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlp_mainCalendar.Location = new System.Drawing.Point(0, 0);
             this.tlp_mainCalendar.Margin = new System.Windows.Forms.Padding(0);
@@ -241,7 +311,7 @@
             this.tlp_mainCalendarHeader.ColumnCount = 3;
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.33758F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.66242F));
-            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 392F));
+            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 395F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -254,60 +324,6 @@
             this.tlp_mainCalendarHeader.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlp_mainCalendarHeader.Size = new System.Drawing.Size(950, 56);
             this.tlp_mainCalendarHeader.TabIndex = 1;
-            // 
-            // menu_User
-            // 
-            this.menu_User.BackColor = System.Drawing.Color.Black;
-            this.menu_User.Dock = System.Windows.Forms.DockStyle.None;
-            this.menu_User.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.menu_User.GripMargin = new System.Windows.Forms.Padding(0);
-            this.menu_User.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItem_Notification,
-            this.MenuItem_User});
-            this.menu_User.Location = new System.Drawing.Point(1016, 9);
-            this.menu_User.Name = "menu_User";
-            this.menu_User.Padding = new System.Windows.Forms.Padding(0);
-            this.menu_User.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menu_User.Size = new System.Drawing.Size(172, 40);
-            this.menu_User.TabIndex = 7;
-            this.menu_User.Text = "menuStrip1";
-            // 
-            // MenuItem_Notification
-            // 
-            this.MenuItem_Notification.AutoSize = false;
-            this.MenuItem_Notification.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            this.MenuItem_Notification.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.MenuItem_Notification.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.MenuItem_Notification.Name = "MenuItem_Notification";
-            this.MenuItem_Notification.Size = new System.Drawing.Size(80, 40);
-            this.MenuItem_Notification.Text = "Notification";
-            // 
-            // MenuItem_User
-            // 
-            this.MenuItem_User.AutoSize = false;
-            this.MenuItem_User.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            this.MenuItem_User.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.profileToolStripMenuItem,
-            this.toolStripMenuItem2});
-            this.MenuItem_User.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.MenuItem_User.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.MenuItem_User.Name = "MenuItem_User";
-            this.MenuItem_User.Size = new System.Drawing.Size(80, 40);
-            this.MenuItem_User.Text = "User";
-            // 
-            // profileToolStripMenuItem
-            // 
-            this.profileToolStripMenuItem.AutoSize = false;
-            this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
-            this.profileToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
-            this.profileToolStripMenuItem.Text = "Profile";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.AutoSize = false;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(120, 22);
-            this.toolStripMenuItem2.Text = "Setting";
             // 
             // Form_GroupSchedule
             // 
@@ -327,15 +343,17 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GroupTask";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_GroupSchedule_FormClosed);
+            this.Load += new System.EventHandler(this.Form_GroupSchedule_Load);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
+            this.menu_Group.ResumeLayout(false);
+            this.menu_Group.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelAside.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Infor)).EndInit();
             this.panelMain.ResumeLayout(false);
             this.panelMainBody.ResumeLayout(false);
             this.panelMainBody.PerformLayout();
-            this.menu_User.ResumeLayout(false);
-            this.menu_User.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -353,12 +371,13 @@
         private System.Windows.Forms.Label label1;
         private Sunny.UI.UIButton btn_Return;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label lbl_User;
-        private System.Windows.Forms.MenuStrip menu_User;
+        private System.Windows.Forms.Label lbl_GroupName;
+        private System.Windows.Forms.MenuStrip menu_Group;
         private System.Windows.Forms.ToolStripMenuItem MenuItem_Notification;
-        private System.Windows.Forms.ToolStripMenuItem MenuItem_User;
+        private System.Windows.Forms.ToolStripMenuItem MenuItem_Group;
         private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.DataGridView dgv_Infor;
     }
 }
 

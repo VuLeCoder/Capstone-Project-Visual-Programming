@@ -1,3 +1,4 @@
+﻿--drop database Schedule
 create database Schedule
 go
 
@@ -89,7 +90,22 @@ CREATE TABLE tbl_ScheduleParticipant (
     foreign key (UserId) references tbl_User(UserId)
 );
 
+create table tbl_ToDoList (
+    ToDoId          int identity(1,1) not null,
+    UserId          int not null,
+    Title           nvarchar(255) not null,
+    Description     nvarchar(max),
+    Priority        varchar(20) check (Priority in ('Low','Normal','High')) default 'Normal',
+    Status          varchar(20) check (Status in ('Pending','InProgress','Completed')) default 'Pending',
+    DueDate         datetime not null,
+    CreatedAt       datetime default getdate(),
 
+    primary key (ToDoId),
+    foreign key (UserId) references tbl_User(UserId)
+);
+
+
+select * from tbl_ToDoList
 -- insert into
 insert into tbl_TimeSlot (timeStr, timeVal) values
 ('12:00 AM', 0.00),
@@ -192,9 +208,17 @@ insert into tbl_TimeSlot (timeStr, timeVal) values
 
 insert into tbl_User (UserName, Email, PasswordHash)
 values
-('VuLe', '1', '1')
+('VuLe', '1', '1'),
+('Tung', '2', '2'),
+('Huy', '3', '3')
 
 insert into tbl_ScheduleType (TypeName, Description, ColorCode)
 values 
     ('Study', '', '#42A5F5'),
     ('Meeting', 'Regular team meeting to discuss progress', '#FF5733')
+
+insert into tbl_ToDoList (UserId, Title, Description, Priority, Status, DueDate)
+values
+(1, N'Gọi điện cho khách hàng A', N'Thảo luận về gia hạn hợp đồng.', 'Normal', 'Pending', '2025-11-02 09:00:00'),
+(1, N'Hoàn thành báo cáo quý', N'Viết báo cáo tổng kết quý 4.', 'High', 'InProgress', '2025-11-04 17:00:00'),
+(1, N'Đẩy code lên production', N'Merge branch "feature-xyz" vào main và deploy.', 'Low', 'Completed', '2025-11-06 14:00:00');

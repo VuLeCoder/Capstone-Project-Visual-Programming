@@ -114,6 +114,24 @@ namespace BtlApp.Individual
         // =============== Xử lý logic, truy vấn DB ================
         private void JoinGroup(int groupId)
         {
+            string queryCheck = $@"
+                select {DbTables.tbl_GroupMember.JoinedAt} 
+                from {DbTables.tbl_GroupMember.Table} 
+                where {DbTables.tbl_GroupMember.UserId} = @UserId and {DbTables.tbl_GroupMember.GroupId} = @GroupId
+            ";
+            SqlParameter[] check = {
+                new SqlParameter("@UserId", UserId),
+                new SqlParameter("@GroupId", groupId)
+            };
+
+            if (Db.ReadTable(queryCheck, check).Rows.Count > 0)
+            {
+                MessageBox.Show("Bạn đã tham gia nhóm này rồi");
+                return;
+            }
+
+
+
             try
             {
                 string query = $@"
@@ -328,6 +346,13 @@ namespace BtlApp.Individual
             {
                 JoinGroup(formJoinGroup.GetGroupId());
             }
+        }
+
+        private void btn_MyTodolist_Click(object sender, EventArgs e)
+        {
+            Form_TodoList formTodoList = new Form_TodoList(this, this.UserId);
+            formTodoList.Show();
+            this.Hide();
         }
 
         private void profileToolStripMenuItem_Click(object sender, EventArgs e)

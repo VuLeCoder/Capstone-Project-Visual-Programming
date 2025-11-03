@@ -105,7 +105,7 @@
             this.menu_User.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuItem_Notification,
             this.MenuItem_User});
-            this.menu_User.Location = new System.Drawing.Point(634, 5);
+            this.menu_User.Location = new System.Drawing.Point(669, 5);
             this.menu_User.Name = "menu_User";
             this.menu_User.Padding = new System.Windows.Forms.Padding(0);
             this.menu_User.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -260,6 +260,7 @@
             this.btn_MyTodolist.TabIndex = 1;
             this.btn_MyTodolist.Text = "Xem việc cần làm";
             this.btn_MyTodolist.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btn_MyTodolist.Click += new System.EventHandler(this.btn_MyTodolist_Click);
             // 
             // btn_MySchedule
             // 

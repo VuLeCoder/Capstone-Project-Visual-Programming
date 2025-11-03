@@ -4,6 +4,7 @@ using BtlApp.Individual;
 using FormProduct.Classes;
 using Krypton.Toolkit;
 using Sunny.UI;
+using Syncfusion.Windows.Forms.Schedule;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,9 +38,10 @@ namespace BtlApp.Group
         private readonly DataProcesser Db = new DataProcesser();
         private DateTime currentWeek;
         private readonly Form_Manager manager;
+
         private readonly int UserId; // ID của user đang xem
-        private readonly MyGroup currentGroup; // Group đang xem
         private readonly string userRole; // Role của user trong group này
+        private readonly MyGroup currentGroup; // Group đang xem
 
         // ====================== Constructor (Đã điều chỉnh) ======================
         public Form_GroupSchedule(Form_Manager manager, MyGroup currentGroup, int userId, string userRole)
@@ -52,19 +54,22 @@ namespace BtlApp.Group
             InitializeComponent();
 
             // Cập nhật tiêu đề form bằng tên nhóm
-            lbl_User.Text = currentGroup.GroupName;
+            lbl_GroupName.Text = currentGroup.GroupName;
 
             // Phân quyền Leader: Chỉ Leader mới thấy nút "Tạo lịch mới"
             if (userRole != "Leader")
             {
                 btn_AddSchedule.Enabled = false;
                 btn_AddSchedule.Visible = false;
+
+                monthCalendar.Location = new Point(5, 5);
+                btn_Return.Location = new Point(42, 190);
             }
 
             createCalendar();
         }
 
-        // ========================= Các hàm (Giữ nguyên) ==========================
+        // ========================= Các hàm ==========================
         private DateTime GetStartOfWeek(DateTime date)
         {
             int diff = date.DayOfWeek - DayOfWeek.Sunday;
@@ -113,7 +118,7 @@ namespace BtlApp.Group
             LoadScheduleFromDB();
         }
 
-        // ====================== Giao diện lịch (Giữ nguyên) ======================
+        // ====================== Giao diện lịch ======================
         private void createHeaderCalendar()
         {
             tlp_mainCalendarHeader.ColumnCount = DAY_NAMES.Length + 1;
@@ -459,6 +464,11 @@ namespace BtlApp.Group
             manager.Show();
         }
 
+        private void Form_GroupSchedule_Load(object sender, EventArgs e)
+        {
+            getUserOfGroubInfor();
+        }
+
         // Click vào lịch đã có (Leader = Sửa/Xóa, Member = Xem)
         private void ScheduleBlock_MouseClick(object sender, MouseEventArgs e)
         {
@@ -664,5 +674,58 @@ namespace BtlApp.Group
                 }
             }
         }
+
+        private void getUserOfGroubInfor()
+        {
+            // Lấy danh sách họ tên và quyền user
+            string query = $@"
+        SELECT u.{DbTables.tbl_User.Name} AS Name,
+               gm.{DbTables.tbl_GroupMember.Role} AS Role
+        FROM {DbTables.tbl_GroupMember.Table} gm
+        JOIN {DbTables.tbl_User.Table} u
+            ON gm.{DbTables.tbl_GroupMember.UserId} = u.{DbTables.tbl_User.Id}
+        WHERE gm.{DbTables.tbl_GroupMember.GroupId} = @GroupId";
+
+            DataTable dt = Db.ReadTable(query, new SqlParameter[]
+            {
+        new SqlParameter("@GroupId", currentGroup.GroupId)
+            });
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                dgv_Infor.DataSource = dt;
+
+                dgv_Infor.Columns["Name"].HeaderText = "Thành viên";
+                dgv_Infor.Columns["Role"].HeaderText = "Vai Trò";
+
+                foreach (DataGridViewRow row in dgv_Infor.Rows)
+                {
+                    if (row.Cells["Role"].Value == null) continue;
+                    string role = row.Cells["Role"].Value.ToString();
+
+                    switch (role.ToLower())
+                    {
+                        case "leader":
+                            row.DefaultCellStyle.ForeColor = Color.DarkBlue;
+                            break;
+
+                        case "member":
+                            row.DefaultCellStyle.ForeColor = Color.Black;
+                            break;
+
+                        case "pending":
+                            row.DefaultCellStyle.ForeColor = Color.Gray;
+                            break;
+
+                        default:
+                            row.DefaultCellStyle.ForeColor = Color.DarkGreen;
+                            break;
+                    }
+                }
+                dgv_Infor.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgv_Infor.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            }
+        }
+
     }
 }

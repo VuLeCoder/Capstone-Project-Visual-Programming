@@ -80,5 +80,23 @@ namespace BtlApp
             this.Hide();
             formRegister.Show();
         }
+
+        private void Form_Login_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btn_Login.PerformClick();
+            }
+        }
+
+        private void txt_Password_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btn_Login.PerformClick();
+            }
+        }
     }
 }

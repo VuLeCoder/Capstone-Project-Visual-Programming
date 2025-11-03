@@ -8,8 +8,10 @@ namespace FormProduct.Classes
     internal class DataProcesser
     {
         private readonly string dbName = "Schedule";
-        private readonly string serverName = @"MINHDUC5A12\SQLEXPRESS";
-        private string connectionString = "Data Source=TRANDUCTHINH\\SQLEXPRESS;Initial Catalog=Schedule;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private readonly string serverName = @"TRIPLEK\SQLEXPRESS";
+
+        private string connectionString =>
+            $@"Server={serverName};Database={dbName};Trusted_Connection=True;";
 
 
         public DataTable ReadTable(string query, SqlParameter[] parameters = null)
