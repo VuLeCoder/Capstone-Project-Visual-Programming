@@ -282,7 +282,9 @@ namespace BtlApp
                 from {DbTables.tbl_Schedule.Table} 
                 where {DbTables.tbl_Schedule.Date} = @Date 
                     and ({DbTables.tbl_Schedule.Start} < @End and {DbTables.tbl_Schedule.End} > @Start) 
-                    and {DbTables.tbl_Schedule.IdSchedule} <> @ID";
+                    and {DbTables.tbl_Schedule.IdSchedule} <> @ID 
+                    and {DbTables.tbl_Schedule.IdUser} = {UserId}
+            ";
 
             SqlParameter[] parameters = {
                 new SqlParameter("@Date", schedule.ScheduleDate),
