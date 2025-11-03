@@ -53,11 +53,9 @@ Form phục vụ các thao tác tương tác nhiều người dùng (leader, mem
 
 | 🧱 Form | 📝 Mô tả | ⚙️ Trạng thái |
 |----------|-----------|---------------|
-| `Tạo nhóm mới` | Nhập thông tin group mới (theo DB `tbl_Group`) | ✅ Cần làm |
-| `Tham gia nhóm` | Nhập **GroupID** để join nhóm có sẵn | ✅ Cần làm |
-| `Nhóm đã tham gia` | Danh sách nhóm mà user đã tạo/tham gia | ✅ Có trong `main` (form đen test) |
 | `Group_Profile` | Thông tin nhóm & thành viên | 👥 Theo role `leader` / `member` |
 | `Xác nhận tham gia` | Khi user click vào lịch nhưng chưa là member | ✅ Cần làm |
+
 
 ---
 
@@ -79,7 +77,7 @@ Khi **người dùng bấm vào một nhóm đã tham gia**, hệ thống sẽ m
   - Tạo / sửa / xóa lịch
   - Kiểm tra trùng lịch với bản thân trước khi thêm mới
   - Cho phép xóa các lịch trùng để thêm mới
-- **Member (hoặc chưa tham gia)**:
+- **Member**:
   - Khi click lịch → hiển thị form **Xác nhận tham gia**
   - Nếu trùng lịch → hỏi có muốn xóa lịch cá nhân để tham gia lịch nhóm không → Nếu có thì cập nhật database (Xóa lịch cũ và thêm lịch mới) (ae check `tbl_Schedule` kỹ để rõ)
 
