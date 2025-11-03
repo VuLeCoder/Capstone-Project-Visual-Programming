@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BtlApp.Group;
 using BtlApp.Database.Models;
+using System.ComponentModel.Design.Serialization;
 
 namespace BtlApp.Individual
 {
@@ -66,6 +67,7 @@ namespace BtlApp.Individual
             GroupPanel panel = new GroupPanel(group, new Size(GROUP_WIDTH, GROUP_HEIGHT), 
                 new Padding(GROUP_GAP, GROUP_GAP, 0, 0), GROUP_BACKCOLOR);
             panel.OnLeaveGroup += () => { LeaveGroup(group.GroupId); };
+            panel.GetInfor += () => { GroupInfor(group.GroupId); };
 
             panel.PanelClick += GroupPanel_Click;
 
@@ -185,6 +187,13 @@ namespace BtlApp.Individual
             }
         }
 
+        private void GroupInfor(int groupId)
+        {
+            Form_GroupInformation form_GroupInformation = new Form_GroupInformation(groupId, this);
+            form_GroupInformation.Show();
+            this.Enabled = false;
+        }
+
         private void LeaveGroup(int groupId)
         {
             string roleQuery = $@"
@@ -283,8 +292,13 @@ namespace BtlApp.Individual
                     RemoveGroup(groupId);
                 }
             }
-        }
 
+            this.Close();
+        }
+        public void Reload()
+        {
+            LoadGroupsFromDB();
+        }
 
 // =====================================================================
 // =====================================================================

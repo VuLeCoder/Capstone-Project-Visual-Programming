@@ -2,6 +2,7 @@
 using Sunny.UI;
 using System;
 using System.Drawing;
+using System.Web.Management;
 using System.Windows.Forms;
 
 namespace BtlApp.Classes
@@ -18,6 +19,7 @@ namespace BtlApp.Classes
         public event EventHandler PanelClick;
 
         public event Action OnLeaveGroup;
+        public event Action GetInfor;
 
         public MyGroup GroupData { get; private set; }
         //Size(220, 120)
@@ -131,6 +133,7 @@ namespace BtlApp.Classes
                 menu.ForeColor = Color.White;
                 menu.BackColor = Color.FromArgb(45, 45, 45);
                 menu.ShowImageMargin = false;
+                menu.Items.Add("Thông tin", null, (s, ev) => GetInfor?.Invoke());
                 menu.Items.Add("Rời nhóm", null, (s, ev) => OnLeaveGroup?.Invoke());
             }
             menu.Show(btnMore, new Point(btnMore.Width, 0));

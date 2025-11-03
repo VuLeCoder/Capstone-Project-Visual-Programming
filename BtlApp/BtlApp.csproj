@@ -135,6 +135,12 @@
     <Compile Include="Group\Form_JoinGroup.Designer.cs">
       <DependentUpon>Form_JoinGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Individual\Form_GroupInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Individual\Form_GroupInformation.Designer.cs">
+      <DependentUpon>Form_GroupInformation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Individual\Form_Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Group\Form_JoinGroup.resx">
       <DependentUpon>Form_JoinGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Individual\Form_GroupInformation.resx">
+      <DependentUpon>Form_GroupInformation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Individual\Form_Login.resx">
       <DependentUpon>Form_Login.cs</DependentUpon>
