@@ -103,7 +103,7 @@
             this.cbPriorityFilter.Items.AddRange(new object[] {
             "All",
             "Low",
-            "Nomal",
+            "Normal",
             "High"});
             this.cbPriorityFilter.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.cbPriorityFilter.Location = new System.Drawing.Point(629, 13);
@@ -253,7 +253,7 @@
             this.cbPriority.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.cbPriority.Items.AddRange(new object[] {
             "Low",
-            "Nomal",
+            "Normal",
             "High"});
             this.cbPriority.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.cbPriority.Location = new System.Drawing.Point(433, 173);
