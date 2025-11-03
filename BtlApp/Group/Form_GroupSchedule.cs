@@ -37,9 +37,10 @@ namespace BtlApp.Group
         private readonly DataProcesser Db = new DataProcesser();
         private DateTime currentWeek;
         private readonly Form_Manager manager;
+
         private readonly int UserId; // ID của user đang xem
-        private readonly MyGroup currentGroup; // Group đang xem
         private readonly string userRole; // Role của user trong group này
+        private readonly MyGroup currentGroup; // Group đang xem
 
         // ====================== Constructor (Đã điều chỉnh) ======================
         public Form_GroupSchedule(Form_Manager manager, MyGroup currentGroup, int userId, string userRole)
@@ -52,19 +53,22 @@ namespace BtlApp.Group
             InitializeComponent();
 
             // Cập nhật tiêu đề form bằng tên nhóm
-            lbl_User.Text = currentGroup.GroupName;
+            lbl_GroupName.Text = currentGroup.GroupName;
 
             // Phân quyền Leader: Chỉ Leader mới thấy nút "Tạo lịch mới"
             if (userRole != "Leader")
             {
                 btn_AddSchedule.Enabled = false;
                 btn_AddSchedule.Visible = false;
+
+                monthCalendar.Location = new Point(5, 5);
+                btn_Return.Location = new Point(42, 190);
             }
 
             createCalendar();
         }
 
-        // ========================= Các hàm (Giữ nguyên) ==========================
+        // ========================= Các hàm ==========================
         private DateTime GetStartOfWeek(DateTime date)
         {
             int diff = date.DayOfWeek - DayOfWeek.Sunday;
@@ -113,7 +117,7 @@ namespace BtlApp.Group
             LoadScheduleFromDB();
         }
 
-        // ====================== Giao diện lịch (Giữ nguyên) ======================
+        // ====================== Giao diện lịch ======================
         private void createHeaderCalendar()
         {
             tlp_mainCalendarHeader.ColumnCount = DAY_NAMES.Length + 1;
