@@ -32,7 +32,7 @@ namespace BtlApp.Group
         private readonly float WIDTH_PERCENT = 0.7F;
         private readonly Font TITLE_FONT = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold);
 
-        private readonly string NAME_CALENDAR_BLOCK = "Schedule_";
+        private readonly string NAME_CALENDAR_BLOCK = "GroupSchedule_";
 
         // ==================== Các biến toàn cục (Đã điều chỉnh) ======================
         private readonly DataProcesser Db = new DataProcesser();
@@ -286,7 +286,7 @@ namespace BtlApp.Group
         }
 
         // Kiểm tra trùng lịch CỦA NHÓM
-        private bool IsDuplicate(MySchedule schedule)
+        private bool IsDuplicateWithGroup(MySchedule schedule)
         {
             string query = $@"
                 select {DbTables.tbl_Schedule.IdSchedule} 
@@ -309,12 +309,50 @@ namespace BtlApp.Group
             return dt.Rows.Count > 0;
         }
 
+        // Kiem tra trung lich voi 1 user
+        private bool IsDuplicateWithUserSchedule(MySchedule schedule)
+        {
+            schedule.IdUser = UserId;
+            schedule.IdGroup = currentGroup.GroupId;
+            string query = $@"
+                select s.{DbTables.tbl_Schedule.IdSchedule}
+                from {DbTables.tbl_Schedule.Table} s
+                where s.{DbTables.tbl_Schedule.IdUser} = {UserId}
+                    and s.{DbTables.tbl_Schedule.Date} = @Date
+                    and (s.{DbTables.tbl_Schedule.Start} < @End and s.{DbTables.tbl_Schedule.End} > @Start)
+
+            ";
+                //inner join tbl_GroupMember gm on gm.GroupId = s.{DbTables.tbl_Schedule.IdGroup}
+                //where 
+                //    gm.UserId = @UserId
+                //    and s.{DbTables.tbl_Schedule.Date} = @Date
+                //    and (s.{DbTables.tbl_Schedule.Start} < @End and s.{DbTables.tbl_Schedule.End} > @Start)
+                    //and s.{DbTables.tbl_Schedule.IdSchedule} <> @ID
+
+            SqlParameter[] parameters = {
+                //new SqlParameter("@UserId", schedule.IdUser),
+                new SqlParameter("@Date", schedule.ScheduleDate),
+                new SqlParameter("@Start", schedule.StartTime),
+                new SqlParameter("@End", schedule.EndTime)
+            };
+
+            DataTable dt = Db.ReadTable(query, parameters);
+            return dt.Rows.Count > 0;
+        }
+
+
         // Thêm lịch CỦA NHÓM
         private void AddScheduleToDB(MySchedule schedule)
         {
-            if (IsDuplicate(schedule))
+            if (IsDuplicateWithGroup(schedule))
             {
-                MessageBox.Show("Lịch bị trùng thời gian");
+                MessageBox.Show("Lịch bị trùng thời gian với 1 lịch trong nhóm");
+                return;
+            }
+
+            if(IsDuplicateWithUserSchedule(schedule))
+            {
+                MessageBox.Show("Lịch bị trùng với lịch cá nhân");
                 return;
             }
 
@@ -367,7 +405,7 @@ namespace BtlApp.Group
         // Cập nhật lịch (Giữ nguyên, chỉ check trùng lặp)
         public bool UpdateSchedule(MySchedule schedule)
         {
-            if (IsDuplicate(schedule))
+            if (IsDuplicateWithGroup(schedule))
             {
                 MessageBox.Show("Lịch bị trùng thời gian");
                 return false;
