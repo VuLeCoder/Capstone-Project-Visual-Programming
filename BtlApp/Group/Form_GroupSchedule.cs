@@ -523,41 +523,36 @@ namespace BtlApp.Group
             Form_AddMySchedule addSchedlueForm = new Form_AddMySchedule();
 
             // PHÂN QUYỀN:
-            if (userRole == "Leader")
+            if (userRole != "Leader")
             {
-                addSchedlueForm.formType(Form_AddMySchedule.TYPE_EDIT);
+                addSchedlueForm.formType(Form_AddMySchedule.TYPE_VIEW);
+                return;
             }
-            else
-            {
-                addSchedlueForm.formType(Form_AddMySchedule.TYPE_VIEW); // Chuyển sang chế độ xem
-            }
+            
+            addSchedlueForm.formType(Form_AddMySchedule.TYPE_EDIT); // Chuyển sang chế độ xem
 
             addSchedlueForm.setData(schedule);
             DialogResult result = addSchedlueForm.ShowDialog(this);
 
-            // Chỉ Leader mới có thể thao tác
-            if (userRole == "Leader")
+            if (result == DialogResult.Yes) // Lưu
             {
-                if (result == DialogResult.Yes) // Lưu
-                {
-                    schedule = addSchedlueForm.getData();
-                    schedule.IdSchedule = scheduleId;
+                schedule = addSchedlueForm.getData();
+                schedule.IdSchedule = scheduleId;
 
-                    if (UpdateSchedule(schedule)) // Chỉ cập nhật UI nếu DB thành công
-                    {
-                        RemoveSchedule(dayIndex, scheduleId);
-                        Color blockColor = getColorFromScheduleType(schedule.IdType);
-                        dayIndex = (schedule.ScheduleDate - currentWeek).Days;
-                        AddScheduleToCell(dayIndex, blockColor, schedule);
-                    }
-                    return;
-                }
-
-                if (result == DialogResult.No) // Xóa
+                if (UpdateSchedule(schedule)) // Chỉ cập nhật UI nếu DB thành công
                 {
-                    DeleteSchedule(scheduleId);
                     RemoveSchedule(dayIndex, scheduleId);
+                    Color blockColor = getColorFromScheduleType(schedule.IdType);
+                    dayIndex = (schedule.ScheduleDate - currentWeek).Days;
+                    AddScheduleToCell(dayIndex, blockColor, schedule);
                 }
+                return;
+            }
+
+            if (result == DialogResult.No) // Xóa
+            {
+                DeleteSchedule(scheduleId);
+                RemoveSchedule(dayIndex, scheduleId);
             }
         }
 

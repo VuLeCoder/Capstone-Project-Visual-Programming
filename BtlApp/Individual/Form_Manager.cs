@@ -130,8 +130,6 @@ namespace BtlApp.Individual
                 return;
             }
 
-
-
             try
             {
                 string query = $@"
