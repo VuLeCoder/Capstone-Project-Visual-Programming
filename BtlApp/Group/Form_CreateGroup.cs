@@ -89,5 +89,23 @@ namespace BtlApp.Group
         {
             this.Close();
         }
+
+        private void txt_Description_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btn_Create.PerformClick();
+            }
+        }
+
+        private void btn_Create_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btn_Create.PerformClick();
+            }
+        }
     }
 }
