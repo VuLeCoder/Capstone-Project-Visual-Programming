@@ -31,9 +31,6 @@
             this.panelHeader = new System.Windows.Forms.Panel();
             this.menu_User = new System.Windows.Forms.MenuStrip();
             this.MenuItem_Notification = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItem_User = new System.Windows.Forms.ToolStripMenuItem();
-            this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.lbl_User = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -73,13 +70,12 @@
             this.menu_User.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.menu_User.GripMargin = new System.Windows.Forms.Padding(0);
             this.menu_User.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItem_Notification,
-            this.MenuItem_User});
-            this.menu_User.Location = new System.Drawing.Point(1016, 9);
+            this.MenuItem_Notification});
+            this.menu_User.Location = new System.Drawing.Point(1112, 9);
             this.menu_User.Name = "menu_User";
             this.menu_User.Padding = new System.Windows.Forms.Padding(0);
             this.menu_User.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menu_User.Size = new System.Drawing.Size(172, 40);
+            this.menu_User.Size = new System.Drawing.Size(202, 40);
             this.menu_User.TabIndex = 7;
             this.menu_User.Text = "menuStrip1";
             // 
@@ -92,33 +88,6 @@
             this.MenuItem_Notification.Name = "MenuItem_Notification";
             this.MenuItem_Notification.Size = new System.Drawing.Size(80, 40);
             this.MenuItem_Notification.Text = "Notification";
-            // 
-            // MenuItem_User
-            // 
-            this.MenuItem_User.AutoSize = false;
-            this.MenuItem_User.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            this.MenuItem_User.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.profileToolStripMenuItem,
-            this.toolStripMenuItem2});
-            this.MenuItem_User.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.MenuItem_User.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.MenuItem_User.Name = "MenuItem_User";
-            this.MenuItem_User.Size = new System.Drawing.Size(80, 40);
-            this.MenuItem_User.Text = "User";
-            // 
-            // profileToolStripMenuItem
-            // 
-            this.profileToolStripMenuItem.AutoSize = false;
-            this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
-            this.profileToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
-            this.profileToolStripMenuItem.Text = "Profile";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.AutoSize = false;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(120, 22);
-            this.toolStripMenuItem2.Text = "Setting";
             // 
             // lbl_User
             // 
@@ -256,7 +225,7 @@
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tlp_mainCalendar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tlp_mainCalendar.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlp_mainCalendar.Location = new System.Drawing.Point(0, 0);
             this.tlp_mainCalendar.Margin = new System.Windows.Forms.Padding(0);
@@ -295,7 +264,7 @@
             this.tlp_mainCalendarHeader.ColumnCount = 3;
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.33758F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.66242F));
-            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 393F));
+            this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 394F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_mainCalendarHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -356,9 +325,6 @@
         private System.Windows.Forms.Label lbl_User;
         private System.Windows.Forms.MenuStrip menu_User;
         private System.Windows.Forms.ToolStripMenuItem MenuItem_Notification;
-        private System.Windows.Forms.ToolStripMenuItem MenuItem_User;
-        private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
     }
 }
 
