@@ -54,7 +54,7 @@ namespace BtlApp.Group
             InitializeComponent();
 
             // Cập nhật tiêu đề form bằng tên nhóm
-            lbl_GroupName.Text = currentGroup.GroupName;
+            lbl_GroupName.Text = currentGroup.GroupName + " --- ID: " + currentGroup.GroupId;
 
             // Phân quyền Leader: Chỉ Leader mới thấy nút "Tạo lịch mới"
             if (userRole != "Leader")
